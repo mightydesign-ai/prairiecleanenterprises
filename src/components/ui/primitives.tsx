@@ -118,10 +118,13 @@ export function MediaImage({
   priority?: boolean;
 }) {
   if (media && typeof media === "object" && media.url) {
+    // Payload builds absolute URLs from serverURL (beta host, later the live domain). next/image only
+    // accepts same-site files as relative paths, so strip the origin from our own /api/media/file URLs.
+    const src = media.url.replace(/^https?:\/\/[^/]+(?=\/api\/media\/file\/)/, "");
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image
-          src={media.url}
+          src={src}
           alt={media.decorative ? "" : (media.alt ?? "")}
           fill
           sizes={sizes}
