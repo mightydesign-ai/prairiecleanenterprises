@@ -1,18 +1,17 @@
-import Image from "next/image";
 import Link from "next/link";
 import { site } from "@/lib/site";
 
 /**
- * PCE logo lockup ("A Canadian Fibre & Pellet Company"), from PCE's own artwork.
- *   /brand/pce-logo.png        full colour, for light backgrounds
- *   /brand/pce-logo-mono-white.png  same artwork with the black type in white, for dark backgrounds
- * Both are 602×238 with transparent backgrounds.
+ * PCE logo lockup, from PCE's own SVG artwork.
+ *   /brand/pce-logo.svg        full colour, for light backgrounds
+ *   /brand/pce-logo-white.svg  all white, for dark and coloured backgrounds
+ * SVGs are served as-is (no image optimiser needed), so plain <img> is correct here.
  */
-const W = 602;
-const H = 238;
+const W = 284;
+const H = 113;
 
 type LogoProps = {
-  /** "auto" swaps to the white version in dark mode; "inverse" is always white (dark footer). */
+  /** "auto" swaps to the white version in dark mode; "inverse" is always white (footer). */
   tone?: "auto" | "inverse";
   className?: string;
   priority?: boolean;
@@ -20,6 +19,7 @@ type LogoProps = {
 
 export function Logo({ tone = "auto", className = "", priority = false }: LogoProps) {
   const size = "h-12 w-auto sm:h-14";
+  const loading = priority ? undefined : "lazy";
   return (
     <Link
       href="/"
@@ -27,27 +27,14 @@ export function Logo({ tone = "auto", className = "", priority = false }: LogoPr
       aria-label={`${site.name}, home`}
     >
       {tone === "inverse" ? (
-        <Image src="/brand/pce-logo-mono-white.png" alt="" width={W} height={H} sizes="180px" className="h-14 w-auto sm:h-16" />
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src="/brand/pce-logo-white.svg" alt="" width={W} height={H} loading={loading} className="h-14 w-auto sm:h-16" />
       ) : (
         <>
-          <Image
-            src="/brand/pce-logo.png"
-            alt=""
-            width={W}
-            height={H}
-            priority={priority}
-            sizes="150px"
-            className={`${size} dark:hidden`}
-          />
-          <Image
-            src="/brand/pce-logo-mono-white.png"
-            alt=""
-            width={W}
-            height={H}
-            priority={priority}
-            sizes="150px"
-            className={`hidden ${size} dark:block`}
-          />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/pce-logo.svg" alt="" width={W} height={H} className={`${size} dark:hidden`} />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/brand/pce-logo-white.svg" alt="" width={W} height={H} className={`hidden ${size} dark:block`} />
         </>
       )}
     </Link>
