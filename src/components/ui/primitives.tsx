@@ -86,8 +86,8 @@ export function ButtonLink({
   const styles =
     variant === "primary"
       ? onDark
-        ? "bg-olive-500 text-neutral-800 hover:bg-olive-400"
-        : "bg-primary text-on-primary hover:bg-primary-hover"
+        ? "bg-primary text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary"
+        : "bg-primary text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary"
       : onDark
         ? "border border-neutral-400 text-on-inverse hover:bg-white/10"
         : "border border-border-strong text-fg hover:bg-surface-sunken";

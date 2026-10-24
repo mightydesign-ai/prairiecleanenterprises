@@ -10,60 +10,59 @@ export const homePage: SeedPage = {
   layout: [
     {
       blockType: "hero",
-      eyebrow: "Weyburn, Saskatchewan",
-      heading: "Prairie flax straw, turned into fibre, fuel and everyday products",
-      intro:
-        "Farmers used to burn it. We buy it, process it at the world's first flax straw multi-processing facility, and ship it to customers in North America and Europe.",
-      primary: { label: "Sell us your flax straw", href: "/sell-your-straw" },
-      secondary: { label: "Explore products", href: "#products" },
-      stat: { value: "750,000+", label: "tonnes of flax straw grown on the Canadian prairies every year" },
+      heading: "Discovering value from unutilized agricultural residue",
+      primary: { label: "Contact us", href: "/contact" },
+      secondary: { label: "Discover our products", href: "#products" },
     },
     {
-      blockType: "highlights",
-      items: [
-        { text: "In Co-op stores across Western Canada" },
-        { text: "Walmart Canada Golden Ticket" },
-        { text: "Bedding partner to Canadian Western Agribition" },
-        { text: "Two patents pending" },
-      ],
+      blockType: "productList",
+      eyebrow: "Our products",
+      heading: "Discover our signature innovations",
     },
-    { blockType: "productList", eyebrow: "Products", heading: "Four products from one crop residue" },
     {
-      blockType: "steps",
+      blockType: "richText",
       tone: "tinted",
-      eyebrow: "How it works",
-      heading: "From the field to four markets in one facility",
-      intro:
-        "Our patent-pending decortication process separates flax fibre from the woody shive using less energy and time than conventional methods.",
-      items: [
-        { title: "Farmers bale the straw", text: "Round or large-square bales are stored on the farm until pickup." },
-        { title: "We haul it to Weyburn", text: "Farmers can deliver, or we arrange transport and pay for the distance." },
-        { title: "Fibre and shive separate", text: "Decortication pulls clean, low-shive fibre away from the woody core." },
-        {
-          title: "Two streams ship out",
-          text: "Fibre goes to pulp and specialty paper makers. Shive becomes pellets for litter, bedding and fuel.",
-        },
-      ],
+      eyebrow: "Flax fibre abundancy",
+      heading: "Flax is an abundant, secure crop in Canada",
+      content: richText(
+        "Over 750,000 tonnes of flax straw are produced annually on the Canadian prairies. Of all the flax grown worldwide, 40% is produced in Canada. Most of which is grown in the same province as PCE's head office, Saskatchewan.",
+        "Unlike other areas around the world, Canadians grow flax for its highly nutritious seeds. The seeds are harvested, but the flax straw is almost always burned in fields as it has no nutritional value and is too fibrous to be tilled back into the soil.",
+      ),
     },
     {
-      blockType: "cta",
+      blockType: "richText",
+      eyebrow: "Efficient, clean fibre decortication",
+      heading: "The most efficient decortication process on the planet",
+      content: richText(
+        "In early 2024, our team researched an innovative decortication process. It has two-patents pending and continue to develop our ground-breaking process to remove the fibre from the shive in the most efficient process on the planet.",
+        "Our approach uses less energy and takes less time, while producing high quality flax fibre with low shive content. There are no facilities like ours in the world that produce both high-quality flax fibre and flax shive pellets for both bio-materials and bioenergy/biofuels markets.",
+      ),
+    },
+    {
+      blockType: "cards",
       tone: "dark",
-      heading: "Stop burning your flax straw. Sell it to us.",
-      text: "We bought more than 25,000 tonnes from the 2025 harvest. Bales of 900 lb or more, 15% moisture or less, rock free. ¼ paid on confirmation, ¾ on pickup.",
-      button: { label: "Start a straw offer", href: "/sell-your-straw" },
-    },
-    {
-      blockType: "stats",
-      eyebrow: "Sustainability",
-      heading: "An abundant residue that used to go up in smoke",
+      eyebrow: "PCE aggregates & processes unutilized agricultural residue",
+      heading: "A low-carbon input for diverse industries",
+      intro:
+        "PCE is a solution provider developing the bioeconomy landscape in North America and the world by doing what no one else is doing – harnessing the millions of tonnes of excess agricultural waste on the Canadian and American prairies. PCE's core strategy is a rigorous focus on efficiently gathering and processing fibre-rich and energy-dense straw and other sources of organic waste for diverse uses. Our feedstock is technologically and product agnostic and can be a low-carbon input solution for:",
       items: [
-        { value: "40%", label: "of the world's flax is grown in Canada, most of it in Saskatchewan" },
-        { value: "80 kg", label: "CO₂e released by every tonne of flax straw burned in the field" },
-        { value: "Up to 90%", label: "lower greenhouse gas emissions for heat and power, in third-party testing of our pellets" },
+        { title: "Flax Fibre", text: "For use in pulp, specialty paper, and biomaterial industries" },
+        { title: "Bioenergy", text: "Heat and power" },
+        { title: "Transport Biofuels", text: "Sustainable Aviation Fuel (SAF) & hydrogen" },
+        { title: "Industrial Absorbents", text: "For industrial cleanups and spill remediation" },
+        { title: "Animal Bedding", text: "Horse, cow, pig, poultry & small animals" },
+        { title: "Decarbonization", text: "Renewable Natural Gas (RNG)" },
       ],
     },
     { blockType: "newsList", heading: "In the news", limit: 3 },
-    { blockType: "partners", heading: "Research and funding partners" },
+    { blockType: "partners", heading: "Partners" },
+    {
+      blockType: "cta",
+      tone: "dark",
+      heading: "The world needs secure, abundant agricultural feedstock & flax fibre",
+      text: "PCE is about leading technologies for the utilization of agricultural residue for feedstock and flax fibre on the Canadian and US prairies. What the world needs, starts here.",
+      button: { label: "Contact us today", href: "/contact" },
+    },
   ],
 };
 

@@ -218,9 +218,9 @@
   --pce-fg-muted: #606060;         /* 6.3:1 on white */
   --pce-border: #e9e9e9;           /* decorative dividers only */
   --pce-border-strong: #6d7373;    /* 4.8:1, meets 3:1 for form controls */
-  --pce-primary: #96a924;          /* site olive: button fills */
-  --pce-primary-hover: #a9bd2f;    /* lighter, so charcoal text stays at 6.8:1 */
-  --pce-on-primary: #262b2b;       /* 5.5:1 on olive (white is 2.6:1, so not used) */
+  --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
+  --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+  --pce-on-primary: #ffffff;       /* white label in every state */
   --pce-accent: #45703e;           /* site green deepened for text, 5.8:1 */
   --pce-on-accent: #ffffff;
   --pce-straw: #9d7c55;            /* graphics and large type only */
@@ -253,9 +253,9 @@
   --pce-fg-muted: #b9bfbf;         /* 8.8:1 */
   --pce-border: #343a3a;
   --pce-border-strong: #7d8484;    /* 4.3:1 */
-  --pce-primary: #96a924;          /* olive reads well on charcoal, 6.3:1 */
-  --pce-primary-hover: #a9bd2f;
-  --pce-on-primary: #262b2b;
+  --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
+  --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+  --pce-on-primary: #ffffff;       /* white label in every state */
   --pce-accent: #9bc095;
   --pce-on-accent: #11340b;
   --pce-straw: #ccaf8e;
@@ -287,9 +287,9 @@
     --pce-fg-muted: #b9bfbf;
     --pce-border: #343a3a;
     --pce-border-strong: #7d8484;
-    --pce-primary: #96a924;
-    --pce-primary-hover: #a9bd2f;
-    --pce-on-primary: #262b2b;
+    --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
+    --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+    --pce-on-primary: #ffffff;       /* white label in every state */
     --pce-accent: #9bc095;
     --pce-on-accent: #11340b;
     --pce-straw: #ccaf8e;

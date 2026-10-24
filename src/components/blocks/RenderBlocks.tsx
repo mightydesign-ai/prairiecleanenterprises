@@ -164,7 +164,7 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
               <span
                 aria-hidden="true"
                 className={`flex size-10 items-center justify-center rounded-full font-display font-bold ${
-                  dark ? "bg-olive-500 text-neutral-800" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
+                  dark ? "bg-primary text-on-primary" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
                 }`}
               >
                 {i + 1}
@@ -265,7 +265,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
                 <span className="font-display text-2xl font-bold group-hover:text-link">{p.name}</span>
                 <span className="flex-1 text-base text-fg-muted">{p.cardSummary ?? p.summary}</span>
                 <span className="pt-2 font-display text-[15px] font-semibold text-link">
-                  Learn more <span aria-hidden="true">→</span>
+                  Learn More <span aria-hidden="true">→</span>
                 </span>
               </span>
             </Link>

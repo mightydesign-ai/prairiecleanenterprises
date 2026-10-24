@@ -9,13 +9,16 @@ export async function SiteFooter() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-inverse text-on-inverse" data-print="hide">
+    <footer className="text-white" data-print="hide">
+      <div className="bg-[#327c9b]">
       <div className="container-wide grid gap-12 py-section-sm md:grid-cols-[1.4fr_2fr]">
-        <div className="max-w-sm space-y-5">
+        <div className="max-w-md space-y-5">
           <Logo tone="inverse" />
-          <p className="text-sm text-on-inverse-muted">
-            PCE buys unused flax straw from prairie farmers and turns it into fibre, fuel and pellets at the
-            world&apos;s first flax straw multi-processing facility.
+          <p className="text-sm text-white">
+            PCE is a Saskatchewan and Canadian-based company that aggregates and processes un-utilized flax straw
+            and other agricultural / organic waste for a low-carbon solution for diverse industries ranging from
+            biofuel to high value B2B and B2C products. PCE&apos;s aim is to provide secure, renewable, sustainable,
+            and abundant ag-based fiber solutions to customers around the world.
           </p>
           {settings.social && settings.social.length > 0 ? (
             <ul className="flex flex-wrap gap-2" aria-label="Social media">
@@ -25,7 +28,7 @@ export async function SiteFooter() {
                     href={s.url}
                     rel="me noopener"
                     target="_blank"
-                    className="pressable inline-flex min-h-11 items-center rounded-md border border-on-inverse-muted/40 px-3 text-sm hover:bg-on-inverse/10"
+                    className="pressable inline-flex min-h-11 items-center rounded-md border border-white/60 px-3 text-sm hover:bg-white/15"
                   >
                     {s.label}
                     <span className="sr-only"> (opens in a new tab)</span>
@@ -50,7 +53,7 @@ export async function SiteFooter() {
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="inline-flex min-h-9 items-center text-sm text-on-inverse-muted underline-offset-4 hover:text-on-inverse hover:underline"
+                      className="inline-flex min-h-9 items-center text-sm text-white underline-offset-4 hover:text-white hover:underline"
                     >
                       {link.label}
                     </Link>
@@ -62,7 +65,7 @@ export async function SiteFooter() {
 
           <div>
             <h2 className="mb-3 font-display text-sm font-semibold">Contact</h2>
-            <address className="space-y-3 text-sm not-italic text-on-inverse-muted">
+            <address className="space-y-3 text-sm not-italic text-white">
               {f ? (
                 <p>
                   {f.name}
@@ -75,14 +78,14 @@ export async function SiteFooter() {
               <ul className="space-y-1">
                 {(settings.phones ?? []).map((p) => (
                   <li key={p.id ?? p.number}>
-                    <a href={telHref(p.number)} className="hover:text-on-inverse hover:underline">
+                    <a href={telHref(p.number)} className="hover:text-white hover:underline">
                       <span className="sr-only">{p.label}: </span>
                       {p.number}
                     </a>
                   </li>
                 ))}
                 <li>
-                  <a href={`mailto:${settings.email}`} className="break-all hover:text-on-inverse hover:underline">
+                  <a href={`mailto:${settings.email}`} className="break-all hover:text-white hover:underline">
                     {settings.email}
                   </a>
                 </li>
@@ -92,11 +95,13 @@ export async function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-on-inverse-muted/20">
-        <div className="container-wide flex flex-col gap-2 py-6 text-xs text-on-inverse-muted sm:flex-row sm:items-center sm:justify-between">
-          <p>© {year} Prairie Clean Enterprises. Proudly Canadian, made in Saskatchewan.</p>
-          <Link href="/privacy" className="hover:text-on-inverse hover:underline">
-            Privacy policy
+      </div>
+
+      <div className="bg-[#444444]">
+        <div className="container-wide flex flex-col gap-2 py-5 text-sm text-white sm:flex-row sm:items-center sm:justify-between">
+          <p>Copyright © {year} PCE</p>
+          <Link href="/privacy" className="underline-offset-4 hover:underline">
+            Privacy Policy
           </Link>
         </div>
       </div>

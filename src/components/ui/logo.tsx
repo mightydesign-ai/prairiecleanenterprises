@@ -5,7 +5,7 @@ import { site } from "@/lib/site";
 /**
  * PCE logo lockup ("A Canadian Fibre & Pellet Company"), from PCE's own artwork.
  *   /brand/pce-logo.png        full colour, for light backgrounds
- *   /brand/pce-logo-white.png  same artwork with the black type in white, for dark backgrounds
+ *   /brand/pce-logo-mono-white.png  same artwork with the black type in white, for dark backgrounds
  * Both are 602×238 with transparent backgrounds.
  */
 const W = 602;
@@ -27,7 +27,7 @@ export function Logo({ tone = "auto", className = "", priority = false }: LogoPr
       aria-label={`${site.name}, home`}
     >
       {tone === "inverse" ? (
-        <Image src="/brand/pce-logo-white.png" alt="" width={W} height={H} sizes="180px" className="h-14 w-auto sm:h-16" />
+        <Image src="/brand/pce-logo-mono-white.png" alt="" width={W} height={H} sizes="180px" className="h-14 w-auto sm:h-16" />
       ) : (
         <>
           <Image
@@ -40,7 +40,7 @@ export function Logo({ tone = "auto", className = "", priority = false }: LogoPr
             className={`${size} dark:hidden`}
           />
           <Image
-            src="/brand/pce-logo-white.png"
+            src="/brand/pce-logo-mono-white.png"
             alt=""
             width={W}
             height={H}

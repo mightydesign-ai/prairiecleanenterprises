@@ -81,7 +81,7 @@ export function MobileNav({ items, cta }: { items: NavItem[]; cta: NavLink }) {
           <div className="border-t border-border p-gutter">
             <Link
               href={cta.href}
-              className="pressable flex min-h-12 items-center justify-center rounded-md bg-primary font-display font-semibold text-on-primary hover:bg-primary-hover"
+              className="pressable flex min-h-12 items-center justify-center rounded-md bg-primary font-display font-semibold text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary"
             >
               {cta.label}
             </Link>

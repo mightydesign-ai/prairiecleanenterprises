@@ -12,7 +12,7 @@ export default function NotFound() {
       </p>
       <Link
         href="/"
-        className="pressable mt-8 inline-flex min-h-12 items-center rounded-md bg-primary px-6 font-display font-semibold text-on-primary hover:bg-primary-hover"
+        className="pressable mt-8 inline-flex min-h-12 items-center rounded-md bg-primary px-6 font-display font-semibold text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary"
       >
         Go to the homepage
       </Link>

@@ -6,12 +6,12 @@ type New<T> = Omit<T, "id" | "createdAt" | "updatedAt" | "slug"> & { slug?: stri
 export const siteSettings: Omit<SiteSetting, "id"> = {
   email: "info@prairiecleanenterprises.com",
   phones: [
-    { label: "Toll free", number: "1-844-978-3529" },
-    { label: "Local", number: "306-910-3529" },
+    { label: "Toll free", number: "1 (844) 978-3529" },
+    { label: "Local", number: "1 (306) 910-3529" },
   ],
   facility: {
     name: "Weyburn Production Facility",
-    street: "54 Queen Street",
+    street: "54 Queen St",
     locality: "North Weyburn",
     region: "SK",
     postalCode: "S0C 1X0",
@@ -34,7 +34,7 @@ export const products: New<Product>[] = [
     headline: "A secure, long-term supply of flax fibre",
     summary:
       "Low-shive fibre from Canadian flax straw, decorticated in Weyburn and baled for shipping worldwide. Built for buyers who need stable volume and steady pricing.",
-    cardSummary: "Low-shive fibre for pulp, specialty paper, nitrocellulose and biomaterials.",
+    cardSummary: "Extracted through our unique process, our flax fibre serves as sustainable pulp, paper, and biomaterials.",
     primaryCtaLabel: "Talk to our fibre team",
     primaryCtaHref: "/contact",
     highlights: [
@@ -69,7 +69,7 @@ export const products: New<Product>[] = [
     headline: "Biomass pellets that burn like wood, made from straw",
     summary:
       "Agricultural pellets usually mean high ash and low heat. By removing the fibre first, our shive pellets match wood on ash and calorific value.",
-    cardSummary: "Dense flax straw pellets that burn clean and hot, with low ash and moisture.",
+    cardSummary: "Produced from flax straw, our biomass pellets offer a low-carbon, efficient energy source for heat and power.",
     primaryCtaLabel: "Request a quote",
     primaryCtaHref: "/contact",
     secondaryCtaLabel: "Ask for a test sample",
@@ -102,7 +102,7 @@ export const products: New<Product>[] = [
     headline: "No clay. No perfume. No cat pee smell.",
     summary:
       "A natural cat litter made from 100% Saskatchewan flax straw. It locks in ammonia odour, keeps dust down and tracks less through your home.",
-    cardSummary: "Clay-free, low-dust cat litter that neutralizes ammonia odour.",
+    cardSummary: "Prairie Clean Cat Litter is 100% natural, ammonia-neutralizing, highly absorbent, and low in odour and dust.",
     primaryCtaLabel: "Find it near you",
     primaryCtaHref: "#buy",
     secondaryCtaLabel: "Buy online",
@@ -135,7 +135,7 @@ export const products: New<Product>[] = [
     headline: "Muck out every few days, not every day",
     summary:
       "Highly absorbent, low-dust flax bedding for horses, cattle, pigs, poultry and small animals. Healthier air for animals and the people who care for them.",
-    cardSummary: "Highly absorbent, compostable bedding that means less mucking out.",
+    cardSummary: "Our animal bedding offers exceptional absorbency and comfort, promoting healthier livestock, & easier maintenance.",
     primaryCtaLabel: "Order bedding",
     primaryCtaHref: "https://prairiecleanbedding.com",
     secondaryCtaLabel: "Bulk and event orders",

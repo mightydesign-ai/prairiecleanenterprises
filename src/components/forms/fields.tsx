@@ -241,7 +241,7 @@ export function SubmitButton({ pending, children }: { pending: boolean; children
       type="submit"
       disabled={pending}
       aria-disabled={pending}
-      className="pressable inline-flex min-h-12 items-center self-start rounded-md bg-primary px-7 font-display text-[17px] font-semibold text-on-primary hover:bg-primary-hover disabled:opacity-70"
+      className="pressable inline-flex min-h-12 items-center self-start rounded-md bg-primary px-7 font-display text-[17px] font-semibold text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary disabled:opacity-70"
     >
       {pending ? "Sending…" : children}
     </button>

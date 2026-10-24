@@ -20,7 +20,7 @@ export function SiteHeader() {
           <ThemeToggle />
           <Link
             href={contactCta.href}
-            className="pressable hidden min-h-11 items-center rounded-md bg-primary px-5 font-display text-sm font-semibold text-on-primary hover:bg-primary-hover sm:inline-flex"
+            className="pressable hidden min-h-11 items-center rounded-md bg-primary px-5 font-display text-sm font-semibold text-on-primary hover:bg-primary-hover hover:text-on-primary focus-visible:text-on-primary active:bg-primary-hover active:text-on-primary sm:inline-flex"
           >
             {contactCta.label}
           </Link>
