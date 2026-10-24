@@ -1,10 +1,13 @@
 import type { MetadataRoute } from "next";
 import { getAllPageSlugs, getNews, getOpenJobs, getProducts } from "@/lib/payload";
+import { isIndexable } from "@/lib/indexing";
 import { site } from "@/lib/site";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
+  // Nothing to advertise until the site is open to search engines.
+  if (!isIndexable) return [];
   const [pages, products, news, jobs] = await Promise.all([getAllPageSlugs(), getProducts(), getNews(), getOpenJobs()]);
   const url = (path: string) => `${site.url}${path}`;
   return [

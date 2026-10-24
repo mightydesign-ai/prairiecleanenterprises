@@ -9,6 +9,13 @@ const securityHeaders = [
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
 ];
 
+// Mirrors src/lib/indexing.ts. Until SITE_INDEXABLE=true, every response tells crawlers not to index,
+// follow, cache, snippet or use it for AI. This also covers /admin, /api and uploaded files.
+const isIndexable = process.env.SITE_INDEXABLE === "true";
+const noIndexHeaders = isIndexable
+  ? []
+  : [{ key: "X-Robots-Tag", value: "noindex, nofollow, noarchive, nosnippet, noimageindex, noai, noimageai" }];
+
 const nextConfig: NextConfig = {
   poweredByHeader: false,
   // Job applications carry a resume (capped at 4 MB, under Vercel's 4.5 MB request limit).
@@ -27,7 +34,7 @@ const nextConfig: NextConfig = {
     return webpackConfig;
   },
   async headers() {
-    return [{ source: "/:path*", headers: securityHeaders }];
+    return [{ source: "/:path*", headers: [...securityHeaders, ...noIndexHeaders] }];
   },
   // Every legacy WordPress URL keeps working and keeps its search ranking.
   async redirects() {

@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { getSiteSettings } from "@/lib/payload";
 import { site } from "@/lib/site";
+import { isIndexable } from "@/lib/indexing";
 import "./globals.css";
 
 // Display face: Archivo, a grotesque with a width axis for big, confident
@@ -43,7 +44,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@PrairieCleanEn",
   },
-  robots: { index: true, follow: true },
+  robots: isIndexable
+    ? { index: true, follow: true }
+    : {
+        index: false,
+        follow: false,
+        nocache: true,
+        googleBot: { index: false, follow: false, noimageindex: true, "max-snippet": 0, "max-image-preview": "none" },
+      },
   formatDetection: { telephone: true, email: true, address: true },
 };
 
