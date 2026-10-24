@@ -1,0 +1,171 @@
+import Image from "next/image";
+import Link from "next/link";
+import type { ReactNode } from "react";
+import type { Media } from "@/payload-types";
+
+export type Tone = "light" | "tinted" | "dark" | null | undefined;
+
+const toneClass: Record<string, string> = {
+  light: "bg-bg text-fg",
+  tinted: "border-y border-border bg-surface-sunken text-fg",
+  dark: "bg-teal-900 text-neutral-100 dark:bg-teal-950",
+};
+
+/** Full-width band with a centred content column. */
+export function Section({
+  tone = "light",
+  children,
+  className = "",
+  id,
+  labelledBy,
+  narrow = false,
+}: {
+  tone?: Tone;
+  children: ReactNode;
+  className?: string;
+  id?: string;
+  labelledBy?: string;
+  narrow?: boolean;
+}) {
+  return (
+    <section id={id} aria-labelledby={labelledBy} className={toneClass[tone ?? "light"]} data-tone={tone ?? "light"}>
+      <div className={`${narrow ? "mx-auto w-full max-w-4xl px-gutter" : "container-wide"} py-section ${className}`}>
+        {children}
+      </div>
+    </section>
+  );
+}
+
+export function Eyebrow({ children, onDark = false }: { children: ReactNode; onDark?: boolean }) {
+  return <p className={`eyebrow ${onDark ? "!text-straw-300" : ""}`}>{children}</p>;
+}
+
+export function SectionHeading({
+  id,
+  eyebrow,
+  heading,
+  intro,
+  onDark = false,
+}: {
+  id?: string;
+  eyebrow?: string | null;
+  heading?: string | null;
+  intro?: string | null;
+  onDark?: boolean;
+}) {
+  if (!eyebrow && !heading && !intro) return null;
+  return (
+    <div className="mb-10 flex max-w-3xl flex-col gap-3">
+      {eyebrow ? <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow> : null}
+      {heading ? (
+        <h2 id={id} className="text-3xl">
+          {heading}
+        </h2>
+      ) : null}
+      {intro ? <p className={onDark ? "text-neutral-300" : "text-fg-muted"}>{intro}</p> : null}
+    </div>
+  );
+}
+
+const isExternal = (href: string) => /^https?:\/\//.test(href);
+
+/** Buttons are links styled as buttons; external links open in the same tab. */
+export function ButtonLink({
+  href,
+  children,
+  variant = "primary",
+  onDark = false,
+}: {
+  href: string;
+  children: ReactNode;
+  variant?: "primary" | "secondary";
+  onDark?: boolean;
+}) {
+  const base =
+    "pressable inline-flex min-h-12 items-center justify-center rounded-md px-6 font-display font-semibold no-underline";
+  const styles =
+    variant === "primary"
+      ? onDark
+        ? "bg-teal-300 text-teal-950 hover:bg-teal-200"
+        : "bg-primary text-on-primary hover:bg-primary-hover"
+      : onDark
+        ? "border border-neutral-400 text-neutral-100 hover:bg-white/10"
+        : "border border-border-strong text-fg hover:bg-surface-sunken";
+  const className = `${base} ${styles}`;
+  return isExternal(href) ? (
+    <a href={href} className={className}>
+      {children}
+    </a>
+  ) : (
+    <Link href={href} className={className}>
+      {children}
+    </Link>
+  );
+}
+
+/** Payload upload, or a labelled placeholder until a photo is added in the CMS. */
+export function MediaImage({
+  media,
+  placeholder,
+  className = "",
+  sizes = "(min-width: 1024px) 50vw, 100vw",
+  priority = false,
+}: {
+  media?: number | Media | null;
+  placeholder: string;
+  className?: string;
+  sizes?: string;
+  priority?: boolean;
+}) {
+  if (media && typeof media === "object" && media.url) {
+    return (
+      <div className={`relative overflow-hidden ${className}`}>
+        <Image
+          src={media.url}
+          alt={media.decorative ? "" : (media.alt ?? "")}
+          fill
+          sizes={sizes}
+          priority={priority}
+          className="object-cover"
+          style={
+            media.focalX != null && media.focalY != null
+              ? { objectPosition: `${media.focalX}% ${media.focalY}%` }
+              : undefined
+          }
+        />
+      </div>
+    );
+  }
+  return (
+    <div
+      role="img"
+      aria-label={`Photo to come: ${placeholder}`}
+      className={`flex items-start bg-[repeating-linear-gradient(-28deg,var(--color-straw-300)_0_18px,var(--color-straw-200)_18px_44px)] p-5 ${className}`}
+    >
+      <span className="rounded-full bg-straw-50 px-3 py-1.5 text-sm font-semibold text-straw-900">
+        Photo: {placeholder}
+      </span>
+    </div>
+  );
+}
+
+export function Breadcrumb({ items }: { items: { label: string; href?: string }[] }) {
+  return (
+    <nav aria-label="Breadcrumb" className="text-sm text-fg-muted">
+      <ol className="flex flex-wrap gap-1.5">
+        {items.map((item, i) => (
+          <li key={item.label} className="flex gap-1.5">
+            {item.href ? (
+              <Link href={item.href} className="link">
+                {item.label}
+              </Link>
+            ) : (
+              <span aria-current={i === items.length - 1 ? "page" : undefined}>{item.label}</span>
+            )}
+            {i < items.length - 1 ? <span aria-hidden="true">/</span> : null}
+          </li>
+        ))}
+      </ol>
+    </nav>
+  );
+}

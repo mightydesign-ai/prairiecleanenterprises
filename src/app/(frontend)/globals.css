@@ -1,0 +1,477 @@
+@import "tailwindcss";
+
+/* =====================================================================
+   Prairie Clean Enterprises — design tokens (Tailwind CSS v4)
+   Brand anchors come from the current logo:
+     Prairie Teal #007B9B · Prairie Green #56844F · Straw #9D7C55
+     Ink #000000 · Maple Red #BE1522
+   Every text/background pairing below is checked to WCAG 2.2 AA.
+   ===================================================================== */
+
+/* Dark mode follows data-theme on <html>, set before paint in layout.tsx. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
+/* ---------------------------------------------------------------------
+   1. Static scales: brand palette, fonts, fluid type, space, motion
+   --------------------------------------------------------------------- */
+@theme {
+  /* Brand anchors (exact logo values) */
+  --color-brand-teal: #007b9b;
+  --color-brand-green: #56844f;
+  --color-brand-straw: #9d7c55;
+  --color-brand-ink: #000000;
+  --color-brand-maple: #be1522;
+
+  /* Tonal scales built in OKLCH around each anchor's hue */
+  --color-teal-50: #e9f8fd;
+  --color-teal-100: #bff1ff;
+  --color-teal-200: #a2dbf2;
+  --color-teal-300: #7dbfd9;
+  --color-teal-400: #53a1bd;
+  --color-teal-500: #2586a5;
+  --color-teal-600: #007b9b;
+  --color-teal-700: #005a76;
+  --color-teal-800: #004660;
+  --color-teal-900: #00334b;
+  --color-teal-950: #002036;
+
+  --color-green-50: #effaec;
+  --color-green-100: #d4f2cf;
+  --color-green-200: #bbdcb5;
+  --color-green-300: #9bc095;
+  --color-green-400: #79a272;
+  --color-green-500: #56844f;
+  --color-green-600: #45703e;
+  --color-green-700: #335b2d;
+  --color-green-800: #22471c;
+  --color-green-900: #11340b;
+  --color-green-950: #022200;
+
+  --color-straw-50: #faf8f4;
+  --color-straw-100: #f2eee6;
+  --color-straw-200: #e6ccaf;
+  --color-straw-300: #ccaf8e;
+  --color-straw-400: #ae8f6a;
+  --color-straw-500: #9d7c55;
+  --color-straw-600: #7a5d3a;
+  --color-straw-700: #654a29;
+  --color-straw-800: #503718;
+  --color-straw-900: #3c2607;
+  --color-straw-950: #291500;
+
+  /* Neutrals carry a trace of the teal hue so greys never feel cold-blue */
+  --color-neutral-0: #ffffff;
+  --color-neutral-50: #f6f7f7;
+  --color-neutral-100: #eef1ef;
+  --color-neutral-200: #dde2e1;
+  --color-neutral-300: #c3cbca;
+  --color-neutral-400: #8f9a99;
+  --color-neutral-500: #6b7776;
+  --color-neutral-600: #4b5454;
+  --color-neutral-700: #343c3c;
+  --color-neutral-800: #222929;
+  --color-neutral-900: #151b1b;
+  --color-neutral-950: #0e1212;
+
+  /* Type families (CSS variables are injected by next/font) */
+  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
+
+  /* Fluid type: scales from a 360px to a 1440px viewport. Rem bounds keep
+     browser zoom and user font-size settings working (WCAG 1.4.4). */
+  --text-xs: clamp(0.8125rem, 0.7917rem + 0.0926vw, 0.875rem);
+  --text-xs--line-height: 1.5;
+  --text-sm: clamp(0.9375rem, 0.9167rem + 0.0926vw, 1rem);
+  --text-sm--line-height: 1.55;
+  --text-base: clamp(1.0625rem, 1.0417rem + 0.0926vw, 1.125rem);
+  --text-base--line-height: 1.65;
+  --text-lg: clamp(1.1875rem, 1.125rem + 0.2778vw, 1.375rem);
+  --text-lg--line-height: 1.55;
+  --text-xl: clamp(1.375rem, 1.25rem + 0.5556vw, 1.75rem);
+  --text-xl--line-height: 1.35;
+  --text-2xl: clamp(1.625rem, 1.4167rem + 0.9259vw, 2.25rem);
+  --text-2xl--line-height: 1.2;
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.6667vw, 3rem);
+  --text-3xl--line-height: 1.12;
+  --text-4xl: clamp(2.25rem, 1.6667rem + 2.5926vw, 4rem);
+  --text-4xl--line-height: 1.05;
+  --text-display: clamp(2.75rem, 1.8333rem + 4.0741vw, 5.5rem);
+  --text-display--line-height: 1;
+  --text-display--letter-spacing: -0.02em;
+
+  /* Fluid layout spacing: p-gutter, py-section, gap-gutter, etc. */
+  --spacing-gutter: clamp(1rem, 0.5rem + 2.2222vw, 2.5rem);
+  --spacing-section-sm: clamp(3rem, 2.3333rem + 2.963vw, 5rem);
+  --spacing-section: clamp(4rem, 2.6667rem + 5.9259vw, 8rem);
+  --spacing-header: 4.5rem;
+
+  /* Content widths, also usable as @container sizes */
+  --container-content: 76rem;
+  --container-wide: 90rem;
+
+  --breakpoint-xs: 30rem;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+
+  --shadow-card: 0 1px 2px rgb(14 18 18 / 0.06), 0 4px 16px -4px rgb(14 18 18 / 0.08);
+  --shadow-raised: 0 2px 4px rgb(14 18 18 / 0.06), 0 16px 40px -12px rgb(14 18 18 / 0.18);
+
+  /* Motion: named curves for micro-interactions */
+  --ease-out-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-quart: cubic-bezier(0.76, 0, 0.24, 1);
+  --ease-spring: cubic-bezier(0.34, 1.36, 0.64, 1);
+
+  --animate-fade-up: fade-up 600ms var(--ease-out-quint) both;
+  --animate-fade-in: fade-in 400ms var(--ease-out-quint) both;
+  --animate-menu-in: menu-in 180ms var(--ease-out-expo) both;
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(0.75rem); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  @keyframes menu-in {
+    from { opacity: 0; transform: translateY(-0.25rem) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+  }
+}
+
+/* ---------------------------------------------------------------------
+   2. Semantic tokens: components use these, never raw scale values,
+      so light and dark switch in one place.
+   --------------------------------------------------------------------- */
+@theme inline {
+  --color-bg: var(--pce-bg);
+  --color-surface: var(--pce-surface);
+  --color-surface-sunken: var(--pce-surface-sunken);
+  --color-fg: var(--pce-fg);
+  --color-fg-muted: var(--pce-fg-muted);
+  --color-border: var(--pce-border);
+  --color-border-strong: var(--pce-border-strong);
+  --color-primary: var(--pce-primary);
+  --color-primary-hover: var(--pce-primary-hover);
+  --color-on-primary: var(--pce-on-primary);
+  --color-accent: var(--pce-accent);
+  --color-on-accent: var(--pce-on-accent);
+  --color-straw: var(--pce-straw);
+  --color-straw-strong: var(--pce-straw-strong);
+  --color-link: var(--pce-link);
+  --color-focus: var(--pce-focus);
+  --color-danger: var(--pce-danger);
+  --color-success: var(--pce-success);
+  --color-inverse: var(--pce-inverse);
+  --color-on-inverse: var(--pce-on-inverse);
+  --color-on-inverse-muted: var(--pce-on-inverse-muted);
+}
+
+:root {
+  --pce-dur-fast: 150ms;
+  --pce-dur-base: 250ms;
+  --pce-dur-slow: 450ms;
+}
+
+/* Light (default) */
+:root,
+[data-theme="light"] {
+  color-scheme: light;
+  --pce-bg: #faf8f4;               /* fg 17.3:1 */
+  --pce-surface: #ffffff;
+  --pce-surface-sunken: #f2eee6;   /* fg 15.9:1, muted 6.7:1 */
+  --pce-fg: #121515;
+  --pce-fg-muted: #4b5454;         /* 7.4:1 on bg */
+  --pce-border: #ddd6ca;           /* decorative dividers only */
+  --pce-border-strong: #6b7776;    /* 4.4:1, meets 3:1 for form controls */
+  --pce-primary: #007b9b;          /* brand teal: fills, icons, large text (4.6:1 on bg) */
+  --pce-primary-hover: #005a76;
+  --pce-on-primary: #ffffff;       /* 4.9:1 on primary */
+  --pce-accent: #45703e;           /* brand green deepened for text, 5.4:1 */
+  --pce-on-accent: #ffffff;
+  --pce-straw: #9d7c55;            /* graphics and large type only */
+  --pce-straw-strong: #654a29;     /* 7.7:1, small text */
+  --pce-link: #005a76;             /* 7.3:1, small text on any light surface */
+  --pce-focus: #005a76;
+  --pce-danger: #be1522;           /* brand maple, 6.0:1 */
+  --pce-success: #335b2d;
+  --pce-inverse: #0e1212;          /* footer / dark bands */
+  --pce-on-inverse: #eef1ef;
+  --pce-on-inverse-muted: #a9b3b1;
+}
+
+/* Dark */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --pce-bg: #0e1212;
+  --pce-surface: #151b1b;
+  --pce-surface-sunken: #0a0d0d;
+  --pce-fg: #eef1ef;               /* 16.6:1 */
+  --pce-fg-muted: #a9b3b1;         /* 8.8:1 */
+  --pce-border: #2a3332;
+  --pce-border-strong: #6b7776;    /* 4.1:1 */
+  --pce-primary: #7dbfd9;          /* 9.3:1 */
+  --pce-primary-hover: #a2dbf2;
+  --pce-on-primary: #002036;       /* 8.2:1 on primary */
+  --pce-accent: #9bc095;
+  --pce-on-accent: #11340b;
+  --pce-straw: #ccaf8e;
+  --pce-straw-strong: #e6ccaf;
+  --pce-link: #a2dbf2;
+  --pce-focus: #7dbfd9;
+  --pce-danger: #ff8e85;
+  --pce-success: #9bc095;
+  --pce-inverse: #050707;
+  --pce-on-inverse: #eef1ef;
+  --pce-on-inverse-muted: #a9b3b1;
+}
+
+/* No-JS fallback: follow the OS setting when no theme has been applied. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    color-scheme: dark;
+    --pce-bg: #0e1212;
+    --pce-surface: #151b1b;
+    --pce-surface-sunken: #0a0d0d;
+    --pce-fg: #eef1ef;
+    --pce-fg-muted: #a9b3b1;
+    --pce-border: #2a3332;
+    --pce-border-strong: #6b7776;
+    --pce-primary: #7dbfd9;
+    --pce-primary-hover: #a2dbf2;
+    --pce-on-primary: #002036;
+    --pce-accent: #9bc095;
+    --pce-on-accent: #11340b;
+    --pce-straw: #ccaf8e;
+    --pce-straw-strong: #e6ccaf;
+    --pce-link: #a2dbf2;
+    --pce-focus: #7dbfd9;
+    --pce-danger: #ff8e85;
+    --pce-success: #9bc095;
+    --pce-inverse: #050707;
+    --pce-on-inverse: #eef1ef;
+    --pce-on-inverse-muted: #a9b3b1;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   3. Base
+   --------------------------------------------------------------------- */
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+    scroll-padding-top: calc(var(--spacing-header) + 1rem);
+    hanging-punctuation: first last;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-size: var(--text-base);
+    line-height: var(--text-base--line-height);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    font-optical-sizing: auto;
+    transition:
+      background-color var(--pce-dur-base) var(--ease-out-quint),
+      color var(--pce-dur-base) var(--ease-out-quint);
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
+  }
+
+  p, li, dd, figcaption {
+    text-wrap: pretty;
+  }
+
+  a {
+    color: inherit;
+    text-underline-offset: 0.2em;
+    text-decoration-thickness: 0.08em;
+  }
+
+  /* One focus style everywhere: 3px ring with an offset that clears
+     any background, meeting WCAG 2.4.13 focus appearance. */
+  :focus-visible {
+    outline: 3px solid var(--color-focus);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-teal-200);
+    color: var(--color-teal-950);
+  }
+
+  img, svg, video {
+    max-width: 100%;
+    height: auto;
+  }
+
+  :target {
+    scroll-margin-top: calc(var(--spacing-header) + 1rem);
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   4. Shared utilities
+   --------------------------------------------------------------------- */
+@utility container-page {
+  width: 100%;
+  max-width: var(--container-content);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+@utility container-wide {
+  width: 100%;
+  max-width: var(--container-wide);
+  margin-inline: auto;
+  padding-inline: var(--spacing-gutter);
+}
+
+/* Body copy link: visible underline that thickens on hover */
+@utility link {
+  color: var(--color-link);
+  text-decoration-line: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.2em;
+  transition: text-decoration-thickness var(--pce-dur-fast) var(--ease-out-quint);
+  &:hover {
+    text-decoration-thickness: 0.16em;
+  }
+}
+
+/* Small uppercase label above section headings */
+@utility eyebrow {
+  font-family: var(--font-display);
+  font-size: var(--text-xs);
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-straw-strong);
+}
+
+/* Press feedback for buttons and cards */
+@utility pressable {
+  transition:
+    transform var(--pce-dur-fast) var(--ease-spring),
+    background-color var(--pce-dur-fast) var(--ease-out-quint),
+    box-shadow var(--pce-dur-base) var(--ease-out-quint);
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+/* Readable text over photography (hero banners) */
+@utility scrim {
+  background-image: linear-gradient(
+    to top,
+    rgb(5 7 7 / 0.85) 0%,
+    rgb(5 7 7 / 0.55) 45%,
+    rgb(5 7 7 / 0.15) 100%
+  );
+}
+
+/* ---------------------------------------------------------------------
+   5. Accessibility guards
+   --------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@media (prefers-contrast: more) {
+  :root,
+  [data-theme="light"] {
+    --pce-fg-muted: #343c3c;
+    --pce-border: #6b7776;
+    --pce-primary: #005a76;
+  }
+  [data-theme="dark"] {
+    --pce-fg-muted: #dde2e1;
+    --pce-border: #8f9a99;
+  }
+}
+
+@media (forced-colors: active) {
+  :focus-visible {
+    outline-color: Highlight;
+  }
+}
+
+@media print {
+  [data-print="hide"] {
+    display: none !important;
+  }
+  body {
+    background: #ffffff;
+    color: #000000;
+  }
+}
+
+/* ---------------------------------------------------------------------
+   6. Rich text from the CMS
+   --------------------------------------------------------------------- */
+@layer components {
+  .prose-pce p {
+    margin: 0;
+  }
+  .prose-pce h2,
+  .prose-pce h3 {
+    margin: 0.75rem 0 0;
+    font-size: var(--text-xl);
+  }
+  .prose-pce ul,
+  .prose-pce ol {
+    margin: 0;
+    padding-left: 1.5rem;
+  }
+  .prose-pce ul {
+    list-style: disc;
+  }
+  .prose-pce ol {
+    list-style: decimal;
+  }
+  .prose-pce li + li {
+    margin-top: 0.375rem;
+  }
+  .prose-pce a {
+    color: var(--color-link);
+    text-decoration-line: underline;
+  }
+  [data-tone="dark"] .prose-pce a {
+    color: var(--color-teal-200);
+  }
+  .prose-pce strong {
+    font-weight: 700;
+  }
+}

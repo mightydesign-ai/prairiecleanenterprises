@@ -1,0 +1,22 @@
+# dependencies
+node_modules
+.pnpm-store
+
+# Next.js
+.next
+out
+next-env.d.ts
+*.tsbuildinfo
+
+# environment (never commit secrets)
+.env
+.env*.local
+
+# local uploads (production uploads live in Vercel Blob)
+/media
+/resumes
+
+# misc
+.DS_Store
+*.log
+.vercel

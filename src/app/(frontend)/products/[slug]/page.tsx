@@ -1,0 +1,182 @@
+import type { Metadata } from "next";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Breadcrumb, ButtonLink, MediaImage, Section } from "@/components/ui/primitives";
+import { buildMetadata } from "@/lib/metadata";
+import { getProductBySlug, getProducts } from "@/lib/payload";
+
+export const revalidate = 3600;
+
+type Props = { params: Promise<{ slug: string }> };
+
+export async function generateStaticParams() {
+  return (await getProducts()).map((p) => ({ slug: p.slug }));
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const p = await getProductBySlug(slug);
+  if (!p) return {};
+  return buildMetadata({ title: p.name, description: p.summary, meta: p.meta, path: `/products/${slug}` });
+}
+
+export default async function ProductPage({ params }: Props) {
+  const { slug } = await params;
+  const [product, all] = await Promise.all([getProductBySlug(slug), getProducts()]);
+  if (!product) notFound();
+  const others = all.filter((p) => p.id !== product.id);
+  const brochure = product.brochure && typeof product.brochure === "object" ? product.brochure : null;
+
+  return (
+    <>
+      <section aria-labelledby="product-h" className="container-wide grid items-center gap-12 py-section-sm lg:grid-cols-2">
+        <div className="flex flex-col gap-5">
+          <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: product.name }]} />
+          {product.audience ? <p className="eyebrow !text-accent">{product.audience}</p> : null}
+          <h1 id="product-h" className="text-4xl font-extrabold [font-stretch:110%]">
+            {product.headline}
+          </h1>
+          <p className="max-w-prose text-lg text-fg-muted">{product.summary}</p>
+          <div className="flex flex-wrap gap-3 pt-2">
+            {product.primaryCtaHref && product.primaryCtaLabel ? (
+              <ButtonLink href={product.primaryCtaHref}>{product.primaryCtaLabel}</ButtonLink>
+            ) : null}
+            {product.secondaryCtaHref && product.secondaryCtaLabel ? (
+              <ButtonLink href={product.secondaryCtaHref} variant="secondary">
+                {product.secondaryCtaLabel}
+              </ButtonLink>
+            ) : null}
+            {brochure?.url ? (
+              <ButtonLink href={brochure.url} variant="secondary">
+                Download brochure (PDF)
+              </ButtonLink>
+            ) : null}
+          </div>
+        </div>
+        <MediaImage media={product.heroImage} placeholder={product.name} priority className="aspect-[5/4] rounded-xl" />
+      </section>
+
+      {product.highlights && product.highlights.length > 0 ? (
+        <Section tone="tinted" labelledBy="why-h">
+          <h2 id="why-h" className="mb-10 text-3xl">
+            Why it performs
+          </h2>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {product.highlights.map((h) => (
+              <li key={h.id ?? h.title} className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-6">
+                {h.value ? <span className="font-display text-4xl font-extrabold leading-none text-link">{h.value}</span> : null}
+                <h3 className="text-xl">{h.title}</h3>
+                {h.text ? <p className="text-base text-fg-muted">{h.text}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
+      {product.applications && product.applications.length > 0 ? (
+        <Section labelledBy="uses-h">
+          <h2 id="uses-h" className="mb-10 text-3xl">
+            Where it&apos;s used
+          </h2>
+          <ul className="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {product.applications.map((a) => (
+              <li key={a.id ?? a.title} className="flex flex-col gap-2 rounded-lg border border-border bg-surface p-6">
+                <h3 className="text-xl">{a.title}</h3>
+                {a.text ? <p className="text-base text-fg-muted">{a.text}</p> : null}
+              </li>
+            ))}
+          </ul>
+        </Section>
+      ) : null}
+
+      {product.whereToBuy && product.whereToBuy.length > 0 ? (
+        <Section labelledBy="buy-h" id="buy">
+          <h2 id="buy-h" className="mb-10 text-3xl">
+            Where to buy
+          </h2>
+          <ul className="grid gap-5 md:grid-cols-3">
+            {product.whereToBuy.map((w, i) => (
+              <li
+                key={w.id ?? w.title}
+                className={`flex flex-col gap-2.5 rounded-lg bg-surface p-7 ${i === 0 ? "border-2 border-primary" : "border border-border"}`}
+              >
+                <span className="text-xs font-bold uppercase tracking-[0.1em] text-link">{w.label}</span>
+                <h3 className="text-2xl">{w.title}</h3>
+                {w.text ? <p className="text-base text-fg-muted">{w.text}</p> : null}
+                {w.href ? (
+                  <a href={w.href} className="link font-display font-semibold">
+                    Go to {w.title}
+                  </a>
+                ) : null}
+              </li>
+            ))}
+          </ul>
+          {product.retailOrderCode ? (
+            <p className="mt-6 text-base">
+              Can&apos;t find it on the shelf? Ask customer service to order it in with item{" "}
+              <strong>#{product.retailOrderCode}</strong>.
+            </p>
+          ) : null}
+        </Section>
+      ) : null}
+
+      {product.callout?.heading ? (
+        <div className="container-wide pb-section-sm">
+          <section aria-labelledby="callout-h" className="grid gap-6 rounded-xl bg-teal-900 p-8 text-neutral-100 sm:p-12 lg:grid-cols-2 lg:items-center">
+            <div className="flex flex-col gap-3">
+              {product.callout.eyebrow ? <p className="eyebrow !text-straw-300">{product.callout.eyebrow}</p> : null}
+              <h2 id="callout-h" className="text-2xl lg:text-3xl">
+                {product.callout.heading}
+              </h2>
+            </div>
+            {product.callout.text ? <p className="text-neutral-300">{product.callout.text}</p> : null}
+          </section>
+        </div>
+      ) : null}
+
+      {product.specs && product.specs.length > 0 ? (
+        <Section tone="tinted" labelledBy="specs-h">
+          <div className="grid gap-10 lg:grid-cols-2">
+            <div className="flex flex-col gap-3">
+              <h2 id="specs-h" className="text-3xl">
+                Specifications
+              </h2>
+              <p className="text-fg-muted">Typical values, as received. Samples are available for qualified buyers.</p>
+            </div>
+            <table className="w-full border-collapse text-[17px]">
+              <caption className="sr-only">{product.name} specifications</caption>
+              <tbody>
+                {product.specs.map((s) => (
+                  <tr key={s.id ?? s.label} className="border-t border-border last:border-b">
+                    <th scope="row" className="py-3.5 text-left font-semibold">
+                      {s.label}
+                    </th>
+                    <td className="text-right text-fg-muted">{s.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </Section>
+      ) : null}
+
+      <Section labelledBy="more-h">
+        <h2 id="more-h" className="mb-6 text-2xl">
+          From the same bale
+        </h2>
+        <ul className="grid gap-4 md:grid-cols-3">
+          {others.map((p) => (
+            <li key={p.id}>
+              <Link
+                href={`/products/${p.slug}`}
+                className="pressable flex min-h-18 items-center justify-between rounded-lg border border-border bg-surface px-6 font-display text-lg font-bold no-underline hover:border-primary"
+              >
+                {p.name} <span aria-hidden="true" className="text-link">→</span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </Section>
+    </>
+  );
+}
