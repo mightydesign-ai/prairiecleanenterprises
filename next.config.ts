@@ -34,7 +34,18 @@ const nextConfig: NextConfig = {
     return webpackConfig;
   },
   async headers() {
-    return [{ source: "/:path*", headers: [...securityHeaders, ...noIndexHeaders] }];
+    return [
+      { source: "/:path*", headers: [...securityHeaders, ...noIndexHeaders] },
+      // Logos are SVG. Used through <img> they cannot run script, and if someone opens one directly this CSP
+      // (no script, no network, sandboxed) keeps it inert. scripts/check-svg.mjs rejects unsafe SVGs at build.
+      {
+        source: "/brand/:file*.svg",
+        headers: [
+          { key: "Content-Security-Policy", value: "default-src 'none'; style-src 'unsafe-inline'; sandbox" },
+          { key: "Content-Type", value: "image/svg+xml" },
+        ],
+      },
+    ];
   },
   // Every legacy WordPress URL keeps working and keeps its search ranking.
   async redirects() {
