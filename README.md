@@ -62,7 +62,7 @@ Commit the migration. Production applies it on the next deploy.
 
 ## Before launch
 
-- [ ] Add the real logo files to `public/brand/` and set `HAS_LOGO_FILES = true` in `src/components/ui/logo.tsx`
+- [x] Logo files in `public/brand/` (from PCE artwork, Oct 2026)
 - [ ] Upload photos in the admin (every placeholder says which photo it needs)
 - [ ] Replace the `[PLACEHOLDER]` spec values on the Flax Fibre and Fuel Pellets products
 - [ ] Add PCE's privacy policy text to the Privacy page and publish it (it's a draft, so `/privacy` is a 404 until then)
