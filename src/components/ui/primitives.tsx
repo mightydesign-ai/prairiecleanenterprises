@@ -8,7 +8,7 @@ export type Tone = "light" | "tinted" | "dark" | null | undefined;
 const toneClass: Record<string, string> = {
   light: "bg-bg text-fg",
   tinted: "border-y border-border bg-surface-sunken text-fg",
-  dark: "bg-teal-900 text-neutral-100 dark:bg-teal-950",
+  dark: "bg-inverse text-on-inverse",
 };
 
 /** Full-width band with a centred content column. */
@@ -37,7 +37,7 @@ export function Section({
 }
 
 export function Eyebrow({ children, onDark = false }: { children: ReactNode; onDark?: boolean }) {
-  return <p className={`eyebrow ${onDark ? "!text-straw-300" : ""}`}>{children}</p>;
+  return <p className={`eyebrow ${onDark ? "!text-on-inverse-accent" : ""}`}>{children}</p>;
 }
 
 export function SectionHeading({
@@ -62,7 +62,7 @@ export function SectionHeading({
           {heading}
         </h2>
       ) : null}
-      {intro ? <p className={onDark ? "text-neutral-300" : "text-fg-muted"}>{intro}</p> : null}
+      {intro ? <p className={onDark ? "text-on-inverse-muted" : "text-fg-muted"}>{intro}</p> : null}
     </div>
   );
 }
@@ -86,10 +86,10 @@ export function ButtonLink({
   const styles =
     variant === "primary"
       ? onDark
-        ? "bg-teal-300 text-teal-950 hover:bg-teal-200"
+        ? "bg-olive-500 text-neutral-800 hover:bg-olive-400"
         : "bg-primary text-on-primary hover:bg-primary-hover"
       : onDark
-        ? "border border-neutral-400 text-neutral-100 hover:bg-white/10"
+        ? "border border-neutral-400 text-on-inverse hover:bg-white/10"
         : "border border-border-strong text-fg hover:bg-surface-sunken";
   const className = `${base} ${styles}`;
   return isExternal(href) ? (

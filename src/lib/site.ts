@@ -14,6 +14,7 @@ export const isGroup = (item: NavItem): item is { label: string; children: NavLi
 
 // Organized by audience: buyers, farmers, the public, investors, job seekers.
 export const primaryNav: NavItem[] = [
+  { label: "Home", href: "/" },
   {
     label: "Products",
     children: [

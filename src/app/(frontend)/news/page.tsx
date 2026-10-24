@@ -55,16 +55,16 @@ export default async function NewsPage() {
       </div>
 
       {featured ? (
-        <article className="mb-14 grid overflow-hidden rounded-xl bg-teal-900 text-neutral-100 lg:grid-cols-2">
+        <article className="mb-14 grid overflow-hidden rounded-xl bg-inverse text-on-inverse lg:grid-cols-2">
           <MediaImage media={featured.image} placeholder={featured.title} className="min-h-72" />
           <div className="flex flex-col justify-center gap-4 p-8 sm:p-12">
-            <span className="text-[15px] font-semibold text-straw-300">
+            <span className="text-[15px] font-semibold text-on-inverse-accent">
               {[featured.source, featured.kind === "video" ? "Video" : null, formatDate(featured.publishedOn)]
                 .filter(Boolean)
                 .join(" · ")}
             </span>
             <h2 className="text-3xl">{featured.title}</h2>
-            <p className="text-neutral-300">{featured.excerpt}</p>
+            <p className="text-on-inverse-muted">{featured.excerpt}</p>
             <div>
               <ButtonLink href={hrefOf(featured)} onDark>
                 {featured.kind === "video" ? "Watch the story" : "Read the story"}

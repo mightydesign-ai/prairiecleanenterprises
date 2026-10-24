@@ -83,7 +83,7 @@ function RichTextSection({ block }: { block: BlockOf<"richText"> }) {
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
         <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
-        <div className={`prose-pce flex flex-col gap-4 text-lg ${dark ? "text-neutral-200" : ""}`}>
+        <div className={`prose-pce flex flex-col gap-4 text-lg ${dark ? "text-on-inverse" : ""}`}>
           <RichText data={block.content as never} />
         </div>
       </div>
@@ -102,14 +102,14 @@ function Stats({ block }: { block: BlockOf<"stats"> }) {
             key={item.id ?? item.label}
             className={`flex flex-col-reverse gap-2 rounded-lg p-6 ${dark ? "border border-white/20" : "border-t border-border"}`}
           >
-            <dt className={dark ? "text-neutral-300" : "text-fg-muted"}>{item.label}</dt>
-            <dd className={`font-display text-4xl font-extrabold leading-none ${dark ? "text-neutral-50" : "text-primary"}`}>
+            <dt className={dark ? "text-on-inverse-muted" : "text-fg-muted"}>{item.label}</dt>
+            <dd className={`font-display text-4xl font-extrabold leading-none ${dark ? "text-on-inverse" : "text-primary"}`}>
               {item.value}
             </dd>
           </div>
         ))}
       </dl>
-      {block.footnote ? <p className={`mt-6 text-sm ${dark ? "text-neutral-300" : "text-fg-muted"}`}>{block.footnote}</p> : null}
+      {block.footnote ? <p className={`mt-6 text-sm ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{block.footnote}</p> : null}
     </Section>
   );
 }
@@ -132,12 +132,12 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
             }`}
           >
             {item.tag ? (
-              <span className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-straw-300" : "text-accent"}`}>
+              <span className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-on-inverse-accent" : "text-accent"}`}>
                 {item.tag}
               </span>
             ) : null}
             <h3 className="text-xl">{item.title}</h3>
-            {item.text ? <p className={`text-base ${dark ? "text-neutral-300" : "text-fg-muted"}`}>{item.text}</p> : null}
+            {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
           </li>
         ))}
       </ul>
@@ -164,13 +164,13 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
               <span
                 aria-hidden="true"
                 className={`flex size-10 items-center justify-center rounded-full font-display font-bold ${
-                  dark ? "bg-teal-300 text-teal-950" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
+                  dark ? "bg-olive-500 text-neutral-800" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
                 }`}
               >
                 {i + 1}
               </span>
               <h3 className="text-xl">{item.title}</h3>
-              {item.text ? <p className={`text-base ${dark ? "text-neutral-300" : "text-fg-muted"}`}>{item.text}</p> : null}
+              {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
             </li>
           );
         })}
@@ -207,14 +207,14 @@ function Cta({ block }: { block: BlockOf<"cta"> }) {
       <section
         aria-labelledby={headingId(block)}
         className={`flex flex-wrap items-center justify-between gap-6 rounded-xl p-8 sm:p-12 ${
-          dark ? "bg-teal-900 text-neutral-100" : "bg-surface-sunken"
+          dark ? "bg-inverse text-on-inverse" : "bg-surface-sunken"
         }`}
       >
         <div className="flex max-w-2xl flex-col gap-3">
           <h2 id={headingId(block)} className="text-2xl lg:text-3xl">
             {block.heading}
           </h2>
-          {block.text ? <p className={dark ? "text-neutral-300" : "text-fg-muted"}>{block.text}</p> : null}
+          {block.text ? <p className={dark ? "text-on-inverse-muted" : "text-fg-muted"}>{block.text}</p> : null}
         </div>
         {block.button?.href && block.button.label ? (
           <ButtonLink href={block.button.href} onDark={dark}>
@@ -324,7 +324,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
             ) : (
               <span
                 aria-hidden="true"
-                className="flex size-22 shrink-0 items-center justify-center rounded-full bg-straw-200 font-display text-2xl font-bold text-straw-900"
+                className="flex size-22 shrink-0 items-center justify-center rounded-full bg-olive-100 font-display text-2xl font-bold text-neutral-800"
               >
                 {t.name
                   .split(/\s+/)

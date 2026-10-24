@@ -54,18 +54,35 @@ accredited investors · job seekers · press.
 
 ## Design tokens
 
-Logo colours: Prairie Teal `#007B9B`, Prairie Green `#56844F`, Straw `#9D7C55`, Ink `#000000`, Maple Red `#BE1522`.
-Components use semantic tokens (`bg-surface`, `text-fg-muted`, `bg-primary`, `text-link`), never raw hex.
+The palette comes from the current prairiecleanenterprises.com (Elementor kit and page styles) and the logo. PCE chose
+those colours deliberately, so keep them:
 
-Contrast decisions already made:
-- Teal `#007B9B` passes on white (4.9:1) but **fails as small text on the tinted surface** (4.2:1). Use `text-link`
-  (`#005A76`) for small teal text.
-- Logo green and straw fail as small text on white (4.4:1, 3.9:1). Text uses `#45703E` (`accent`) and
-  `#654A29` (`straw-strong`); the originals are for graphics and large type.
-- The old site's olive button (`#96A924`, 2.6:1 with white) is not used.
+| Role | Colour |
+|---|---|
+| Olive (buttons, primary fills) | `#96A924`, hovers `#819217` / `#748410` |
+| Teal (links, icons) | `#007B9A` |
+| Sky (headings and accents on dark bands) | `#6EC1E4` |
+| Green (bands, accent) | `#54864D` |
+| Charcoal (text, dark bands, footer) | `#262B2B` |
+| Light grey (bands) | `#F3F3F3` |
+| Grey (secondary text) | `#606060` |
+| Straw, Maple Red (from the logo) | `#9D7C55`, `#BE1522` |
+
+Components use semantic tokens (`bg-primary`, `text-on-primary`, `bg-inverse`, `text-on-inverse`,
+`text-on-inverse-accent`, `text-link`, `bg-selected`), never raw hex or scale steps like `bg-teal-900`.
+
+Contrast decisions (all checked to WCAG 2.2 AA; where an original pairing fails, the colour stays and the pairing changes):
+- Olive with white text is 2.6:1, so olive buttons carry **charcoal** text (5.5:1).
+- Teal is 4.9:1 on white but 4.4:1 on the light grey band, so small links on grey use `#006A86` (the tinted-surface override).
+- Sky `#6EC1E4` is only for dark bands (7.1:1 on charcoal); it fails on white (2.0:1).
+- Green `#54864D` is 4.3:1 on white, so text uses `#45703E` (5.8:1); the original is for fills and large type.
+- Straw is for graphics and large type only.
 
 Type: Archivo (display, width axis) + Source Sans 3 (body) via `next/font`. PCE fixed the logo and colours only;
 fonts can change.
+
+Block thumbnails shown in the Payload layout picker live in `public/block-previews/` (one SVG per block, set with
+`imageURL` in `src/blocks/config.ts`). Add one when you add a block.
 
 ## Commands
 

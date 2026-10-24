@@ -70,7 +70,7 @@ function ContactFormInner({ onReset }: { onReset: () => void }) {
           {contactTopics.map((t, i) => (
             <label
               key={t.value}
-              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border px-4 text-[15px] font-semibold has-[:checked]:border-primary has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950"
+              className="flex min-h-11 cursor-pointer items-center gap-2 rounded-full border border-border px-4 text-[15px] font-semibold has-[:checked]:border-primary has-[:checked]:bg-selected"
             >
               <input type="radio" name="topic" value={t.value} defaultChecked={i === 0} className="size-4 accent-[var(--color-primary)]" />
               {t.label}
@@ -120,7 +120,7 @@ function StrawOfferInner({ onReset }: { onReset: () => void }) {
           {interests.map((o) => (
             <label
               key={o.value}
-              className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-4 has-[:checked]:border-2 has-[:checked]:border-primary has-[:checked]:bg-teal-50 dark:has-[:checked]:bg-teal-950"
+              className="flex cursor-pointer items-start gap-3 rounded-lg border border-border p-4 has-[:checked]:border-2 has-[:checked]:border-primary has-[:checked]:bg-selected"
             >
               <input
                 type="radio"

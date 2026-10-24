@@ -41,6 +41,8 @@ const link = (name: string, label: string): Field => ({
 
 export const HeroBlock: Block = {
   slug: "hero",
+  imageURL: "/block-previews/hero.svg",
+  imageAltText: "Preview of the Hero layout",
   labels: { singular: "Hero", plural: "Heroes" },
   fields: [
     eyebrow,
@@ -63,12 +65,16 @@ export const HeroBlock: Block = {
 
 export const RichTextBlock: Block = {
   slug: "richText",
+  imageURL: "/block-previews/richText.svg",
+  imageAltText: "Preview of the Text layout",
   labels: { singular: "Text", plural: "Text" },
   fields: [eyebrow, heading, { name: "content", type: "richText", required: true }, tone],
 };
 
 export const HighlightsBlock: Block = {
   slug: "highlights",
+  imageURL: "/block-previews/highlights.svg",
+  imageAltText: "Preview of the Highlight strip layout",
   labels: { singular: "Highlight strip", plural: "Highlight strips" },
   fields: [
     {
@@ -83,6 +89,8 @@ export const HighlightsBlock: Block = {
 
 export const StatsBlock: Block = {
   slug: "stats",
+  imageURL: "/block-previews/stats.svg",
+  imageAltText: "Preview of the Stats layout",
   labels: { singular: "Stats", plural: "Stats" },
   fields: [
     eyebrow,
@@ -109,6 +117,8 @@ export const StatsBlock: Block = {
 
 export const CardsBlock: Block = {
   slug: "cards",
+  imageURL: "/block-previews/cards.svg",
+  imageAltText: "Preview of the Cards layout",
   labels: { singular: "Cards", plural: "Cards" },
   fields: [
     eyebrow,
@@ -131,6 +141,8 @@ export const CardsBlock: Block = {
 
 export const StepsBlock: Block = {
   slug: "steps",
+  imageURL: "/block-previews/steps.svg",
+  imageAltText: "Preview of the Numbered steps layout",
   labels: { singular: "Numbered steps", plural: "Numbered steps" },
   fields: [
     eyebrow,
@@ -152,6 +164,8 @@ export const StepsBlock: Block = {
 
 export const MilestonesBlock: Block = {
   slug: "milestones",
+  imageURL: "/block-previews/milestones.svg",
+  imageAltText: "Preview of the Timeline layout",
   labels: { singular: "Timeline", plural: "Timelines" },
   fields: [
     heading,
@@ -174,6 +188,8 @@ export const MilestonesBlock: Block = {
 
 export const CtaBlock: Block = {
   slug: "cta",
+  imageURL: "/block-previews/cta.svg",
+  imageAltText: "Preview of the Call to action layout",
   labels: { singular: "Call to action", plural: "Calls to action" },
   fields: [
     { name: "heading", type: "text", required: true },
@@ -185,6 +201,8 @@ export const CtaBlock: Block = {
 
 export const FaqBlock: Block = {
   slug: "faq",
+  imageURL: "/block-previews/faq.svg",
+  imageAltText: "Preview of the FAQ layout",
   labels: { singular: "FAQ", plural: "FAQs" },
   fields: [
     heading,
@@ -202,30 +220,40 @@ export const FaqBlock: Block = {
 
 export const ProductListBlock: Block = {
   slug: "productList",
+  imageURL: "/block-previews/productList.svg",
+  imageAltText: "Preview of the Product list layout",
   labels: { singular: "Product list", plural: "Product lists" },
   fields: [eyebrow, heading],
 };
 
 export const NewsListBlock: Block = {
   slug: "newsList",
+  imageURL: "/block-previews/newsList.svg",
+  imageAltText: "Preview of the Latest news layout",
   labels: { singular: "Latest news", plural: "Latest news" },
   fields: [heading, { name: "limit", type: "number", defaultValue: 3, min: 1, max: 12 }],
 };
 
 export const TeamBlock: Block = {
   slug: "team",
+  imageURL: "/block-previews/team.svg",
+  imageAltText: "Preview of the Team layout",
   labels: { singular: "Team", plural: "Team" },
   fields: [heading],
 };
 
 export const PartnersBlock: Block = {
   slug: "partners",
+  imageURL: "/block-previews/partners.svg",
+  imageAltText: "Preview of the Partner logos layout",
   labels: { singular: "Partner logos", plural: "Partner logos" },
   fields: [heading],
 };
 
 export const FormBlock: Block = {
   slug: "form",
+  imageURL: "/block-previews/form.svg",
+  imageAltText: "Preview of the Form layout",
   labels: { singular: "Form", plural: "Forms" },
   fields: [
     { name: "anchor", type: "text", admin: { description: "Optional id so buttons can link here, e.g. offer." } },

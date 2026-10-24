@@ -35,7 +35,7 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
             type="button"
             aria-pressed={topic === t.value}
             onClick={() => setTopic(t.value)}
-            className="pressable min-h-11 rounded-full border border-border bg-surface px-4 font-display text-[15px] font-semibold aria-pressed:border-teal-900 aria-pressed:bg-teal-900 aria-pressed:text-neutral-100"
+            className="pressable min-h-11 rounded-full border border-border bg-surface px-4 font-display text-[15px] font-semibold aria-pressed:border-inverse aria-pressed:bg-inverse aria-pressed:text-on-inverse"
           >
             {t.label}
           </button>

@@ -2,10 +2,16 @@
 
 /* =====================================================================
    Prairie Clean Enterprises — design tokens (Tailwind CSS v4)
-   Brand anchors come from the current logo:
-     Prairie Teal #007B9B · Prairie Green #56844F · Straw #9D7C55
-     Ink #000000 · Maple Red #BE1522
-   Every text/background pairing below is checked to WCAG 2.2 AA.
+   Palette taken from the current prairiecleanenterprises.com (Elementor
+   kit and page styles, Oct 2026). Those colours were chosen deliberately:
+     Olive #96A924 (buttons) · Teal #007B9A (links, icons)
+     Sky #6EC1E4 (headings on dark bands) · Green #54864D (bands)
+     Charcoal #262B2B (text, dark bands) · Light grey #F3F3F3 (bands)
+     Grey #606060 (secondary text)
+   Logo artwork adds Straw #9D7C55 and Maple Red #BE1522.
+   Every text/background pairing below is checked to WCAG 2.2 AA; where an
+   original pairing fails, the colour is kept and the pairing changes
+   (for example olive buttons carry charcoal text, not white).
    ===================================================================== */
 
 /* Dark mode follows data-theme on <html>, set before paint in layout.tsx. */
@@ -15,32 +21,53 @@
    1. Static scales: brand palette, fonts, fluid type, space, motion
    --------------------------------------------------------------------- */
 @theme {
-  /* Brand anchors (exact logo values) */
-  --color-brand-teal: #007b9b;
-  --color-brand-green: #56844f;
+  /* Brand anchors (exact values from the current site and logo) */
+  --color-brand-olive: #96a924;
+  --color-brand-teal: #007b9a;
+  --color-brand-sky: #6ec1e4;
+  --color-brand-green: #54864d;
+  --color-brand-charcoal: #262b2b;
+  --color-brand-grey: #f3f3f3;
   --color-brand-straw: #9d7c55;
-  --color-brand-ink: #000000;
   --color-brand-maple: #be1522;
 
-  /* Tonal scales built in OKLCH around each anchor's hue */
+  /* Olive: the current site's button colour (#96A924), hovers #819217 / #748410 */
+  --color-olive-50: #f6f8e6;
+  --color-olive-100: #ebf0c4;
+  --color-olive-200: #d6e08f;
+  --color-olive-300: #c3d36a;
+  --color-olive-400: #a9bd2f;
+  --color-olive-500: #96a924;
+  --color-olive-600: #819217;
+  --color-olive-700: #748410;
+  --color-olive-800: #5a660c;
+  --color-olive-900: #414a08;
+
+  /* Teal: links and icons (#007B9A) */
   --color-teal-50: #e9f8fd;
   --color-teal-100: #bff1ff;
   --color-teal-200: #a2dbf2;
   --color-teal-300: #7dbfd9;
-  --color-teal-400: #53a1bd;
-  --color-teal-500: #2586a5;
-  --color-teal-600: #007b9b;
-  --color-teal-700: #005a76;
-  --color-teal-800: #004660;
-  --color-teal-900: #00334b;
-  --color-teal-950: #002036;
+  --color-teal-400: #3a9ab8;
+  --color-teal-500: #1a8aa8;
+  --color-teal-600: #007b9a;
+  --color-teal-700: #006a86;
+  --color-teal-800: #005a73;
+  --color-teal-900: #00405a;
+  --color-teal-950: #002a3d;
+
+  /* Sky: heading colour on dark bands (#6EC1E4) */
+  --color-sky-100: #d4edf8;
+  --color-sky-200: #a3d8ee;
+  --color-sky-300: #6ec1e4;
+  --color-sky-400: #3fa9d6;
 
   --color-green-50: #effaec;
   --color-green-100: #d4f2cf;
   --color-green-200: #bbdcb5;
   --color-green-300: #9bc095;
   --color-green-400: #79a272;
-  --color-green-500: #56844f;
+  --color-green-500: #54864d;
   --color-green-600: #45703e;
   --color-green-700: #335b2d;
   --color-green-800: #22471c;
@@ -59,19 +86,19 @@
   --color-straw-900: #3c2607;
   --color-straw-950: #291500;
 
-  /* Neutrals carry a trace of the teal hue so greys never feel cold-blue */
+  /* Neutrals: the current site's charcoal (#262B2B) and greys */
   --color-neutral-0: #ffffff;
-  --color-neutral-50: #f6f7f7;
-  --color-neutral-100: #eef1ef;
-  --color-neutral-200: #dde2e1;
-  --color-neutral-300: #c3cbca;
-  --color-neutral-400: #8f9a99;
-  --color-neutral-500: #6b7776;
-  --color-neutral-600: #4b5454;
-  --color-neutral-700: #343c3c;
-  --color-neutral-800: #222929;
-  --color-neutral-900: #151b1b;
-  --color-neutral-950: #0e1212;
+  --color-neutral-50: #f9f9f9;
+  --color-neutral-100: #f3f3f3;
+  --color-neutral-200: #e9e9e9;
+  --color-neutral-300: #c8cccc;
+  --color-neutral-400: #949494;
+  --color-neutral-500: #6d7373;
+  --color-neutral-600: #606060;
+  --color-neutral-700: #434343;
+  --color-neutral-800: #262b2b;
+  --color-neutral-900: #1c2020;
+  --color-neutral-950: #111414;
 
   /* Type families (CSS variables are injected by next/font) */
   --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
@@ -170,6 +197,8 @@
   --color-inverse: var(--pce-inverse);
   --color-on-inverse: var(--pce-on-inverse);
   --color-on-inverse-muted: var(--pce-on-inverse-muted);
+  --color-on-inverse-accent: var(--pce-on-inverse-accent);
+  --color-selected: var(--pce-selected);
 }
 
 :root {
@@ -182,80 +211,103 @@
 :root,
 [data-theme="light"] {
   color-scheme: light;
-  --pce-bg: #faf8f4;               /* fg 17.3:1 */
+  --pce-bg: #ffffff;
   --pce-surface: #ffffff;
-  --pce-surface-sunken: #f2eee6;   /* fg 15.9:1, muted 6.7:1 */
-  --pce-fg: #121515;
-  --pce-fg-muted: #4b5454;         /* 7.4:1 on bg */
-  --pce-border: #ddd6ca;           /* decorative dividers only */
-  --pce-border-strong: #6b7776;    /* 4.4:1, meets 3:1 for form controls */
-  --pce-primary: #007b9b;          /* brand teal: fills, icons, large text (4.6:1 on bg) */
-  --pce-primary-hover: #005a76;
-  --pce-on-primary: #ffffff;       /* 4.9:1 on primary */
-  --pce-accent: #45703e;           /* brand green deepened for text, 5.4:1 */
+  --pce-surface-sunken: #f3f3f3;   /* site's light grey band; fg 12.9:1, muted 5.7:1 */
+  --pce-fg: #262b2b;               /* site charcoal, 14.4:1 */
+  --pce-fg-muted: #606060;         /* 6.3:1 on white */
+  --pce-border: #e9e9e9;           /* decorative dividers only */
+  --pce-border-strong: #6d7373;    /* 4.8:1, meets 3:1 for form controls */
+  --pce-primary: #96a924;          /* site olive: button fills */
+  --pce-primary-hover: #a9bd2f;    /* lighter, so charcoal text stays at 6.8:1 */
+  --pce-on-primary: #262b2b;       /* 5.5:1 on olive (white is 2.6:1, so not used) */
+  --pce-accent: #45703e;           /* site green deepened for text, 5.8:1 */
   --pce-on-accent: #ffffff;
   --pce-straw: #9d7c55;            /* graphics and large type only */
-  --pce-straw-strong: #654a29;     /* 7.7:1, small text */
-  --pce-link: #005a76;             /* 7.3:1, small text on any light surface */
-  --pce-focus: #005a76;
-  --pce-danger: #be1522;           /* brand maple, 6.0:1 */
+  --pce-straw-strong: #654a29;
+  --pce-link: #007b9a;             /* site teal, 4.9:1 on white */
+  --pce-focus: #007b9a;
+  --pce-danger: #be1522;           /* maple, 6.3:1 */
   --pce-success: #335b2d;
-  --pce-inverse: #0e1212;          /* footer / dark bands */
-  --pce-on-inverse: #eef1ef;
-  --pce-on-inverse-muted: #a9b3b1;
+  --pce-inverse: #262b2b;          /* dark bands and footer, as on the current site */
+  --pce-on-inverse: #f3f3f3;
+  --pce-on-inverse-muted: #c8cccc; /* 8.9:1 */
+  --pce-on-inverse-accent: #6ec1e4;/* site sky, 7.1:1 on charcoal */
+  --pce-selected: #ebf0c4;         /* chosen options in forms and filters */
+}
+
+/* Teal is 4.4:1 on the grey band, just short of 4.5, so small links there go one step deeper. */
+[data-tone="tinted"],
+.bg-surface-sunken {
+  --pce-link: #006a86;             /* 5.6:1 on #f3f3f3 */
+  --pce-focus: #006a86;
 }
 
 /* Dark */
 [data-theme="dark"] {
   color-scheme: dark;
-  --pce-bg: #0e1212;
-  --pce-surface: #151b1b;
-  --pce-surface-sunken: #0a0d0d;
-  --pce-fg: #eef1ef;               /* 16.6:1 */
-  --pce-fg-muted: #a9b3b1;         /* 8.8:1 */
-  --pce-border: #2a3332;
-  --pce-border-strong: #6b7776;    /* 4.1:1 */
-  --pce-primary: #7dbfd9;          /* 9.3:1 */
-  --pce-primary-hover: #a2dbf2;
-  --pce-on-primary: #002036;       /* 8.2:1 on primary */
+  --pce-bg: #1c2020;
+  --pce-surface: #262b2b;
+  --pce-surface-sunken: #151818;
+  --pce-fg: #f3f3f3;
+  --pce-fg-muted: #b9bfbf;         /* 8.8:1 */
+  --pce-border: #343a3a;
+  --pce-border-strong: #7d8484;    /* 4.3:1 */
+  --pce-primary: #96a924;          /* olive reads well on charcoal, 6.3:1 */
+  --pce-primary-hover: #a9bd2f;
+  --pce-on-primary: #262b2b;
   --pce-accent: #9bc095;
   --pce-on-accent: #11340b;
   --pce-straw: #ccaf8e;
   --pce-straw-strong: #e6ccaf;
-  --pce-link: #a2dbf2;
-  --pce-focus: #7dbfd9;
+  --pce-link: #6ec1e4;             /* site sky, 8.2:1 */
+  --pce-focus: #6ec1e4;
   --pce-danger: #ff8e85;
   --pce-success: #9bc095;
-  --pce-inverse: #050707;
-  --pce-on-inverse: #eef1ef;
-  --pce-on-inverse-muted: #a9b3b1;
+  --pce-inverse: #111414;
+  --pce-on-inverse: #f3f3f3;
+  --pce-on-inverse-muted: #c8cccc;
+  --pce-on-inverse-accent: #6ec1e4;
+  --pce-selected: #2f3a1a;
+}
+[data-theme="dark"] [data-tone="tinted"],
+[data-theme="dark"] .bg-surface-sunken {
+  --pce-link: #6ec1e4;
+  --pce-focus: #6ec1e4;
 }
 
 /* No-JS fallback: follow the OS setting when no theme has been applied. */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme]) {
     color-scheme: dark;
-    --pce-bg: #0e1212;
-    --pce-surface: #151b1b;
-    --pce-surface-sunken: #0a0d0d;
-    --pce-fg: #eef1ef;
-    --pce-fg-muted: #a9b3b1;
-    --pce-border: #2a3332;
-    --pce-border-strong: #6b7776;
-    --pce-primary: #7dbfd9;
-    --pce-primary-hover: #a2dbf2;
-    --pce-on-primary: #002036;
+    --pce-bg: #1c2020;
+    --pce-surface: #262b2b;
+    --pce-surface-sunken: #151818;
+    --pce-fg: #f3f3f3;
+    --pce-fg-muted: #b9bfbf;
+    --pce-border: #343a3a;
+    --pce-border-strong: #7d8484;
+    --pce-primary: #96a924;
+    --pce-primary-hover: #a9bd2f;
+    --pce-on-primary: #262b2b;
     --pce-accent: #9bc095;
     --pce-on-accent: #11340b;
     --pce-straw: #ccaf8e;
     --pce-straw-strong: #e6ccaf;
-    --pce-link: #a2dbf2;
-    --pce-focus: #7dbfd9;
+    --pce-link: #6ec1e4;
+    --pce-focus: #6ec1e4;
     --pce-danger: #ff8e85;
     --pce-success: #9bc095;
-    --pce-inverse: #050707;
-    --pce-on-inverse: #eef1ef;
-    --pce-on-inverse-muted: #a9b3b1;
+    --pce-inverse: #111414;
+    --pce-on-inverse: #f3f3f3;
+    --pce-on-inverse-muted: #c8cccc;
+    --pce-on-inverse-accent: #6ec1e4;
+    --pce-selected: #2f3a1a;
+  }
+  :root:not([data-theme]) [data-tone="tinted"],
+  :root:not([data-theme]) .bg-surface-sunken {
+    --pce-link: #6ec1e4;
+    --pce-focus: #6ec1e4;
   }
 }
 
@@ -317,8 +369,8 @@
   }
 
   ::selection {
-    background-color: var(--color-teal-200);
-    color: var(--color-teal-950);
+    background-color: var(--color-olive-200);
+    color: var(--color-neutral-800);
   }
 
   img, svg, video {
@@ -371,7 +423,7 @@
   font-weight: 600;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--color-straw-strong);
+  color: var(--color-link);
 }
 
 /* Press feedback for buttons and cards */
@@ -389,9 +441,9 @@
 @utility scrim {
   background-image: linear-gradient(
     to top,
-    rgb(5 7 7 / 0.85) 0%,
-    rgb(5 7 7 / 0.55) 45%,
-    rgb(5 7 7 / 0.15) 100%
+    rgb(38 43 43 / 0.88) 0%,
+    rgb(38 43 43 / 0.6) 45%,
+    rgb(96 96 96 / 0.15) 100%
   );
 }
 
@@ -412,13 +464,13 @@
 @media (prefers-contrast: more) {
   :root,
   [data-theme="light"] {
-    --pce-fg-muted: #343c3c;
-    --pce-border: #6b7776;
-    --pce-primary: #005a76;
+    --pce-fg-muted: #434343;
+    --pce-border: #6d7373;
+    --pce-link: #005a73;
   }
   [data-theme="dark"] {
-    --pce-fg-muted: #dde2e1;
-    --pce-border: #8f9a99;
+    --pce-fg-muted: #e9e9e9;
+    --pce-border: #949494;
   }
 }
 
@@ -469,7 +521,7 @@
     text-decoration-line: underline;
   }
   [data-tone="dark"] .prose-pce a {
-    color: var(--color-teal-200);
+    color: var(--color-on-inverse-accent);
   }
   .prose-pce strong {
     font-weight: 700;

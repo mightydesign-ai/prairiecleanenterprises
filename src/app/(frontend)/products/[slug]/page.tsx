@@ -122,14 +122,14 @@ export default async function ProductPage({ params }: Props) {
 
       {product.callout?.heading ? (
         <div className="container-wide pb-section-sm">
-          <section aria-labelledby="callout-h" className="grid gap-6 rounded-xl bg-teal-900 p-8 text-neutral-100 sm:p-12 lg:grid-cols-2 lg:items-center">
+          <section aria-labelledby="callout-h" className="grid gap-6 rounded-xl bg-inverse p-8 text-on-inverse sm:p-12 lg:grid-cols-2 lg:items-center">
             <div className="flex flex-col gap-3">
-              {product.callout.eyebrow ? <p className="eyebrow !text-straw-300">{product.callout.eyebrow}</p> : null}
+              {product.callout.eyebrow ? <p className="eyebrow !text-on-inverse-accent">{product.callout.eyebrow}</p> : null}
               <h2 id="callout-h" className="text-2xl lg:text-3xl">
                 {product.callout.heading}
               </h2>
             </div>
-            {product.callout.text ? <p className="text-neutral-300">{product.callout.text}</p> : null}
+            {product.callout.text ? <p className="text-on-inverse-muted">{product.callout.text}</p> : null}
           </section>
         </div>
       ) : null}
