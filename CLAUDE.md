@@ -18,7 +18,7 @@ accredited investors · job seekers · press.
 
 ## Stack and why
 
-- **Next.js 15.4.11** — Payload 3.92 peer range is `>=15.4.11 <15.5` or `>=16.3.3`. Do not bump to 15.5.
+- **Next.js 16.4.3** — Payload 3.92 supports Next `>=16.3.3 <17` (and 15.4.x, which has unpatched critical CVEs: do not go back). Stay on a Payload-supported Next line; run `pnpm audit --prod` before releases.
 - **Payload CMS 3** inside the Next app (`src/app/(payload)`), Postgres adapter, admin at `/admin`.
   Chosen over Sanity so content and form submissions live in one database and one admin.
 - **Tailwind CSS 4**, CSS-first: tokens in `src/app/(frontend)/globals.css` (`@theme`). There is no `tailwind.config.ts`.

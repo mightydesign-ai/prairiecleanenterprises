@@ -10,6 +10,8 @@ export const Users: CollectionConfig = {
   },
   auth: {
     tokenExpiration: 60 * 60 * 8,
+    // Payload's cookie is not Secure by default. Production is HTTPS only, so mark it Secure and keep it SameSite.
+    cookies: { secure: process.env.NODE_ENV === "production", sameSite: "Lax" },
     maxLoginAttempts: 5,
     lockTime: 15 * 60 * 1000,
   },
@@ -25,6 +27,19 @@ export const Users: CollectionConfig = {
     delete: admins,
   },
   hooks: {
+    beforeValidate: [
+      // Staff passwords: at least 12 characters, not all one kind of character.
+      ({ data }) => {
+        const pw = (data as { password?: unknown } | undefined)?.password;
+        if (typeof pw === "string" && pw.length > 0) {
+          if (pw.length < 12) throw new Error("Use a password of at least 12 characters.");
+          if (!/[a-z]/.test(pw) || !/[A-Z0-9\W_]/.test(pw)) {
+            throw new Error("Mix lower-case letters with capitals, numbers or symbols, or use a long passphrase.");
+          }
+        }
+        return data;
+      },
+    ],
     beforeChange: [
       // The very first account (created at /admin on a fresh install) is always an admin.
       async ({ data, operation, req }) => {

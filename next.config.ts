@@ -1,11 +1,35 @@
 import { withPayload } from "@payloadcms/next/withPayload";
 import type { NextConfig } from "next";
 
+// Vercel Blob store hostname, derived from the token (vercel_blob_rw_<storeId>_...). Only this store may be
+// optimised through /_next/image, so the site can't be used as an image proxy for anyone else's blob store.
+const blobStoreId = process.env.BLOB_READ_WRITE_TOKEN?.split("_")[3]?.toLowerCase();
+const blobHost = blobStoreId ? `${blobStoreId}.public.blob.vercel-storage.com` : null;
+
+// Content Security Policy for the public site. Next.js and the theme script use inline scripts, so script-src
+// keeps 'unsafe-inline'; everything else is locked down (no plugins, no framing, forms and base URL pinned to
+// this site, connections and images only to this site and our own blob store). /admin and /api are excluded
+// because the Payload admin has its own requirements.
+const csp = [
+  "default-src 'self'",
+  "script-src 'self' 'unsafe-inline'",
+  "style-src 'self' 'unsafe-inline'",
+  `img-src 'self' data: blob:${blobHost ? ` https://${blobHost}` : ""}`,
+  "font-src 'self' data:",
+  `connect-src 'self'${blobHost ? ` https://${blobHost}` : ""}`,
+  "object-src 'none'",
+  "base-uri 'self'",
+  "form-action 'self'",
+  "frame-ancestors 'self'",
+  "upgrade-insecure-requests",
+].join("; ");
+
 const securityHeaders = [
   { key: "X-Content-Type-Options", value: "nosniff" },
   { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
   { key: "X-Frame-Options", value: "SAMEORIGIN" },
   { key: "Permissions-Policy", value: "camera=(), microphone=(), geolocation=()" },
+  { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
   { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
 ];
 
@@ -23,7 +47,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     localPatterns: [{ pathname: "/api/media/file/**" }, { pathname: "/brand/**" }],
-    remotePatterns: [{ protocol: "https", hostname: "*.public.blob.vercel-storage.com" }],
+    remotePatterns: blobHost ? [{ protocol: "https", hostname: blobHost }] : [],
   },
   webpack: (webpackConfig) => {
     webpackConfig.resolve.extensionAlias = {
@@ -36,6 +60,7 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       { source: "/:path*", headers: [...securityHeaders, ...noIndexHeaders] },
+      { source: "/((?!admin|api).*)", headers: [{ key: "Content-Security-Policy", value: csp }] },
       // Uploaded files (editors can upload SVG). Shown through <img> they are inert; opened directly, this
       // CSP stops any script or network access.
       {

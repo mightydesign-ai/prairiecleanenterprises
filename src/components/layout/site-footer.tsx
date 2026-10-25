@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { safeHref } from "@/lib/safe-url";
 import { Logo } from "@/components/ui/logo";
 import { getSiteSettings } from "@/lib/payload";
 import { footerNav, telHref } from "@/lib/site";
@@ -25,7 +26,7 @@ export async function SiteFooter() {
               {settings.social.map((s) => (
                 <li key={s.id ?? s.url}>
                   <a
-                    href={s.url}
+                    href={safeHref(s.url)}
                     rel="me noopener"
                     target="_blank"
                     className="pressable inline-flex min-h-11 items-center rounded-md border border-white/60 px-3 text-sm hover:bg-white/15"
@@ -52,7 +53,7 @@ export async function SiteFooter() {
                 {col.links.map((link) => (
                   <li key={link.href}>
                     <Link
-                      href={link.href}
+                      href={safeHref(link.href)}
                       className="inline-flex min-h-9 items-center text-sm text-white underline-offset-4 hover:text-white hover:underline"
                     >
                       {link.label}

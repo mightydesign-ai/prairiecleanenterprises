@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { safeHref } from "@/lib/safe-url";
 import { Breadcrumb, ButtonLink, MediaImage, Section } from "@/components/ui/primitives";
 import { buildMetadata } from "@/lib/metadata";
 import { getProductBySlug, getProducts } from "@/lib/payload";
@@ -105,7 +106,7 @@ export default async function ProductPage({ params }: Props) {
                 <h3 className="text-2xl">{w.title}</h3>
                 {w.text ? <p className="text-base text-fg-muted">{w.text}</p> : null}
                 {w.href ? (
-                  <a href={w.href} className="link font-display font-semibold">
+                  <a href={safeHref(w.href)} className="link font-display font-semibold">
                     Go to {w.title}
                   </a>
                 ) : null}

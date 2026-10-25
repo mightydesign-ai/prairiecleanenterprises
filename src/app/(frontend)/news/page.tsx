@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { safeHref } from "@/lib/safe-url";
 import { formatDate } from "@/components/blocks/RenderBlocks";
 import { Breadcrumb, ButtonLink, MediaImage } from "@/components/ui/primitives";
 import { getNews, getSiteSettings } from "@/lib/payload";
@@ -21,7 +22,7 @@ const topicLabel: Record<string, string> = {
   funding: "Funding",
 };
 
-const hrefOf = (n: News) => (n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news"));
+const hrefOf = (n: News) => safeHref(n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news"));
 
 export default async function NewsPage() {
   const [items, settings] = await Promise.all([getNews(), getSiteSettings()]);

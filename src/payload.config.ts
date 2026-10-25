@@ -23,6 +23,8 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000";
 
 export default buildConfig({
   serverURL: siteUrl,
+  // Content is read through the local API; the public GraphQL endpoint is switched off to shrink the attack surface.
+  graphQL: { disable: true },
   admin: {
     user: Users.slug,
     meta: { titleSuffix: " · PCE website" },

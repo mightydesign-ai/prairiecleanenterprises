@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { ReactNode } from "react";
+import { safeHref } from "@/lib/safe-url";
 import type { Media } from "@/payload-types";
 
 export type Tone = "light" | "tinted" | "dark" | null | undefined;
@@ -92,6 +93,7 @@ export function ButtonLink({
         ? "border border-neutral-400 text-on-inverse hover:bg-white/10"
         : "border border-border-strong text-fg hover:bg-surface-sunken";
   const className = `${base} ${styles}`;
+  href = safeHref(href);
   return isExternal(href) ? (
     <a href={href} className={className}>
       {children}

@@ -2,6 +2,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { Fragment } from "react";
 import { ContactForm, InvestorForm, StrawOfferForm } from "@/components/forms/forms";
+import { safeHref } from "@/lib/safe-url";
 import { ButtonLink, MediaImage, Section, SectionHeading, mediaSrc } from "@/components/ui/primitives";
 import { getNews, getPartners, getProducts, getTeam } from "@/lib/payload";
 import type { Page } from "@/payload-types";
@@ -360,7 +361,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
               {[n.source, formatDate(n.publishedOn)].filter(Boolean).join(" · ")}
             </span>
             <a
-              href={n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news")}
+              href={safeHref(n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news"))}
               className="font-display text-xl font-bold leading-snug no-underline hover:text-link"
             >
               {n.title}
@@ -431,7 +432,7 @@ async function PartnerLogos({ block }: { block: BlockOf<"partners"> }) {
             <li key={p.id}>
               {p.url ? (
                 <a
-                  href={p.url}
+                  href={safeHref(p.url)}
                   rel="noopener"
                   target="_blank"
                   aria-label={logo ? `${p.name} (opens in a new tab)` : undefined}

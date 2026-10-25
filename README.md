@@ -2,7 +2,7 @@
 
 The public site and CMS for [prairiecleanenterprises.com](https://prairiecleanenterprises.com), built by Mighty Design.
 
-- **Next.js 15.4** (App Router, React 19) — Payload 3.92 supports Next 15.4.11+ but not 15.5
+- **Next.js 16.4** (App Router, React 19) — Payload 3.92 supports Next 16.3.3+; 15.4 has unpatched critical CVEs
 - **Payload CMS 3** running inside the same app, admin at `/admin`
 - **Tailwind CSS 4**, design tokens in `src/app/(frontend)/globals.css`
 - **Postgres** (Neon in production, any Postgres 14+ locally)

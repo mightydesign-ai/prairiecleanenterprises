@@ -1,4 +1,5 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
+import { jsonLd } from "@/lib/safe-url";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ApplicationForm } from "@/components/forms/forms";
@@ -56,7 +57,7 @@ export default async function JobPage({ params }: Props) {
 
   return (
     <div className="container-wide py-section-sm">
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jobJsonLd) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(jobJsonLd) }} />
       <div className="mb-10 flex flex-col gap-4">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: job.title }]} />
         <h1 className="text-4xl font-extrabold">{job.title}</h1>

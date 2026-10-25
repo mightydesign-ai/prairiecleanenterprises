@@ -13,15 +13,18 @@ export type FormState =
 const MAX_PER_HOUR = 5;
 const INBOXES: CollectionSlug[] = ["contact-submissions", "straw-offers", "investor-inquiries", "job-applications"];
 
+// No form field needs more than this; it stops oversized payloads from being stored.
+const MAX_FIELD = 5000;
 const text = (fd: FormData, key: string) => {
   const v = fd.get(key);
-  return typeof v === "string" ? v.trim() : "";
+  return typeof v === "string" ? v.trim().slice(0, MAX_FIELD) : "";
 };
-const num = (fd: FormData, key: string) => {
+/** A finite number inside [min, max], or undefined. */
+const num = (fd: FormData, key: string, min = 0, max = 1_000_000) => {
   const v = text(fd, key);
   if (!v) return undefined;
   const n = Number(v);
-  return Number.isFinite(n) ? n : undefined;
+  return Number.isFinite(n) && n >= min && n <= max ? n : undefined;
 };
 const checked = (fd: FormData, key: string) => fd.get(key) === "on";
 
@@ -59,7 +62,12 @@ async function guard(fd: FormData): Promise<{ blocked: FormState } | { ipHash: s
     return { blocked: { status: "success", message: "Thanks, we've received your message." } };
   }
   const h = await headers();
-  const ip = h.get("x-forwarded-for")?.split(",")[0]?.trim() || h.get("x-real-ip") || "";
+  // On Vercel x-vercel-forwarded-for / x-real-ip are set by the platform and can't be spoofed by the client.
+  const ip =
+    h.get("x-vercel-forwarded-for")?.split(",")[0]?.trim() ||
+    h.get("x-real-ip") ||
+    h.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+    "";
   const ipHash = ip
     ? createHash("sha256").update(`${process.env.IP_HASH_SALT ?? ""}:${ip}`).digest("hex")
     : null;
@@ -161,11 +169,11 @@ export async function submitStrawOffer(_prev: FormState, fd: FormData): Promise<
       nearestTown: text(fd, "nearestTown"),
       ruralMunicipality: text(fd, "ruralMunicipality") || undefined,
       legalLandLocation: text(fd, "legalLandLocation") || undefined,
-      cropYear: interest === "sell" ? num(fd, "cropYear") : undefined,
-      estimatedBales: interest === "sell" ? num(fd, "estimatedBales") : undefined,
+      cropYear: interest === "sell" ? num(fd, "cropYear", 2000, 2100) : undefined,
+      estimatedBales: interest === "sell" ? num(fd, "estimatedBales", 1, 1_000_000) : undefined,
       baleType: interest === "sell" ? text(fd, "baleType") || undefined : undefined,
-      avgBaleWeightLb: num(fd, "avgBaleWeightLb"),
-      moisturePct: num(fd, "moisturePct"),
+      avgBaleWeightLb: num(fd, "avgBaleWeightLb", 1, 10_000),
+      moisturePct: num(fd, "moisturePct", 0, 100),
       canTransport: text(fd, "canTransport") === "yes",
       rockFree: checked(fd, "rockFree"),
       message: text(fd, "message") || undefined,
@@ -210,6 +218,16 @@ export async function submitInvestorRequest(_prev: FormState, fd: FormData): Pro
   }
 }
 
+/** The browser-supplied file type can be faked, so also check the file's first bytes. */
+function looksLikeResume(bytes: Buffer): boolean {
+  const starts = (sig: number[]) => sig.every((b, i) => bytes[i] === b);
+  return (
+    starts([0x25, 0x50, 0x44, 0x46, 0x2d]) || // %PDF-
+    starts([0xd0, 0xcf, 0x11, 0xe0, 0xa1, 0xb1, 0x1a, 0xe1]) || // .doc (OLE)
+    starts([0x50, 0x4b, 0x03, 0x04]) // .docx (zip)
+  );
+}
+
 const RESUME_TYPES = [
   "application/pdf",
   "application/msword",
@@ -220,26 +238,40 @@ export async function submitApplication(_prev: FormState, fd: FormData): Promise
   const errors: Errors = {};
   requireFields(fd, { fullName: "Enter your full name." }, errors);
   checkContact(fd, errors, true);
-  const jobId = num(fd, "job");
+  const jobId = num(fd, "job", 1, 2_147_483_647);
   if (!jobId) errors.form = "This posting is no longer open.";
   const resume = fd.get("resume");
   const hasResume = resume instanceof File && resume.size > 0;
   if (hasResume && resume.size > 4 * 1024 * 1024) errors.resume = "Resume must be 4 MB or smaller.";
   if (hasResume && !RESUME_TYPES.includes(resume.type)) errors.resume = "Upload a PDF or Word document.";
+  let resumeBytes: Buffer | null = null;
+  if (hasResume && !errors.resume) {
+    resumeBytes = Buffer.from(await (resume as File).arrayBuffer());
+    if (!looksLikeResume(resumeBytes)) errors.resume = "Upload a PDF or Word document.";
+  }
   if (Object.keys(errors).length) return failed(errors);
 
   const g = await guard(fd);
   if ("blocked" in g) return g.blocked;
   try {
     const payload = await getPayloadClient();
+    // Only accept applications for postings that are open to the public.
+    const openJob = await payload.find({
+      collection: "jobs",
+      where: { and: [{ id: { equals: jobId } }, { open: { equals: true } }] },
+      limit: 1,
+      depth: 0,
+      overrideAccess: true,
+    });
+    if (openJob.totalDocs === 0) return failed({ form: "This posting is no longer open." });
     let resumeId: number | undefined;
-    if (hasResume) {
+    if (hasResume && resumeBytes) {
       const file = resume as File;
       const doc = await payload.create({
         collection: "resumes",
         data: {},
         file: {
-          data: Buffer.from(await file.arrayBuffer()),
+          data: resumeBytes,
           mimetype: file.type,
           name: file.name.replace(/[^\w.\-]+/g, "_"),
           size: file.size,
