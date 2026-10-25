@@ -360,7 +360,7 @@ async function PartnerLogos({ block }: { block: BlockOf<"partners"> }) {
           // script this way. Logos are 64px tall (the old tile height) and grow slightly on hover.
           const content = logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={mediaSrc(logo.url!)} alt={p.name} loading="lazy" className="h-16 w-auto max-w-48 object-contain motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out-quint motion-safe:group-hover/logo:scale-110 motion-safe:group-focus-visible/logo:scale-110" />
+            <img src={mediaSrc(logo.url!)} alt={p.name} loading="lazy" className="h-32 w-auto max-w-96 object-contain motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out-quint motion-safe:group-hover/logo:scale-110 motion-safe:group-focus-visible/logo:scale-110" />
           ) : (
             p.name
           );
