@@ -64,7 +64,10 @@ async function run() {
   process.exit(0);
 }
 
-run().catch((e) => {
-  console.error(e);
+// `payload run` exits when the import settles, so the work must be awaited at top level.
+try {
+  await run();
+} catch (err) {
+  console.error(err);
   process.exit(1);
-});
+}
