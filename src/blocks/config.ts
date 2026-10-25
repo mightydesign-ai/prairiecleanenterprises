@@ -52,6 +52,13 @@ export const HeroBlock: Block = {
     link("secondary", "Second button"),
     { name: "image", type: "upload", relationTo: "media" },
     {
+      name: "showImageArea",
+      type: "checkbox",
+      label: "Show the photo area on the right",
+      defaultValue: false,
+      admin: { description: "Shows a placeholder until a photo is added. Turns on automatically when a photo or stat badge is set." },
+    },
+    {
       name: "stat",
       type: "group",
       label: "Stat badge on the image",

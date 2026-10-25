@@ -14,7 +14,7 @@ const headingId = (block: { id?: string | null }, suffix = "h") => (block.id ? `
 function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
   const H = first ? "h1" : "h2";
   // The image column shows when there's a photo or a stat badge; otherwise the text runs full width.
-  const hasFigure = Boolean(block.image) || Boolean(block.stat?.value);
+  const hasFigure = Boolean(block.image) || Boolean(block.stat?.value) || Boolean(block.showImageArea);
   return (
     <section
       aria-labelledby={headingId(block)}
@@ -46,7 +46,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
       <figure className="relative">
         <MediaImage
           media={block.image}
-          placeholder="main photo for this page"
+          placeholder="Hero image"
           priority={first}
           className="aspect-[5/4] rounded-xl"
         />

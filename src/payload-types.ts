@@ -183,6 +183,10 @@ export interface Page {
           href?: string | null;
         };
         image?: (number | null) | Media;
+        /**
+         * Shows a placeholder until a photo is added. Turns on automatically when a photo or stat badge is set.
+         */
+        showImageArea?: boolean | null;
         stat?: {
           value?: string | null;
           label?: string | null;
@@ -1079,6 +1083,7 @@ export interface PagesSelect<T extends boolean = true> {
                     href?: T;
                   };
               image?: T;
+              showImageArea?: T;
               stat?:
                 | T
                 | {
