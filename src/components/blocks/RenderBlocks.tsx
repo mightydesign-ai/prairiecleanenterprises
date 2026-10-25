@@ -157,30 +157,51 @@ function Stats({ block }: { block: BlockOf<"stats"> }) {
 
 function Cards({ block }: { block: BlockOf<"cards"> }) {
   const dark = block.tone === "dark";
+  const grid =
+    block.columns === "2"
+      ? "sm:grid-cols-2"
+      : block.columns === "3"
+        ? "sm:grid-cols-2 lg:grid-cols-3"
+        : "sm:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(16rem,1fr))]";
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
       <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
-      <ul className="grid gap-5 sm:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(16rem,1fr))]">
-        {(block.items ?? []).map((item) => (
-          <li
-            key={item.id ?? item.title}
-            className={`flex flex-col gap-2 rounded-lg p-6 ${
-              dark
-                ? "border border-white/20"
-                : item.highlight
-                  ? "border-2 border-accent bg-surface"
-                  : "border border-border bg-surface"
-            }`}
-          >
-            {item.tag ? (
-              <span className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-on-inverse-accent" : "text-accent"}`}>
-                {item.tag}
-              </span>
-            ) : null}
-            <h3 className="text-xl">{item.title}</h3>
-            {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
-          </li>
-        ))}
+      <ul className={`grid gap-5 ${grid}`}>
+        {(block.items ?? []).map((item) => {
+          const img = item.image && typeof item.image === "object" && item.image.url ? item.image : null;
+          return (
+            <li
+              key={item.id ?? item.title}
+              className={`flex gap-5 rounded-lg p-6 ${img ? "flex-row items-center" : "flex-col"} ${
+                dark
+                  ? "border border-white/20"
+                  : item.highlight
+                    ? "border-2 border-accent bg-surface"
+                    : "border border-border bg-surface"
+              }`}
+            >
+              {img ? (
+                // Plain <img> so uploaded SVGs stay inert (locked-down CSP on /api/media/file/*.svg).
+                // eslint-disable-next-line @next/next/no-img-element
+                <img
+                  src={mediaSrc(img.url!)}
+                  alt={img.decorative ? "" : (img.alt ?? "")}
+                  loading="lazy"
+                  className="size-20 shrink-0 object-contain"
+                />
+              ) : null}
+              <div className="flex flex-col gap-2">
+                {item.tag ? (
+                  <span className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-on-inverse-accent" : "text-accent"}`}>
+                    {item.tag}
+                  </span>
+                ) : null}
+                <h3 className="text-xl">{item.title}</h3>
+                {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
+              </div>
+            </li>
+          );
+        })}
       </ul>
     </Section>
   );

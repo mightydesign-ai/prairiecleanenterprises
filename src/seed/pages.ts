@@ -47,6 +47,7 @@ export const homePage: SeedPage = {
       tone: "dark",
       eyebrow: "PCE aggregates & processes unutilized agricultural residue",
       heading: "A low-carbon input for diverse industries",
+      columns: "2",
       intro:
         "PCE is a solution provider developing the bioeconomy landscape in North America and the world by doing what no one else is doing – harnessing the millions of tonnes of excess agricultural waste on the Canadian and American prairies. PCE's core strategy is a rigorous focus on efficiently gathering and processing fibre-rich and energy-dense straw and other sources of organic waste for diverse uses. Our feedstock is technologically and product agnostic and can be a low-carbon input solution for:",
       items: [

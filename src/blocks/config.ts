@@ -184,11 +184,24 @@ export const CardsBlock: Block = {
     heading,
     { name: "intro", type: "textarea" },
     {
+      name: "columns",
+      type: "select",
+      label: "Cards per row",
+      defaultValue: "auto",
+      options: [
+        { label: "Automatic (as many as fit)", value: "auto" },
+        { label: "2 per row", value: "2" },
+        { label: "3 per row", value: "3" },
+      ],
+      admin: { description: "On phones the cards always stack in one column." },
+    },
+    {
       name: "items",
       type: "array",
       minRows: 1,
       fields: [
         { name: "tag", type: "text" },
+        { name: "image", type: "upload", relationTo: "media", admin: { description: "Optional icon or picture (SVG or PNG) shown beside the text." } },
         { name: "title", type: "text", required: true },
         { name: "text", type: "textarea" },
         { name: "highlight", type: "checkbox", admin: { description: "Draw this card with an accent border." } },

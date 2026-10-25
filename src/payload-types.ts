@@ -307,9 +307,17 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         intro?: string | null;
+        /**
+         * On phones the cards always stack in one column.
+         */
+        columns?: ('auto' | '2' | '3') | null;
         items?:
           | {
               tag?: string | null;
+              /**
+               * Optional icon or picture (SVG or PNG) shown beside the text.
+               */
+              image?: (number | null) | Media;
               title: string;
               text?: string | null;
               /**
@@ -1162,10 +1170,12 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              columns?: T;
               items?:
                 | T
                 | {
                     tag?: T;
+                    image?: T;
                     title?: T;
                     text?: T;
                     highlight?: T;
