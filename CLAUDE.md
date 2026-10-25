@@ -59,15 +59,15 @@ The palette is three colours taken from the logo (`PCE_logo-clr.svg`), plus its 
 | Role | Colour |
 |---|---|
 | Green (buttons, primary fills) | `#527A4F`, hover `#416340` |
-| Teal (links, focus, footer band, icons) | `#007495` |
+| Teal (links, focus, icons) | `#007495` |
 | Straw / brown (graphics, large type) | `#946E4C` |
-| Charcoal (text, dark bands, footer strip) | `#343334` |
+| Charcoal (text, dark bands) | `#343334` |
 | Light grey (bands) | `#F3F3F3` |
 | Red (errors only) | `#BE2631` |
 
 Components use semantic tokens (`bg-primary`, `text-on-primary`, `bg-inverse`, `text-on-inverse`,
 `text-on-inverse-accent`, `text-link`, `bg-selected`), never raw hex or scale steps like `bg-teal-900`.
-The `green`, `teal` and `straw` scales in `globals.css` are generated from those anchors.
+The footer deliberately keeps the live site's colours (`#327C9B` for the main band and the copyright strip) and is outside the palette. The `green`, `teal` and `straw` scales in `globals.css` are generated from those anchors.
 
 Contrast (WCAG 2.2 AA):
 - White on green 4.9:1 (hover 7:1+), on teal 5.3:1, on charcoal 12:1. Button labels are white in every state.
