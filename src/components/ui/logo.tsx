@@ -4,7 +4,8 @@ import { site } from "@/lib/site";
 /**
  * PCE logo lockup, from PCE's own SVG artwork.
  *   /brand/pce-logo.svg        full colour, for light backgrounds
- *   /brand/pce-logo-white.svg  all white, for dark and coloured backgrounds
+ *   /brand/pce-logo-dark.svg   white type with the coloured stripes, for the header in dark mode
+ *   /brand/pce-logo-white.svg  all white, for the coloured footer
  * SVGs are served as-is (no image optimiser needed), so plain <img> is correct here. Never inline them:
  * an <img> SVG cannot run script. Keep them clean with `pnpm check:svg`.
  */
@@ -36,7 +37,7 @@ export function Logo({ tone = "auto", className = "", priority = false }: LogoPr
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img src="/brand/pce-logo.svg" alt="" width={COLOUR.w} height={COLOUR.h} className={`${size} dark:hidden`} />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/brand/pce-logo-white.svg" alt="" width={WHITE.w} height={WHITE.h} className={`hidden ${size} dark:block`} />
+          <img src="/brand/pce-logo-dark.svg" alt="" width={COLOUR.w} height={COLOUR.h} className={`hidden ${size} dark:block`} />
         </>
       )}
     </Link>
