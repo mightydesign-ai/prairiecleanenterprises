@@ -40,6 +40,40 @@ export const SiteSettings: GlobalConfig = {
       ],
     },
     {
+      name: "typography",
+      type: "group",
+      label: "Text sizes",
+      admin: { description: "Change heading sizes across the whole site. The font is always Inter." },
+      fields: [
+        {
+          name: "cardTitleSize",
+          type: "select",
+          label: "Card titles (e.g. Flax Fibre, Animal Bedding)",
+          defaultValue: "default",
+      options: [
+        { label: "Smallest", value: "xs" },
+        { label: "Smaller", value: "sm" },
+        { label: "Default", value: "default" },
+        { label: "Larger", value: "lg" },
+        { label: "Largest", value: "xl" },
+      ],
+        },
+        {
+          name: "sectionHeadingSize",
+          type: "select",
+          label: "Section headings",
+          defaultValue: "default",
+      options: [
+        { label: "Smallest", value: "xs" },
+        { label: "Smaller", value: "sm" },
+        { label: "Default", value: "default" },
+        { label: "Larger", value: "lg" },
+        { label: "Largest", value: "xl" },
+      ],
+        },
+      ],
+    },
+    {
       name: "social",
       type: "array",
       fields: [

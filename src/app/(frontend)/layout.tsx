@@ -16,6 +16,12 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
+// Heading size choices (Site settings > Text sizes) map onto the fluid type scale in globals.css.
+const sizeScale = {
+  cardTitle: { xs: "--text-lg", sm: "--text-xl", lg: "--text-3xl", xl: "--text-4xl" },
+  sectionHeading: { xs: "--text-xl", sm: "--text-2xl", lg: "--text-4xl", xl: "--text-display" },
+} as const;
+
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -88,11 +94,19 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     sameAs: (settings.social ?? []).map((s) => s.url),
   };
 
+  const sizeVars: Record<string, string> = {};
+  const cardStep = sizeScale.cardTitle[(settings.typography?.cardTitleSize ?? "default") as keyof typeof sizeScale.cardTitle];
+  const headingStep =
+    sizeScale.sectionHeading[(settings.typography?.sectionHeadingSize ?? "default") as keyof typeof sizeScale.sectionHeading];
+  if (cardStep) sizeVars["--card-title-size"] = `var(${cardStep})`;
+  if (headingStep) sizeVars["--section-heading-size"] = `var(${headingStep})`;
+
   return (
     <html
       lang="en-CA"
       dir="ltr"
       className={inter.variable}
+      style={sizeVars}
       suppressHydrationWarning
     >
       <head>

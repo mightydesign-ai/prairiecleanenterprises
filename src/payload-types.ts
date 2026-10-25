@@ -1715,6 +1715,13 @@ export interface SiteSetting {
     region: string;
     postalCode: string;
   };
+  /**
+   * Change heading sizes across the whole site. The font is always Inter.
+   */
+  typography?: {
+    cardTitleSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
+    sectionHeadingSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
+  };
   social?:
     | {
         label: string;
@@ -1746,6 +1753,12 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         locality?: T;
         region?: T;
         postalCode?: T;
+      };
+  typography?:
+    | T
+    | {
+        cardTitleSize?: T;
+        sectionHeadingSize?: T;
       };
   social?:
     | T

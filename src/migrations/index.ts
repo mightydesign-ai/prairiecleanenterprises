@@ -4,6 +4,7 @@ import * as migration_20261025_155014_image_text_and_product_sections from './20
 import * as migration_20261025_210432_hero_image_area from './20261025_210432_hero_image_area';
 import * as migration_20261025_211545_image_fit from './20261025_211545_image_fit';
 import * as migration_20261025_215711_cards_columns_images from './20261025_215711_cards_columns_images';
+import * as migration_20261025_235839_text_sizes from './20261025_235839_text_sizes';
 
 export const migrations = [
   {
@@ -34,6 +35,11 @@ export const migrations = [
   {
     up: migration_20261025_215711_cards_columns_images.up,
     down: migration_20261025_215711_cards_columns_images.down,
-    name: '20261025_215711_cards_columns_images'
+    name: '20261025_215711_cards_columns_images',
+  },
+  {
+    up: migration_20261025_235839_text_sizes.up,
+    down: migration_20261025_235839_text_sizes.down,
+    name: '20261025_235839_text_sizes'
   },
 ];

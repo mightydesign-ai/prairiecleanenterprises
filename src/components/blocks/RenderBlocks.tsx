@@ -197,7 +197,7 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
                     {item.tag}
                   </span>
                 ) : null}
-                <h3 className="text-xl">{item.title}</h3>
+                <h3 className="card-title-sm">{item.title}</h3>
                 {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
               </div>
             </li>
@@ -325,7 +325,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
               <MediaImage media={p.heroImage} placeholder={p.name} className="aspect-[4/3]" sizes="(min-width: 1280px) 25vw, 50vw" />
               <span className="flex flex-1 flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
-                <span className="font-display text-2xl font-bold group-hover:text-link">{p.name}</span>
+                <span className="card-title font-display font-bold group-hover:text-link">{p.name}</span>
                 <span className="flex-1 text-base text-fg-muted">{p.cardSummary ?? p.summary}</span>
                 <span className="pt-2 font-display text-[15px] font-semibold text-link">
                   Learn More <span aria-hidden="true">→</span>

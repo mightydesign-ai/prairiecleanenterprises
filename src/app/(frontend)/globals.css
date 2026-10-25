@@ -505,3 +505,20 @@
     font-weight: 700;
   }
 }
+
+/* ---------------------------------------------------------------------
+   7. Editable heading sizes (Site settings > Text sizes)
+   The layout sets --card-title-size / --section-heading-size only when an editor changes them.
+   --------------------------------------------------------------------- */
+.card-title {
+  font-size: var(--card-title-size, var(--text-2xl));
+  line-height: 1.2;
+}
+.card-title-sm {
+  font-size: var(--card-title-size, var(--text-xl));
+  line-height: 1.25;
+}
+.section-heading {
+  font-size: var(--section-heading-size, var(--text-3xl));
+  line-height: 1.12;
+}
