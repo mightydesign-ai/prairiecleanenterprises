@@ -103,6 +103,9 @@ export function ButtonLink({
   );
 }
 
+/** Payload builds absolute URLs from serverURL; next/image and our own routes want the same-site path. */
+export const mediaSrc = (url: string) => url.replace(/^https?:\/\/[^/]+(?=\/api\/media\/file\/)/, "");
+
 /** Payload upload, or a labelled placeholder until a photo is added in the CMS. */
 export function MediaImage({
   media,
@@ -118,9 +121,7 @@ export function MediaImage({
   priority?: boolean;
 }) {
   if (media && typeof media === "object" && media.url) {
-    // Payload builds absolute URLs from serverURL (beta host, later the live domain). next/image only
-    // accepts same-site files as relative paths, so strip the origin from our own /api/media/file URLs.
-    const src = media.url.replace(/^https?:\/\/[^/]+(?=\/api\/media\/file\/)/, "");
+    const src = mediaSrc(media.url);
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image

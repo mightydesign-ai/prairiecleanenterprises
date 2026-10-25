@@ -2,7 +2,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { Fragment } from "react";
 import { ContactForm, InvestorForm, StrawOfferForm } from "@/components/forms/forms";
-import { ButtonLink, MediaImage, Section, SectionHeading } from "@/components/ui/primitives";
+import { ButtonLink, MediaImage, Section, SectionHeading, mediaSrc } from "@/components/ui/primitives";
 import { getNews, getPartners, getProducts, getTeam } from "@/lib/payload";
 import type { Page } from "@/payload-types";
 
@@ -353,18 +353,36 @@ async function PartnerLogos({ block }: { block: BlockOf<"partners"> }) {
       <h2 id={headingId(block)} className="font-display text-xs font-semibold uppercase tracking-[0.12em] text-fg-muted">
         {block.heading ?? "Research and funding partners"}
       </h2>
-      <ul className="flex flex-wrap justify-center gap-x-9 gap-y-3 font-display text-[17px] font-semibold text-fg-muted">
-        {partners.map((p) => (
-          <li key={p.id}>
-            {p.url ? (
-              <a href={p.url} className="no-underline hover:text-fg hover:underline">
-                {p.name}
-              </a>
-            ) : (
-              p.name
-            )}
-          </li>
-        ))}
+      <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 font-display text-[17px] font-semibold text-fg-muted">
+        {partners.map((p) => {
+          const logo = p.logo && typeof p.logo === "object" && p.logo.url ? p.logo : null;
+          // Logos sit on a white tile so dark artwork stays readable in dark mode. Plain <img>: partner
+          // artwork is often SVG, which next/image will not optimise, and it cannot run script this way.
+          const content = logo ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img src={mediaSrc(logo.url!)} alt={p.name} loading="lazy" className="h-12 w-auto max-w-40 object-contain" />
+          ) : (
+            p.name
+          );
+          const tile = logo ? "flex min-h-16 items-center rounded-md bg-white px-4 py-2 ring-1 ring-border" : "";
+          return (
+            <li key={p.id}>
+              {p.url ? (
+                <a
+                  href={p.url}
+                  rel="noopener"
+                  target="_blank"
+                  aria-label={logo ? `${p.name} (opens in a new tab)` : undefined}
+                  className={`${tile} no-underline hover:underline`}
+                >
+                  {content}
+                </a>
+              ) : (
+                <span className={tile}>{content}</span>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </section>
   );
