@@ -97,6 +97,16 @@ export const Products: CollectionConfig = {
                 { name: "body", type: "richText" },
                 { name: "image", type: "upload", relationTo: "media" },
                 {
+                  name: "imageFit",
+                  type: "select",
+                  label: "Image display",
+                  defaultValue: "crop",
+                  options: [
+                    { label: "Crop to fit the layout", value: "crop" },
+                    { label: "Show the whole image (no cropping)", value: "full" },
+                  ],
+                },
+                {
                   name: "imagePlaceholder",
                   type: "checkbox",
                   defaultValue: false,

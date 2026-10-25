@@ -178,7 +178,7 @@ export default async function ProductPage({ params }: Props) {
                 ) : null}
               </div>
               {hasImage ? (
-                <MediaImage media={sec.image} placeholder={sec.heading} className="aspect-[4/3] rounded-xl" />
+                <MediaImage media={sec.image} placeholder={sec.heading} fit={sec.imageFit} className="aspect-[4/3] rounded-xl" />
               ) : sec.body ? (
                 <div className="prose-pce flex flex-col gap-4 text-lg">
                   <RichText data={sec.body as never} />

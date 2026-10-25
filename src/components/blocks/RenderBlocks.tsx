@@ -47,6 +47,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
         <MediaImage
           media={block.image}
           placeholder="Hero image"
+          fit={block.imageFit}
           priority={first}
           className="aspect-[5/4] rounded-xl"
         />
@@ -100,6 +101,7 @@ function ImageTextSection({ block }: { block: BlockOf<"imageText"> }) {
     <MediaImage
       media={block.image}
       placeholder={block.heading ?? "image for this section"}
+      fit={block.imageFit}
       className={side === "below" ? "aspect-[16/9] rounded-xl" : "aspect-[4/3] rounded-xl"}
     />
   ) : null;

@@ -184,6 +184,10 @@ export interface Page {
         };
         image?: (number | null) | Media;
         /**
+         * Crop keeps every image the same shape. Whole image keeps the photo's own proportions.
+         */
+        imageFit?: ('crop' | 'full') | null;
+        /**
          * Shows a placeholder until a photo is added. Turns on automatically when a photo or stat badge is set.
          */
         showImageArea?: boolean | null;
@@ -257,6 +261,10 @@ export interface Page {
           [k: string]: unknown;
         } | null;
         image?: (number | null) | Media;
+        /**
+         * Crop keeps every image the same shape. Whole image keeps the photo's own proportions.
+         */
+        imageFit?: ('crop' | 'full') | null;
         /**
          * Show a labelled photo placeholder here until an image is uploaded.
          */
@@ -573,6 +581,7 @@ export interface Product {
           [k: string]: unknown;
         } | null;
         image?: (number | null) | Media;
+        imageFit?: ('crop' | 'full') | null;
         /**
          * Show a labelled photo placeholder until an image is uploaded.
          */
@@ -1083,6 +1092,7 @@ export interface PagesSelect<T extends boolean = true> {
                     href?: T;
                   };
               image?: T;
+              imageFit?: T;
               showImageArea?: T;
               stat?:
                 | T
@@ -1122,6 +1132,7 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               content?: T;
               image?: T;
+              imageFit?: T;
               imagePlaceholder?: T;
               imageSide?: T;
               tone?: T;
@@ -1321,6 +1332,7 @@ export interface ProductsSelect<T extends boolean = true> {
         heading?: T;
         body?: T;
         image?: T;
+        imageFit?: T;
         imagePlaceholder?: T;
         id?: T;
       };

@@ -52,6 +52,17 @@ export const HeroBlock: Block = {
     link("secondary", "Second button"),
     { name: "image", type: "upload", relationTo: "media" },
     {
+      name: "imageFit",
+      type: "select",
+      label: "Image display",
+      defaultValue: "crop",
+      options: [
+        { label: "Crop to fit the layout", value: "crop" },
+        { label: "Show the whole image (no cropping)", value: "full" },
+      ],
+      admin: { description: "Crop keeps every image the same shape. Whole image keeps the photo's own proportions." },
+    },
+    {
       name: "showImageArea",
       type: "checkbox",
       label: "Show the photo area on the right",
@@ -88,6 +99,17 @@ export const ImageTextBlock: Block = {
     heading,
     { name: "content", type: "richText" },
     { name: "image", type: "upload", relationTo: "media" },
+    {
+      name: "imageFit",
+      type: "select",
+      label: "Image display",
+      defaultValue: "crop",
+      options: [
+        { label: "Crop to fit the layout", value: "crop" },
+        { label: "Show the whole image (no cropping)", value: "full" },
+      ],
+      admin: { description: "Crop keeps every image the same shape. Whole image keeps the photo's own proportions." },
+    },
     {
       name: "imagePlaceholder",
       type: "checkbox",

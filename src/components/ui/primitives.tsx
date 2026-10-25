@@ -113,15 +113,35 @@ export function MediaImage({
   className = "",
   sizes = "(min-width: 1024px) 50vw, 100vw",
   priority = false,
+  fit = "crop",
 }: {
   media?: number | Media | null;
   placeholder: string;
   className?: string;
   sizes?: string;
   priority?: boolean;
+  /** "crop" fills the box (className sets its shape); "full" shows the whole photo at its own proportions. */
+  fit?: "crop" | "full" | null;
 }) {
   if (media && typeof media === "object" && media.url) {
     const src = mediaSrc(media.url);
+    if (fit === "full" && media.width && media.height) {
+      // The aspect-* class is dropped so the photo keeps its own shape; rounding and other classes stay.
+      const shape = className.replace(/\baspect-\[[^\]]+\]/g, "").trim();
+      return (
+        <div className={`overflow-hidden ${shape}`}>
+          <Image
+            src={src}
+            alt={media.decorative ? "" : (media.alt ?? "")}
+            width={media.width}
+            height={media.height}
+            sizes={sizes}
+            priority={priority}
+            className="block h-auto w-full"
+          />
+        </div>
+      );
+    }
     return (
       <div className={`relative overflow-hidden ${className}`}>
         <Image
