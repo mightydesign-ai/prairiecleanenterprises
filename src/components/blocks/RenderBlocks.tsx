@@ -356,15 +356,15 @@ async function PartnerLogos({ block }: { block: BlockOf<"partners"> }) {
       <ul className="flex flex-wrap items-center justify-center gap-x-6 gap-y-4 font-display text-[17px] font-semibold text-fg-muted">
         {partners.map((p) => {
           const logo = p.logo && typeof p.logo === "object" && p.logo.url ? p.logo : null;
-          // Logos sit on a white tile so dark artwork stays readable in dark mode. Plain <img>: partner
-          // artwork is often SVG, which next/image will not optimise, and it cannot run script this way.
+          // Plain <img>: partner artwork is often SVG, which next/image will not optimise, and it cannot run
+          // script this way. Logos are 64px tall (the old tile height) and grow slightly on hover.
           const content = logo ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={mediaSrc(logo.url!)} alt={p.name} loading="lazy" className="h-12 w-auto max-w-40 object-contain" />
+            <img src={mediaSrc(logo.url!)} alt={p.name} loading="lazy" className="h-16 w-auto max-w-48 object-contain motion-safe:transition-transform motion-safe:duration-200 motion-safe:ease-out-quint motion-safe:group-hover/logo:scale-110 motion-safe:group-focus-visible/logo:scale-110" />
           ) : (
             p.name
           );
-          const tile = logo ? "flex min-h-16 items-center rounded-md bg-white px-4 py-2 ring-1 ring-border" : "";
+          const tile = logo ? "group/logo flex items-center" : "";
           return (
             <li key={p.id}>
               {p.url ? (
