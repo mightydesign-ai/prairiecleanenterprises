@@ -10,9 +10,22 @@ export const homePage: SeedPage = {
   layout: [
     {
       blockType: "hero",
-      heading: "Discovering value from unutilized agricultural residue",
-      primary: { label: "Contact us", href: "/contact" },
-      secondary: { label: "Discover our products", href: "#products" },
+      eyebrow: "Weyburn, Saskatchewan",
+      heading: "Prairie flax straw, turned into fibre, fuel and everyday products",
+      intro:
+        "Farmers used to burn it. We buy it, process it at the world's first flax straw multi-processing facility, and ship it to customers in North America and Europe.",
+      primary: { label: "Sell us your flax straw", href: "/sell-your-straw" },
+      secondary: { label: "Explore products", href: "#products" },
+      stat: { value: "750,000+", label: "tonnes of flax straw grown on the Canadian prairies every year" },
+    },
+    {
+      blockType: "highlights",
+      items: [
+        { text: "In Co-op stores across Western Canada" },
+        { text: "Walmart Canada Golden Ticket" },
+        { text: "Bedding partner to Canadian Western Agribition" },
+        { text: "Two patents pending" },
+      ],
     },
     {
       blockType: "productList",
