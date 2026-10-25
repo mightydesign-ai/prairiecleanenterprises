@@ -10,7 +10,7 @@ export async function SiteFooter() {
 
   return (
     <footer className="text-white" data-print="hide">
-      <div className="bg-[#327c9b]">
+      <div className="bg-brand-teal">
       <div className="container-wide grid gap-12 py-section-sm md:grid-cols-[1.4fr_2fr]">
         <div className="max-w-md space-y-5">
           <Logo tone="inverse" />
@@ -97,7 +97,7 @@ export async function SiteFooter() {
 
       </div>
 
-      <div className="bg-[#444444]">
+      <div className="bg-brand-charcoal">
         <div className="container-wide flex flex-col gap-2 py-5 text-sm text-white sm:flex-row sm:items-center sm:justify-between">
           <p>Copyright © {year} PCE</p>
           <Link href="/privacy" className="underline-offset-4 hover:underline">

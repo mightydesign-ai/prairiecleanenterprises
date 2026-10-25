@@ -54,29 +54,26 @@ accredited investors · job seekers · press.
 
 ## Design tokens
 
-The palette comes from the current prairiecleanenterprises.com (Elementor kit and page styles) and the logo. PCE chose
-those colours deliberately, so keep them:
+The palette is three colours taken from the logo (`PCE_logo-clr.svg`), plus its charcoal. PCE asked for exactly these, so keep to them:
 
 | Role | Colour |
 |---|---|
-| Olive (buttons, primary fills) | `#96A924`, hovers `#819217` / `#748410` |
-| Teal (links, icons) | `#007B9A` |
-| Sky (headings and accents on dark bands) | `#6EC1E4` |
-| Green (bands, accent) | `#54864D` |
-| Charcoal (text, dark bands, footer) | `#262B2B` |
+| Green (buttons, primary fills) | `#527A4F`, hover `#416340` |
+| Teal (links, focus, footer band, icons) | `#007495` |
+| Straw / brown (graphics, large type) | `#946E4C` |
+| Charcoal (text, dark bands, footer strip) | `#343334` |
 | Light grey (bands) | `#F3F3F3` |
-| Grey (secondary text) | `#606060` |
-| Straw, Maple Red (from the logo) | `#9D7C55`, `#BE1522` |
+| Red (errors only) | `#BE2631` |
 
 Components use semantic tokens (`bg-primary`, `text-on-primary`, `bg-inverse`, `text-on-inverse`,
 `text-on-inverse-accent`, `text-link`, `bg-selected`), never raw hex or scale steps like `bg-teal-900`.
+The `green`, `teal` and `straw` scales in `globals.css` are generated from those anchors.
 
-Contrast decisions (all checked to WCAG 2.2 AA; where an original pairing fails, the colour stays and the pairing changes):
-- Olive with white text is 2.6:1, so olive buttons carry **charcoal** text (5.5:1).
-- Teal is 4.9:1 on white but 4.4:1 on the light grey band, so small links on grey use `#006A86` (the tinted-surface override).
-- Sky `#6EC1E4` is only for dark bands (7.1:1 on charcoal); it fails on white (2.0:1).
-- Green `#54864D` is 4.3:1 on white, so text uses `#45703E` (5.8:1); the original is for fills and large type.
-- Straw is for graphics and large type only.
+Contrast (WCAG 2.2 AA):
+- White on green 4.9:1 (hover 7:1+), on teal 5.3:1, on charcoal 12:1. Button labels are white in every state.
+- Teal text is 5.3:1 on white and 4.9:1 on the grey band (small links there use `#00657F`).
+- Straw is 4.6:1 on white: graphics and large type; body text in brown uses `#6B4C30`.
+- On dark bands, accents use light tints of the brand colours (`#6FC3DD` teal, `#A8CBA5` green, `#C9A583` straw).
 
 Type: Inter (variable, headings and body) via `next/font`. PCE fixed the logo and colours only;
 fonts can change.

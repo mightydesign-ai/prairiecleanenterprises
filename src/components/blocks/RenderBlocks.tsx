@@ -324,7 +324,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
             ) : (
               <span
                 aria-hidden="true"
-                className="flex size-22 shrink-0 items-center justify-center rounded-full bg-olive-100 font-display text-2xl font-bold text-neutral-800"
+                className="flex size-22 shrink-0 items-center justify-center rounded-full bg-green-100 font-display text-2xl font-bold text-neutral-800"
               >
                 {t.name
                   .split(/\s+/)

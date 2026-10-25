@@ -2,16 +2,13 @@
 
 /* =====================================================================
    Prairie Clean Enterprises — design tokens (Tailwind CSS v4)
-   Palette taken from the current prairiecleanenterprises.com (Elementor
-   kit and page styles, Oct 2026). Those colours were chosen deliberately:
-     Olive #96A924 (buttons) · Teal #007B9A (links, icons)
-     Sky #6EC1E4 (headings on dark bands) · Green #54864D (bands)
-     Charcoal #262B2B (text, dark bands) · Light grey #F3F3F3 (bands)
-     Grey #606060 (secondary text)
-   Logo artwork adds Straw #9D7C55 and Maple Red #BE1522.
+   Palette: three colours from the logo (PCE_logo-clr.svg):
+     Green #527A4F (buttons, primary) · Teal #007495 (links, footer)
+     Straw #946E4C (graphics) · Charcoal #343334 (text, dark bands)
+     Light grey #F3F3F3 (bands) · Red #BE2631 (errors only)
    Every text/background pairing below is checked to WCAG 2.2 AA; where an
    original pairing fails, the colour is kept and the pairing changes
-   (for example olive buttons carry charcoal text, not white).
+   (for example white on teal is 5.3:1, so teal bands carry white text).
    ===================================================================== */
 
 /* Dark mode follows data-theme on <html>, set before paint in layout.tsx. */
@@ -21,70 +18,51 @@
    1. Static scales: brand palette, fonts, fluid type, space, motion
    --------------------------------------------------------------------- */
 @theme {
-  /* Brand anchors (exact values from the current site and logo) */
-  --color-brand-olive: #96a924;
-  --color-brand-teal: #007b9a;
-  --color-brand-sky: #6ec1e4;
-  --color-brand-green: #54864d;
-  --color-brand-charcoal: #262b2b;
+  /* Brand palette: three colours taken from the logo (PCE_logo-clr.svg), plus its charcoal text colour */
+  --color-brand-green: #527a4f;   /* primary: buttons and fills */
+  --color-brand-teal: #007495;    /* links, focus, footer band */
+  --color-brand-straw: #946e4c;   /* graphics and large type */
+  --color-brand-charcoal: #343334;
   --color-brand-grey: #f3f3f3;
-  --color-brand-straw: #9d7c55;
-  --color-brand-maple: #be1522;
 
-  /* Olive: the current site's button colour (#96A924), hovers #819217 / #748410 */
-  --color-olive-50: #f6f8e6;
-  --color-olive-100: #ebf0c4;
-  --color-olive-200: #d6e08f;
-  --color-olive-300: #c3d36a;
-  --color-olive-400: #a9bd2f;
-  --color-olive-500: #96a924;
-  --color-olive-600: #819217;
-  --color-olive-700: #748410;
-  --color-olive-800: #5a660c;
-  --color-olive-900: #414a08;
+  /* Green */
+  --color-green-50: #f1f4f1;
+  --color-green-100: #e0e7df;
+  --color-green-200: #c2d0c1;
+  --color-green-300: #a0b69e;
+  --color-green-400: #789776;
+  --color-green-500: #527a4f;
+  --color-green-600: #456743;
+  --color-green-700: #385338;
+  --color-green-800: #2b402c;
+  --color-green-900: #1e2c20;
+  --color-green-950: #161f18;
 
-  /* Teal: links and icons (#007B9A) */
-  --color-teal-50: #e9f8fd;
-  --color-teal-100: #bff1ff;
-  --color-teal-200: #a2dbf2;
-  --color-teal-300: #7dbfd9;
-  --color-teal-400: #3a9ab8;
-  --color-teal-500: #1a8aa8;
-  --color-teal-600: #007b9a;
-  --color-teal-700: #006a86;
-  --color-teal-800: #005a73;
-  --color-teal-900: #00405a;
-  --color-teal-950: #002a3d;
+  /* Teal */
+  --color-teal-50: #ebf4f7;
+  --color-teal-100: #d1e6ec;
+  --color-teal-200: #a6ceda;
+  --color-teal-300: #73b3c5;
+  --color-teal-400: #3893ac;
+  --color-teal-500: #007495;
+  --color-teal-600: #02627d;
+  --color-teal-700: #044f64;
+  --color-teal-800: #053d4c;
+  --color-teal-900: #072b34;
+  --color-teal-950: #081e24;
 
-  /* Sky: heading colour on dark bands (#6EC1E4) */
-  --color-sky-100: #d4edf8;
-  --color-sky-200: #a3d8ee;
-  --color-sky-300: #6ec1e4;
-  --color-sky-400: #3fa9d6;
-
-  --color-green-50: #effaec;
-  --color-green-100: #d4f2cf;
-  --color-green-200: #bbdcb5;
-  --color-green-300: #9bc095;
-  --color-green-400: #79a272;
-  --color-green-500: #54864d;
-  --color-green-600: #45703e;
-  --color-green-700: #335b2d;
-  --color-green-800: #22471c;
-  --color-green-900: #11340b;
-  --color-green-950: #022200;
-
-  --color-straw-50: #faf8f4;
-  --color-straw-100: #f2eee6;
-  --color-straw-200: #e6ccaf;
-  --color-straw-300: #ccaf8e;
-  --color-straw-400: #ae8f6a;
-  --color-straw-500: #9d7c55;
-  --color-straw-600: #7a5d3a;
-  --color-straw-700: #654a29;
-  --color-straw-800: #503718;
-  --color-straw-900: #3c2607;
-  --color-straw-950: #291500;
+  /* Straw */
+  --color-straw-50: #f6f3f1;
+  --color-straw-100: #ece5df;
+  --color-straw-200: #daccc0;
+  --color-straw-300: #c4af9d;
+  --color-straw-400: #ac8e73;
+  --color-straw-500: #946e4c;
+  --color-straw-600: #7b5d41;
+  --color-straw-700: #624b36;
+  --color-straw-800: #493a2b;
+  --color-straw-900: #31291f;
+  --color-straw-950: #201d18;
 
   /* Neutrals: the current site's charcoal (#262B2B) and greys */
   --color-neutral-0: #ffffff;
@@ -214,33 +192,33 @@
   --pce-bg: #ffffff;
   --pce-surface: #ffffff;
   --pce-surface-sunken: #f3f3f3;   /* site's light grey band; fg 12.9:1, muted 5.7:1 */
-  --pce-fg: #262b2b;               /* site charcoal, 14.4:1 */
+  --pce-fg: #343334;               /* logo charcoal, 12.2:1 */
   --pce-fg-muted: #606060;         /* 6.3:1 on white */
   --pce-border: #e9e9e9;           /* decorative dividers only */
   --pce-border-strong: #6d7373;    /* 4.8:1, meets 3:1 for form controls */
-  --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
-  --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+  --pce-primary: #527a4f;          /* logo green; white label 4.9:1 */
+  --pce-primary-hover: #416340;    /* darker on hover; white stays 7:1+ */
   --pce-on-primary: #ffffff;       /* white label in every state */
-  --pce-accent: #45703e;           /* site green deepened for text, 5.8:1 */
+  --pce-accent: #007495;           /* logo teal, 5.3:1 with white */
   --pce-on-accent: #ffffff;
-  --pce-straw: #9d7c55;            /* graphics and large type only */
-  --pce-straw-strong: #654a29;
-  --pce-link: #007b9a;             /* site teal, 4.9:1 on white */
-  --pce-focus: #007b9a;
-  --pce-danger: #be1522;           /* maple, 6.3:1 */
-  --pce-success: #335b2d;
-  --pce-inverse: #262b2b;          /* dark bands and footer, as on the current site */
+  --pce-straw: #946e4c;            /* logo brown; 4.6:1 on white */
+  --pce-straw-strong: #6b4c30;
+  --pce-link: #007495;             /* logo teal, 5.3:1 on white, 4.9:1 on grey band */
+  --pce-focus: #007495;
+  --pce-danger: #be2631;           /* logo red, errors only, 6:1 */
+  --pce-success: #3a5f38;
+  --pce-inverse: #343334;          /* dark bands: logo charcoal */
   --pce-on-inverse: #f3f3f3;
   --pce-on-inverse-muted: #c8cccc; /* 8.9:1 */
-  --pce-on-inverse-accent: #6ec1e4;/* site sky, 7.1:1 on charcoal */
-  --pce-selected: #ebf0c4;         /* chosen options in forms and filters */
+  --pce-on-inverse-accent: #6fc3dd;/* light tint of logo teal, 7:1 on charcoal */
+  --pce-selected: #e3eee2;         /* chosen options in forms and filters */
 }
 
-/* Teal is 4.4:1 on the grey band, just short of 4.5, so small links there go one step deeper. */
+/* Teal is 4.9:1 on the grey band; one step deeper keeps small links comfortable there. */
 [data-tone="tinted"],
 .bg-surface-sunken {
-  --pce-link: #006a86;             /* 5.6:1 on #f3f3f3 */
-  --pce-focus: #006a86;
+  --pce-link: #00657f;             /* 6.0:1 on #f3f3f3 */
+  --pce-focus: #00657f;
 }
 
 /* Dark */
@@ -253,27 +231,27 @@
   --pce-fg-muted: #b9bfbf;         /* 8.8:1 */
   --pce-border: #343a3a;
   --pce-border-strong: #7d8484;    /* 4.3:1 */
-  --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
-  --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+  --pce-primary: #527a4f;          /* logo green; white label 4.9:1 */
+  --pce-primary-hover: #416340;    /* darker on hover; white stays 7:1+ */
   --pce-on-primary: #ffffff;       /* white label in every state */
-  --pce-accent: #9bc095;
-  --pce-on-accent: #11340b;
-  --pce-straw: #ccaf8e;
-  --pce-straw-strong: #e6ccaf;
-  --pce-link: #6ec1e4;             /* site sky, 8.2:1 */
-  --pce-focus: #6ec1e4;
+  --pce-accent: #a8cba5;
+  --pce-on-accent: #10260f;
+  --pce-straw: #c9a583;
+  --pce-straw-strong: #e2c9ac;
+  --pce-link: #6fc3dd;             /* site sky, 8.2:1 */
+  --pce-focus: #6fc3dd;
   --pce-danger: #ff8e85;
-  --pce-success: #9bc095;
-  --pce-inverse: #111414;
+  --pce-success: #a8cba5;
+  --pce-inverse: #1f1e1f;
   --pce-on-inverse: #f3f3f3;
   --pce-on-inverse-muted: #c8cccc;
-  --pce-on-inverse-accent: #6ec1e4;
-  --pce-selected: #2f3a1a;
+  --pce-on-inverse-accent: #6fc3dd;
+  --pce-selected: #25382a;
 }
 [data-theme="dark"] [data-tone="tinted"],
 [data-theme="dark"] .bg-surface-sunken {
-  --pce-link: #6ec1e4;
-  --pce-focus: #6ec1e4;
+  --pce-link: #6fc3dd;
+  --pce-focus: #6fc3dd;
 }
 
 /* No-JS fallback: follow the OS setting when no theme has been applied. */
@@ -287,27 +265,27 @@
     --pce-fg-muted: #b9bfbf;
     --pce-border: #343a3a;
     --pce-border-strong: #7d8484;
-    --pce-primary: #6b7a0e;          /* deepened site olive so white labels pass AA (4.8:1) */
-    --pce-primary-hover: #566209;    /* darker on hover; white stays 6.7:1 */
+    --pce-primary: #527a4f;          /* logo green; white label 4.9:1 */
+    --pce-primary-hover: #416340;    /* darker on hover; white stays 7:1+ */
     --pce-on-primary: #ffffff;       /* white label in every state */
-    --pce-accent: #9bc095;
-    --pce-on-accent: #11340b;
-    --pce-straw: #ccaf8e;
-    --pce-straw-strong: #e6ccaf;
-    --pce-link: #6ec1e4;
-    --pce-focus: #6ec1e4;
+    --pce-accent: #a8cba5;
+    --pce-on-accent: #10260f;
+    --pce-straw: #c9a583;
+    --pce-straw-strong: #e2c9ac;
+    --pce-link: #6fc3dd;
+    --pce-focus: #6fc3dd;
     --pce-danger: #ff8e85;
-    --pce-success: #9bc095;
-    --pce-inverse: #111414;
+    --pce-success: #a8cba5;
+    --pce-inverse: #1f1e1f;
     --pce-on-inverse: #f3f3f3;
     --pce-on-inverse-muted: #c8cccc;
-    --pce-on-inverse-accent: #6ec1e4;
-    --pce-selected: #2f3a1a;
+    --pce-on-inverse-accent: #6fc3dd;
+    --pce-selected: #25382a;
   }
   :root:not([data-theme]) [data-tone="tinted"],
   :root:not([data-theme]) .bg-surface-sunken {
-    --pce-link: #6ec1e4;
-    --pce-focus: #6ec1e4;
+    --pce-link: #6fc3dd;
+    --pce-focus: #6fc3dd;
   }
 }
 
@@ -369,7 +347,7 @@
   }
 
   ::selection {
-    background-color: var(--color-olive-200);
+    background-color: var(--color-green-200);
     color: var(--color-neutral-800);
   }
 
