@@ -237,6 +237,41 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        content?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        /**
+         * Show a labelled photo placeholder here until an image is uploaded.
+         */
+        imagePlaceholder?: boolean | null;
+        imageSide?: ('right' | 'left' | 'below') | null;
+        /**
+         * Background for this section.
+         */
+        tone?: ('light' | 'tinted' | 'dark') | null;
+        id?: string | null;
+        blockName?: string | null;
+        blockType: 'imageText';
+      }
+    | {
+        /**
+         * Small label above the heading (optional).
+         */
+        eyebrow?: string | null;
+        heading?: string | null;
         items?:
           | {
               value: string;
@@ -508,6 +543,36 @@ export interface Product {
     | {
         label: string;
         value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Longer story sections shown below the specifications, in order.
+   */
+  sections?:
+    | {
+        eyebrow?: string | null;
+        heading: string;
+        body?: {
+          root: {
+            type: string;
+            children: {
+              type: any;
+              version: number;
+              [k: string]: unknown;
+            }[];
+            direction: ('ltr' | 'rtl') | null;
+            format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+            indent: number;
+            version: number;
+          };
+          [k: string]: unknown;
+        } | null;
+        image?: (number | null) | Media;
+        /**
+         * Show a labelled photo placeholder until an image is uploaded.
+         */
+        imagePlaceholder?: boolean | null;
         id?: string | null;
       }[]
     | null;
@@ -1045,6 +1110,19 @@ export interface PagesSelect<T extends boolean = true> {
               id?: T;
               blockName?: T;
             };
+        imageText?:
+          | T
+          | {
+              eyebrow?: T;
+              heading?: T;
+              content?: T;
+              image?: T;
+              imagePlaceholder?: T;
+              imageSide?: T;
+              tone?: T;
+              id?: T;
+              blockName?: T;
+            };
         stats?:
           | T
           | {
@@ -1229,6 +1307,16 @@ export interface ProductsSelect<T extends boolean = true> {
     | {
         label?: T;
         value?: T;
+        id?: T;
+      };
+  sections?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?: T;
+        body?: T;
+        image?: T;
+        imagePlaceholder?: T;
         id?: T;
       };
   whereToBuy?:

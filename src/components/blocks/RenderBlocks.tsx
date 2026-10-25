@@ -91,6 +91,45 @@ function RichTextSection({ block }: { block: BlockOf<"richText"> }) {
   );
 }
 
+function ImageTextSection({ block }: { block: BlockOf<"imageText"> }) {
+  const dark = block.tone === "dark";
+  const hasImage = Boolean(block.image) || Boolean(block.imagePlaceholder);
+  const side = block.imageSide ?? "right";
+  const hasText = Boolean(block.content);
+  const figure = hasImage ? (
+    <MediaImage
+      media={block.image}
+      placeholder={block.heading ?? "image for this section"}
+      className={side === "below" ? "aspect-[16/9] rounded-xl" : "aspect-[4/3] rounded-xl"}
+    />
+  ) : null;
+  const body = (
+    <div className="flex flex-col gap-6">
+      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
+      {hasText ? (
+        <div className={`prose-pce flex flex-col gap-4 text-lg ${dark ? "text-on-inverse" : ""}`}>
+          <RichText data={block.content as never} />
+        </div>
+      ) : null}
+    </div>
+  );
+  return (
+    <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
+      {side === "below" || !figure ? (
+        <div className="flex flex-col gap-10">
+          {body}
+          {figure}
+        </div>
+      ) : (
+        <div className="grid items-center gap-10 lg:grid-cols-2">
+          <div className={side === "left" ? "lg:order-2" : ""}>{body}</div>
+          <div className={side === "left" ? "lg:order-1" : ""}>{figure}</div>
+        </div>
+      )}
+    </Section>
+  );
+}
+
 function Stats({ block }: { block: BlockOf<"stats"> }) {
   const dark = block.tone === "dark";
   return (
@@ -411,6 +450,8 @@ export function RenderBlocks({ blocks }: { blocks: Page["layout"] }) {
             return <Highlights key={key} block={block} />;
           case "richText":
             return <RichTextSection key={key} block={block} />;
+          case "imageText":
+            return <ImageTextSection key={key} block={block} />;
           case "stats":
             return <Stats key={key} block={block} />;
           case "cards":

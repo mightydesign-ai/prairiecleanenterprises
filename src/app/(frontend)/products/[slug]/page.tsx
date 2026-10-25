@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Breadcrumb, ButtonLink, MediaImage, Section } from "@/components/ui/primitives";
@@ -141,7 +142,7 @@ export default async function ProductPage({ params }: Props) {
               <h2 id="specs-h" className="text-3xl">
                 Specifications
               </h2>
-              <p className="text-fg-muted">Typical values, as received. Samples are available for qualified buyers.</p>
+              <p className="text-fg-muted">Values are as received unless stated otherwise, and percentages are by weight.</p>
             </div>
             <table className="w-full border-collapse text-[17px]">
               <caption className="sr-only">{product.name} specifications</caption>
@@ -159,6 +160,34 @@ export default async function ProductPage({ params }: Props) {
           </div>
         </Section>
       ) : null}
+
+      {(product.sections ?? []).map((sec, i) => {
+        const hasImage = Boolean(sec.image) || Boolean(sec.imagePlaceholder);
+        return (
+          <Section key={sec.id ?? sec.heading} tone={i % 2 === 0 ? "light" : "tinted"} labelledBy={`sec-${i}-h`}>
+            <div className={hasImage ? "grid items-center gap-10 lg:grid-cols-2" : "grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"}>
+              <div className="flex flex-col gap-4">
+                {sec.eyebrow ? <p className="eyebrow">{sec.eyebrow}</p> : null}
+                <h2 id={`sec-${i}-h`} className="text-3xl">
+                  {sec.heading}
+                </h2>
+                {hasImage && sec.body ? (
+                  <div className="prose-pce flex flex-col gap-4 text-lg">
+                    <RichText data={sec.body as never} />
+                  </div>
+                ) : null}
+              </div>
+              {hasImage ? (
+                <MediaImage media={sec.image} placeholder={sec.heading} className="aspect-[4/3] rounded-xl" />
+              ) : sec.body ? (
+                <div className="prose-pce flex flex-col gap-4 text-lg">
+                  <RichText data={sec.body as never} />
+                </div>
+              ) : null}
+            </div>
+          </Section>
+        );
+      })}
 
       <Section labelledBy="more-h">
         <h2 id="more-h" className="mb-6 text-2xl">

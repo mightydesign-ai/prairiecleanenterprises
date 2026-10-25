@@ -71,6 +71,36 @@ export const RichTextBlock: Block = {
   fields: [eyebrow, heading, { name: "content", type: "richText", required: true }, tone],
 };
 
+export const ImageTextBlock: Block = {
+  slug: "imageText",
+  imageURL: "/block-previews/richText.svg",
+  imageAltText: "Preview of the Text with image layout",
+  labels: { singular: "Text with image", plural: "Text with image" },
+  fields: [
+    eyebrow,
+    heading,
+    { name: "content", type: "richText" },
+    { name: "image", type: "upload", relationTo: "media" },
+    {
+      name: "imagePlaceholder",
+      type: "checkbox",
+      defaultValue: false,
+      admin: { description: "Show a labelled photo placeholder here until an image is uploaded." },
+    },
+    {
+      name: "imageSide",
+      type: "select",
+      defaultValue: "right",
+      options: [
+        { label: "Right of the text", value: "right" },
+        { label: "Left of the text", value: "left" },
+        { label: "Below the text, full width", value: "below" },
+      ],
+    },
+    tone,
+  ],
+};
+
 export const HighlightsBlock: Block = {
   slug: "highlights",
   imageURL: "/block-previews/highlights.svg",
@@ -276,6 +306,7 @@ export const pageBlocks: Block[] = [
   HeroBlock,
   HighlightsBlock,
   RichTextBlock,
+  ImageTextBlock,
   StatsBlock,
   CardsBlock,
   StepsBlock,

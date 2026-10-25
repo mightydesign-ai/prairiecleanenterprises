@@ -87,6 +87,24 @@ export const Products: CollectionConfig = {
               ],
             },
             {
+              name: "sections",
+              type: "array",
+              labels: { singular: "Section", plural: "Sections" },
+              admin: { description: "Longer story sections shown below the specifications, in order." },
+              fields: [
+                { name: "eyebrow", type: "text" },
+                { name: "heading", type: "text", required: true },
+                { name: "body", type: "richText" },
+                { name: "image", type: "upload", relationTo: "media" },
+                {
+                  name: "imagePlaceholder",
+                  type: "checkbox",
+                  defaultValue: false,
+                  admin: { description: "Show a labelled photo placeholder until an image is uploaded." },
+                },
+              ],
+            },
+            {
               name: "whereToBuy",
               type: "array",
               fields: [
