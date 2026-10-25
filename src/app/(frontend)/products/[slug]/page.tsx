@@ -33,7 +33,7 @@ export default async function ProductPage({ params }: Props) {
         <div className="flex flex-col gap-5">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: product.name }]} />
           {product.audience ? <p className="eyebrow !text-accent">{product.audience}</p> : null}
-          <h1 id="product-h" className="text-4xl font-extrabold [font-stretch:110%]">
+          <h1 id="product-h" className="text-4xl font-extrabold">
             {product.headline}
           </h1>
           <p className="max-w-prose text-lg text-fg-muted">{product.summary}</p>

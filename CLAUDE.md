@@ -78,7 +78,7 @@ Contrast decisions (all checked to WCAG 2.2 AA; where an original pairing fails,
 - Green `#54864D` is 4.3:1 on white, so text uses `#45703E` (5.8:1); the original is for fills and large type.
 - Straw is for graphics and large type only.
 
-Type: Archivo (display, width axis) + Source Sans 3 (body) via `next/font`. PCE fixed the logo and colours only;
+Type: Inter (variable, headings and body) via `next/font`. PCE fixed the logo and colours only;
 fonts can change.
 
 SVG safety: logos in `public/brand/` load through `<img>` (never inline, never `dangerouslySetInnerHTML`), are served with a locked-down CSP, and `pnpm check:svg` fails on scripts, event handlers, external references or any tag outside an allow list. Run it whenever an SVG is added; `pnpm ci` runs it.

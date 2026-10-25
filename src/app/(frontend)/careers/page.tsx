@@ -25,7 +25,7 @@ export default async function CareersPage() {
       <section aria-labelledby="careers-h" className="container-wide grid items-center gap-12 py-section-sm lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "Careers" }]} />
-          <h1 id="careers-h" className="text-4xl font-extrabold [font-stretch:110%]">
+          <h1 id="careers-h" className="text-4xl font-extrabold">
             Help run the first plant of its kind
           </h1>
           <p className="max-w-prose text-lg text-fg-muted">

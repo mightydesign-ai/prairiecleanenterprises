@@ -24,7 +24,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
         {block.eyebrow ? <p className="eyebrow animate-fade-up">{block.eyebrow}</p> : null}
         <H
           id={headingId(block)}
-          className={`max-w-4xl animate-fade-up text-4xl font-extrabold [font-stretch:110%] [animation-delay:80ms] ${hasFigure ? "lg:text-display" : ""}`}
+          className={`max-w-4xl animate-fade-up text-4xl font-extrabold [animation-delay:80ms] ${hasFigure ? "lg:text-display" : ""}`}
         >
           {block.heading}
         </H>

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, Source_Sans_3 } from "next/font/google";
+import { Inter } from "next/font/google";
 import { SkipLink } from "@/components/layout/skip-link";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
@@ -8,19 +8,11 @@ import { site } from "@/lib/site";
 import { isIndexable } from "@/lib/indexing";
 import "./globals.css";
 
-// Display face: Archivo, a grotesque with a width axis for big, confident
-// industrial headlines. Body: Source Sans 3 for long-form readability.
-const archivo = Archivo({
-  subsets: ["latin"],
-  axes: ["wdth"],
-  display: "swap",
-  variable: "--font-archivo",
-});
-
-const sourceSans = Source_Sans_3({
+// One family for everything: Inter (variable), used for both headings and body text.
+const inter = Inter({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-source-sans",
+  variable: "--font-inter",
 });
 
 export const metadata: Metadata = {
@@ -99,7 +91,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     <html
       lang="en-CA"
       dir="ltr"
-      className={`${archivo.variable} ${sourceSans.variable}`}
+      className={inter.variable}
       suppressHydrationWarning
     >
       <head>

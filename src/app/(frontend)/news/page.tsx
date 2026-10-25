@@ -44,7 +44,7 @@ export default async function NewsPage() {
     <div className="container-wide py-section-sm">
       <div className="mb-10 flex flex-col gap-5">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "News" }]} />
-        <h1 className="text-4xl font-extrabold [font-stretch:110%]">PCE in the news</h1>
+        <h1 className="text-4xl font-extrabold">PCE in the news</h1>
         <p className="max-w-prose text-lg text-fg-muted">
           Coverage of our facility, products and partnerships. Media enquiries go to{" "}
           <a href={`mailto:${settings.email}`} className="link">

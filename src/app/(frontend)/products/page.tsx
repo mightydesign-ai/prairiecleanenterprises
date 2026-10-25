@@ -17,7 +17,7 @@ export default async function ProductsPage() {
     <section aria-labelledby="products-h" className="container-wide py-section-sm">
       <div className="mb-10 flex flex-col gap-5">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products" }]} />
-        <h1 id="products-h" className="text-4xl font-extrabold [font-stretch:110%]">
+        <h1 id="products-h" className="text-4xl font-extrabold">
           Four products from one crop residue
         </h1>
         <p className="max-w-prose text-lg text-fg-muted">

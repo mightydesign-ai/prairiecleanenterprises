@@ -101,8 +101,8 @@
   --color-neutral-950: #111414;
 
   /* Type families (CSS variables are injected by next/font) */
-  --font-display: var(--font-archivo), ui-sans-serif, system-ui, sans-serif;
-  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: ui-monospace, "SFMono-Regular", Menlo, monospace;
 
   /* Fluid type: scales from a 360px to a 1440px viewport. Rem bounds keep
