@@ -17,6 +17,7 @@
     "migrate": "cross-env NODE_OPTIONS=--no-deprecation payload migrate",
     "migrate:create": "cross-env NODE_OPTIONS=--no-deprecation payload migrate:create",
     "seed": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/index.ts",
+    "import-images": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/import-images.ts",
     "attach-media": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/attach-media.ts"
   },
   "dependencies": {
