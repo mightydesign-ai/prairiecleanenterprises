@@ -39,6 +39,24 @@ const link = (name: string, label: string): Field => ({
   ],
 });
 
+/** "How many in a row" for card-style grids. Automatic keeps each block's own layout; phones always show one column. */
+const columnsField: Field = {
+  name: "columns",
+  type: "select",
+  label: "How many in a row",
+  defaultValue: "auto",
+  options: [
+    { label: "Automatic", value: "auto" },
+    { label: "1", value: "1" },
+    { label: "2", value: "2" },
+    { label: "3", value: "3" },
+    { label: "4", value: "4" },
+    { label: "5", value: "5" },
+    { label: "6", value: "6" },
+  ],
+  admin: { description: "On phones the items always stack in one column, and on tablets they never go above two." },
+};
+
 export const HeroBlock: Block = {
   slug: "hero",
   imageURL: "/block-previews/hero.svg",
@@ -183,18 +201,7 @@ export const CardsBlock: Block = {
     eyebrow,
     heading,
     { name: "intro", type: "textarea" },
-    {
-      name: "columns",
-      type: "select",
-      label: "Cards per row",
-      defaultValue: "auto",
-      options: [
-        { label: "Automatic (as many as fit)", value: "auto" },
-        { label: "2 per row", value: "2" },
-        { label: "3 per row", value: "3" },
-      ],
-      admin: { description: "On phones the cards always stack in one column." },
-    },
+    columnsField,
     {
       name: "showBorder",
       type: "checkbox",
@@ -273,6 +280,7 @@ export const StepsBlock: Block = {
     eyebrow,
     heading,
     { name: "intro", type: "textarea" },
+    columnsField,
     {
       name: "items",
       type: "array",
@@ -348,7 +356,7 @@ export const ProductListBlock: Block = {
   imageURL: "/block-previews/productList.svg",
   imageAltText: "Preview of the Product list layout",
   labels: { singular: "Product list", plural: "Product lists" },
-  fields: [eyebrow, heading],
+  fields: [eyebrow, heading, columnsField],
 };
 
 export const NewsListBlock: Block = {
@@ -356,7 +364,7 @@ export const NewsListBlock: Block = {
   imageURL: "/block-previews/newsList.svg",
   imageAltText: "Preview of the Latest news layout",
   labels: { singular: "Latest news", plural: "Latest news" },
-  fields: [heading, { name: "limit", type: "number", defaultValue: 3, min: 1, max: 12 }],
+  fields: [heading, { name: "limit", type: "number", defaultValue: 3, min: 1, max: 12 }, columnsField],
 };
 
 export const TeamBlock: Block = {
@@ -364,7 +372,7 @@ export const TeamBlock: Block = {
   imageURL: "/block-previews/team.svg",
   imageAltText: "Preview of the Team layout",
   labels: { singular: "Team", plural: "Team" },
-  fields: [heading],
+  fields: [heading, columnsField],
 };
 
 export const PartnersBlock: Block = {

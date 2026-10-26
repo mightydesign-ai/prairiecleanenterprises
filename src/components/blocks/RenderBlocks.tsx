@@ -12,6 +12,18 @@ type BlockOf<T extends Block["blockType"]> = Extract<Block, { blockType: T }>;
 
 const headingId = (block: { id?: string | null }, suffix = "h") => (block.id ? `b-${block.id}-${suffix}` : undefined);
 
+/** Column classes for "How many in a row". Phones stay at one column and tablets at two. */
+const COLUMNS: Record<string, string> = {
+  "1": "grid-cols-1",
+  "2": "sm:grid-cols-2",
+  "3": "sm:grid-cols-2 lg:grid-cols-3",
+  "4": "sm:grid-cols-2 lg:grid-cols-4",
+  "5": "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5",
+  "6": "sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6",
+};
+const gridCols = (columns: string | null | undefined, automatic: string) =>
+  columns && columns !== "auto" && COLUMNS[columns] ? COLUMNS[columns] : automatic;
+
 function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
   const H = first ? "h1" : "h2";
   // The image column shows when there's a photo or a stat badge; otherwise the text runs full width.
@@ -158,12 +170,7 @@ function Stats({ block }: { block: BlockOf<"stats"> }) {
 
 function Cards({ block }: { block: BlockOf<"cards"> }) {
   const dark = block.tone === "dark";
-  const grid =
-    block.columns === "2"
-      ? "sm:grid-cols-2"
-      : block.columns === "3"
-        ? "sm:grid-cols-2 lg:grid-cols-3"
-        : "sm:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(16rem,1fr))]";
+  const grid = gridCols(block.columns, "sm:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(16rem,1fr))]");
   const bordered = block.showBorder !== false;
   const position = block.imagePosition ?? "left";
   const align = block.alignment ?? "left";
@@ -225,7 +232,7 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
       <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
-      <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]">
+      <ol className={`grid gap-4 ${gridCols(block.columns, "sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]")}`}>
         {items.map((item, i) => {
           const last = i === items.length - 1;
           return (
@@ -326,7 +333,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
   return (
     <Section id="products" tone="tinted" labelledBy={headingId(block)}>
       <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} />
-      <ul className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+      <ul className={`grid gap-6 ${gridCols(block.columns, "sm:grid-cols-2 xl:grid-cols-4")}`}>
         {products.map((p) => (
           <li key={p.id} className="flex">
             <Link
@@ -365,7 +372,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
           All coverage
         </Link>
       </div>
-      <ul className="grid gap-6 md:grid-cols-3">
+      <ul className={`grid gap-6 ${gridCols(block.columns, "md:grid-cols-3")}`}>
         {items.map((n) => (
           <li key={n.id} className="flex flex-col gap-2.5 rounded-lg border border-border bg-surface p-6">
             <span className="text-sm font-semibold text-straw-strong">
@@ -390,7 +397,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
   return (
     <Section labelledBy={headingId(block)}>
       <SectionHeading id={headingId(block)} heading={block.heading ?? "Leadership team"} />
-      <ul className="grid gap-6 lg:grid-cols-2">
+      <ul className={`grid gap-6 ${gridCols(block.columns, "lg:grid-cols-2")}`}>
         {team.map((t) => (
           <li key={t.id} className="flex items-start gap-5 rounded-lg border border-border bg-surface p-6">
             {t.photo && typeof t.photo === "object" ? (

@@ -6,6 +6,7 @@ import * as migration_20261025_211545_image_fit from './20261025_211545_image_fi
 import * as migration_20261025_215711_cards_columns_images from './20261025_215711_cards_columns_images';
 import * as migration_20261025_235839_text_sizes from './20261025_235839_text_sizes';
 import * as migration_20261026_023116_card_image_controls from './20261026_023116_card_image_controls';
+import * as migration_20261026_030517_columns_in_a_row from './20261026_030517_columns_in_a_row';
 
 export const migrations = [
   {
@@ -46,6 +47,11 @@ export const migrations = [
   {
     up: migration_20261026_023116_card_image_controls.up,
     down: migration_20261026_023116_card_image_controls.down,
-    name: '20261026_023116_card_image_controls'
+    name: '20261026_023116_card_image_controls',
+  },
+  {
+    up: migration_20261026_030517_columns_in_a_row.up,
+    down: migration_20261026_030517_columns_in_a_row.down,
+    name: '20261026_030517_columns_in_a_row'
   },
 ];

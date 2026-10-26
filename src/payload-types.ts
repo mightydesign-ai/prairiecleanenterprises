@@ -308,9 +308,9 @@ export interface Page {
         heading?: string | null;
         intro?: string | null;
         /**
-         * On phones the cards always stack in one column.
+         * On phones the items always stack in one column, and on tablets they never go above two.
          */
-        columns?: ('auto' | '2' | '3') | null;
+        columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         showBorder?: boolean | null;
         /**
          * Applies to cards that have an image.
@@ -356,6 +356,10 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         intro?: string | null;
+        /**
+         * On phones the items always stack in one column, and on tablets they never go above two.
+         */
+        columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         items?:
           | {
               title: string;
@@ -390,6 +394,10 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * On phones the items always stack in one column, and on tablets they never go above two.
+         */
+        columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'productList';
@@ -397,12 +405,20 @@ export interface Page {
     | {
         heading?: string | null;
         limit?: number | null;
+        /**
+         * On phones the items always stack in one column, and on tablets they never go above two.
+         */
+        columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'newsList';
       }
     | {
         heading?: string | null;
+        /**
+         * On phones the items always stack in one column, and on tablets they never go above two.
+         */
+        columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'team';
@@ -1210,6 +1226,7 @@ export interface PagesSelect<T extends boolean = true> {
               eyebrow?: T;
               heading?: T;
               intro?: T;
+              columns?: T;
               items?:
                 | T
                 | {
@@ -1240,6 +1257,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1248,6 +1266,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               limit?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
@@ -1255,6 +1274,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              columns?: T;
               id?: T;
               blockName?: T;
             };
