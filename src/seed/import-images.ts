@@ -17,7 +17,7 @@ const ctx = { disableRevalidate: true };
 const norm = (s: string) => s.toLowerCase().replace(/&amp;/g, "&").replace(/[^a-z0-9]+/g, " ").trim();
 const DIR = path.join(process.cwd(), "assets", "live-images-web");
 
-type Item = { file: string; alt: string; kind: string; newsTitle?: string; person?: string; partner?: string };
+type Item = { file: string; source: string; oldFile?: string; alt: string; kind: string; newsTitle?: string; person?: string; partner?: string };
 
 async function run() {
   const payload = await getPayload({ config });
@@ -51,6 +51,7 @@ async function run() {
       log(`uploaded ${item.file}`);
     }
     ids.set(item.file, doc.id);
+    ids.set(item.source, doc.id);
   }
 
   // 2. News stories (match by headline; a repeated headline takes its images in order).
@@ -102,11 +103,11 @@ async function run() {
       log(`product ${slug} hero <- ${file}`);
     }
   };
-  await setHero("cat-litter", "cat-litter/pcl-bag-mockup-new.webp");
-  await setHero("animal-bedding", "animal-bedding/bag-2.webp");
+  await setHero("cat-litter", "cat-litter/PCL-Bag-Mockup_New.png");
+  await setHero("animal-bedding", "animal-bedding/Bag-2.png");
 
   const pellets = products.find((x) => x.slug === "fuel-pellets");
-  const flower = ids.get("fuel-pellets/flax-flower-opt.webp");
+  const flower = ids.get("fuel-pellets/flax-flower-opt.png");
   if (pellets && flower && Array.isArray(pellets.sections)) {
     const sections = pellets.sections.map((s) =>
       s.heading === "The flax plant" && !s.image ? { ...s, image: flower as number, imagePlaceholder: false } : s,
@@ -116,7 +117,7 @@ async function run() {
   }
 
   // 5. Investors page: facility photo in the "In production" block.
-  const facility = ids.get("investors/facilityy-1.webp");
+  const facility = ids.get("investors/facilityy-1.jpg");
   const inv = (await payload.find({ collection: "pages", where: { slug: { equals: "investors" } }, limit: 1, depth: 0 })).docs[0];
   if (inv && facility && Array.isArray(inv.layout)) {
     let changed = false;
