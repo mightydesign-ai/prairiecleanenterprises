@@ -190,6 +190,15 @@ export default async function ProductPage({ params }: Props) {
         );
       })}
 
+      <Section tone="dark" labelledBy="world-h">
+        <div className="flex flex-col items-start gap-5">
+          <h2 id="world-h" className="max-w-3xl text-3xl">
+            The world needs secure, abundant agricultural feedstock &amp; flax fibre
+          </h2>
+          <ButtonLink href="/contact">Contact us today</ButtonLink>
+        </div>
+      </Section>
+
       <Section labelledBy="more-h">
         <h2 id="more-h" className="mb-6 text-2xl">
           From the same bale

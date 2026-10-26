@@ -263,6 +263,12 @@ export const otherPages: SeedPage[] = [
         text: "Contact us to learn more about the environmental benefits of our flax straw pellets.",
         button: { label: "See fuel pellets", href: "/products/fuel-pellets" },
       },
+      {
+        blockType: "cta",
+        tone: "tinted",
+        heading: "The world needs secure, abundant agricultural feedstock & flax fibre",
+        button: { label: "Contact us today", href: "/contact" },
+      },
     ],
   },
   {
@@ -430,6 +436,58 @@ export const otherPages: SeedPage[] = [
         ),
       },
       {
+        blockType: "richText",
+        eyebrow: "Investment Opportunity",
+        heading: "Investment Opportunity",
+        content: richText(
+          {
+            list: [
+              "Minimum equity investment: $50,000 CAD",
+              "Debt option: 10% annual interest compounded monthly (minimum of $100,000 CAD investment)",
+              "Equity option $7/share CAD",
+              "Investors can invest through a TFSA, RRSP, or LIRA, contact PCE for more details",
+            ],
+          },
+        ),
+      },
+      {
+        blockType: "cta",
+        tone: "tinted",
+        heading: "Contact us to learn more",
+        button: { label: "Contact us to learn more", href: "#inquire" },
+      },
+      {
+        blockType: "richText",
+        eyebrow: "Investor background: facility",
+        heading: "PCE is building an incredible future. Be part of it.",
+        content: richText(
+          "We are building an incredible future starting with a 34,000 square foot facility with high-efficient, flax straw multi-processing equipment that has real impacts on Saskatchewan farmers, Saskatchewan’s economy, and value-added innovation for the prairies.",
+          "Our first flax straw processing facility is located in Weyburn, Saskatchewan. Weyburn is located near thousands of acres of flax crops. It is not a new build; we retrofitted an existing building.",
+          "PCE’s facility is the only facility in the world simultaneously processing flax straw into both fibre and shive.",
+        ),
+      },
+      {
+        blockType: "cards",
+        tone: "tinted",
+        eyebrow: "Inside the facility",
+        heading: "Key equipment",
+        columns: "3",
+        items: [
+          {
+            title: "Rotochopper",
+            text: "The first part of the process for the flax straw is the Rotochopper machine. Flax straw is extremely fibrous and tough. The Rotochopper is a power horizontal grinder that transforms straw by grinding and shredding it into smaller pieces. This first step prepares the straw properly for the next stages of the PCE patent-pending approach.",
+          },
+          {
+            title: "Flax Fibre Bale Press Machine",
+            text: "Designed for densely baling flax fibre for shipping to our customers. The more compressed we make the bales, the more efficient and cost-saving it is for shipping and transport.",
+          },
+          {
+            title: "Automated Bagging Machine",
+            text: "This is the high-efficiency automated bagging machine that can handle filling bags at a high speed. It can do a variety of bag sizes with low downtime when switching bag sizes. It has the capacity to do up to 250 bags per hour. It is used to bag Prairie Clean Cat Litter 20lb bags and Prairie Clean Premium Animal Bedding 40lb bags, and any future bag sizes we will need.",
+          },
+        ],
+      },
+      {
         blockType: "form",
         form: "investor",
         anchor: "inquire",
@@ -440,6 +498,12 @@ export const otherPages: SeedPage[] = [
         blockType: "richText",
         content: richText(
           "This page contains forward-looking statements; no assurance is given that projected outcomes will occur. Investing involves risk. Accredited investors only. Speak with a PCE representative about the specifics of the debt and equity options.",
+        ),
+      },
+      {
+        blockType: "richText",
+        content: richText(
+          "*This website contains forward-looking statements. No assurances can be made that projections/outcomes described here will occur. Investment involves risk. Accredited investors only. Please speak with a representative from PCE regarding all details surrounding the debt and equity options specifics.",
         ),
       },
     ],

@@ -47,6 +47,7 @@ export const products: New<Product>[] = [
       { title: "Biocomposites", text: "A renewable reinforcement for moulded parts and panels." },
       { title: "Technical textiles and nonwovens", text: "Feedstock for mats, insulation and industrial nonwovens." },
       { title: "Nitrocellulose", text: "A domestic alternative to cotton and wood cellulose, in development." },
+      { title: "Biomaterial industries" },
     ],
     callout: {
       eyebrow: "Decortication",
@@ -236,6 +237,7 @@ export const products: New<Product>[] = [
         heading: "Support Local. Support a Superior Product. Choose Prairie Clean.",
         imagePlaceholder: true,
         body: richText(
+          "A Canadian Clay-Free, Odour-Smart, Sustainable Choice For Pet Owners",
           "Give your customers a healthier, more natural choice for their pets while supporting sustainable farming in Saskatchewan. Order Prairie Clean Cat Litter today.",
           "prairiecleanlitter.ca",
         ),
