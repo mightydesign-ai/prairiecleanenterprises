@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { jsonLd } from "@/lib/safe-url";
 import { Inter } from "next/font/google";
 import { SkipLink } from "@/components/layout/skip-link";
+import { ScrollToTop } from "@/components/layout/scroll-to-top";
 import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { getSiteSettings } from "@/lib/payload";
@@ -118,6 +119,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
       </head>
       <body className="flex min-h-dvh flex-col bg-bg text-fg antialiased">
         <SkipLink />
+        <ScrollToTop />
         <SiteHeader />
         <main id="main" tabIndex={-1} className="flex-1 focus:outline-none">
           {children}
