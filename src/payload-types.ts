@@ -311,6 +311,20 @@ export interface Page {
          * On phones the cards always stack in one column.
          */
         columns?: ('auto' | '2' | '3') | null;
+        showBorder?: boolean | null;
+        /**
+         * Applies to cards that have an image.
+         */
+        imagePosition?: ('above' | 'left' | 'right') | null;
+        /**
+         * Height of the image. The picture keeps its own proportions.
+         */
+        imageSize?: ('sm' | 'md' | 'lg' | 'xl') | null;
+        /**
+         * Text alignment, and the image's position when it sits above the text.
+         */
+        alignment?: ('left' | 'center' | 'right') | null;
+        imageVerticalAlign?: ('top' | 'center') | null;
         items?:
           | {
               tag?: string | null;
@@ -1171,6 +1185,11 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               intro?: T;
               columns?: T;
+              showBorder?: T;
+              imagePosition?: T;
+              imageSize?: T;
+              alignment?: T;
+              imageVerticalAlign?: T;
               items?:
                 | T
                 | {

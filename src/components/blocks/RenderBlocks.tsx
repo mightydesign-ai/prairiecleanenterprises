@@ -164,21 +164,32 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
       : block.columns === "3"
         ? "sm:grid-cols-2 lg:grid-cols-3"
         : "sm:grid-cols-2 xl:grid-cols-[repeat(auto-fit,minmax(16rem,1fr))]";
+  const bordered = block.showBorder !== false;
+  const position = block.imagePosition ?? "left";
+  const align = block.alignment ?? "left";
+  const imgHeight = { sm: "h-12", md: "h-20", lg: "h-32", xl: "h-48" }[block.imageSize ?? "md"];
+  const textAlign = { left: "text-left", center: "text-center", right: "text-right" }[align];
+  // Above the text, the alignment also positions the image; beside the text, it stays next to the text.
+  const aboveItems = { left: "items-start", center: "items-center", right: "items-end" }[align];
+  const sideItems = block.imageVerticalAlign === "top" ? "items-start" : "items-center";
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
       <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
       <ul className={`grid gap-5 ${grid}`}>
         {(block.items ?? []).map((item) => {
           const img = item.image && typeof item.image === "object" && item.image.url ? item.image : null;
+          const layout = !img || position === "above" ? `flex-col ${aboveItems}` : `${position === "right" ? "flex-row-reverse" : "flex-row"} ${sideItems}`;
           return (
             <li
               key={item.id ?? item.title}
-              className={`flex gap-5 rounded-lg p-6 ${img ? "flex-row items-center" : "flex-col"} ${
-                dark
-                  ? "border border-white/20"
-                  : item.highlight
-                    ? "border-2 border-accent bg-surface"
-                    : "border border-border bg-surface"
+              className={`flex gap-5 rounded-lg ${bordered ? "p-6" : "py-4"} ${layout} ${textAlign} ${
+                !bordered
+                  ? ""
+                  : dark
+                    ? "border border-white/20"
+                    : item.highlight
+                      ? "border-2 border-accent bg-surface"
+                      : "border border-border bg-surface"
               }`}
             >
               {img ? (
@@ -188,10 +199,10 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
                   src={mediaSrc(img.url!)}
                   alt={img.decorative ? "" : (img.alt ?? "")}
                   loading="lazy"
-                  className="size-20 shrink-0 object-contain"
+                  className={`${imgHeight} w-auto shrink-0 object-contain ${position === "above" ? "max-w-full" : "max-w-[45%]"}`}
                 />
               ) : null}
-              <div className="flex flex-col gap-2">
+              <div className="flex min-w-0 flex-1 flex-col gap-2 [overflow-wrap:anywhere]">
                 {item.tag ? (
                   <span className={`text-xs font-bold uppercase tracking-[0.08em] ${dark ? "text-on-inverse-accent" : "text-accent"}`}>
                     {item.tag}
