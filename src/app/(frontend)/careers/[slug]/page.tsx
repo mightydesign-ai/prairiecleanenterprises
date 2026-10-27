@@ -60,7 +60,7 @@ export default async function JobPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(jobJsonLd) }} />
       <div className="mb-10 flex flex-col gap-4">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: job.title }]} />
-        <h1 className="title-page font-extrabold">{job.title}</h1>
+        <h1 className="title-page">{job.title}</h1>
         <ul aria-label="Role details" className="flex flex-wrap gap-2 text-[15px] font-semibold">
           {[job.location, typeLabel[job.employmentType], job.shift, job.pay].filter(Boolean).map((t) => (
             <li key={t} className="rounded-full bg-surface-sunken px-3.5 py-1.5">

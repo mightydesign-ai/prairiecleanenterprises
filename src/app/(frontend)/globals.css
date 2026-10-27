@@ -522,6 +522,7 @@
    otherwise each role keeps the size it was designed with.
    --------------------------------------------------------------------- */
 .title-page {
+  font-weight: var(--page-title-weight, 700);
   font-size: calc(var(--page-title-size, var(--text-4xl)) * var(--heading-scale, 1));
   line-height: 1.05;
 }
@@ -532,14 +533,17 @@
   }
 }
 .title-section {
+  font-weight: var(--section-heading-weight, 700);
   font-size: calc(var(--section-heading-size, var(--text-3xl)) * var(--heading-scale, 1));
   line-height: 1.12;
 }
 .title-card {
+  font-weight: var(--card-title-weight, 700);
   font-size: calc(var(--card-title-size, var(--text-2xl)) * var(--heading-scale, 1));
   line-height: 1.2;
 }
 .title-small {
+  font-weight: var(--small-title-weight, 700);
   font-size: calc(var(--small-title-size, var(--text-xl)) * var(--heading-scale, 1));
   line-height: 1.25;
 }

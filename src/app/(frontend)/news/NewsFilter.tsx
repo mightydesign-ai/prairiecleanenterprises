@@ -61,7 +61,7 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
                 <span className="font-display font-bold text-fg">{n.date}</span> · {n.source}
               </span>
               <span className="text-xs font-bold uppercase tracking-[0.06em] text-accent">{n.topicLabel}</span>
-              <a href={n.href} className="title-small font-display font-bold leading-snug no-underline hover:text-link">
+              <a href={n.href} className="title-small font-display leading-snug no-underline hover:text-link">
                 {n.title}
                 {n.external ? <span className="sr-only"> (on {n.source})</span> : null}
               </a>

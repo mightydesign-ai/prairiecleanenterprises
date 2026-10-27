@@ -99,6 +99,13 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   setStep("--page-title-size", t?.pageTitleStep);
   setStep("--section-heading-size", t?.sectionHeadingStep);
   setStep("--card-title-size", t?.cardTitleStep);
+  const setWeight = (cssVar: string, value?: string | null) => {
+    if (value && /^[1-9]00$/.test(value)) sizeVars[cssVar] = value;
+  };
+  setWeight("--page-title-weight", t?.pageTitleWeight);
+  setWeight("--section-heading-weight", t?.sectionHeadingWeight);
+  setWeight("--card-title-weight", t?.cardTitleWeight);
+  setWeight("--small-title-weight", t?.smallTitleWeight);
   setStep("--small-title-size", t?.smallTitleStep);
 
   return (

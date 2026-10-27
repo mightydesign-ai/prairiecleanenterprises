@@ -17,7 +17,7 @@ export default async function ProductsPage() {
     <section aria-labelledby="products-h" className="container-wide py-section-sm">
       <div className="mb-10 flex flex-col gap-5">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products" }]} />
-        <h1 id="products-h" className="title-page font-extrabold">
+        <h1 id="products-h" className="title-page">
           Four products from one crop residue
         </h1>
         <p className="max-w-prose text-lg text-fg-muted">
@@ -35,7 +35,7 @@ export default async function ProductsPage() {
               <MediaImage media={p.heroImage} placeholder={p.name} className="aspect-[16/9]" sizes="(min-width: 640px) 50vw, 100vw" />
               <span className="flex flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
-                <span className="title-card font-display font-bold group-hover:text-link">{p.name}</span>
+                <span className="title-card font-display group-hover:text-link">{p.name}</span>
                 <span className="text-base text-fg-muted">{p.cardSummary ?? p.summary}</span>
               </span>
             </Link>

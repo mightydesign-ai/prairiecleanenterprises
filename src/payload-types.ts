@@ -168,7 +168,7 @@ export interface Page {
         eyebrow?: string | null;
         heading: string;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
@@ -282,7 +282,7 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         content: {
@@ -323,7 +323,7 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         content?: {
@@ -418,7 +418,7 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
@@ -452,11 +452,11 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
-         * Size of the title on every item in this block. Default uses the Site settings size.
+         * Size of the title on every item in this block.
          */
         itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
@@ -534,11 +534,11 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
-         * Size of the title on every item in this block. Default uses the Site settings size.
+         * Size of the title on every item in this block.
          */
         itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
@@ -589,7 +589,7 @@ export interface Page {
     | {
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
@@ -618,11 +618,11 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
-         * Size of the product names on the cards. Default uses the Site settings size.
+         * Size of the product names on the cards.
          */
         itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
@@ -644,7 +644,7 @@ export interface Page {
     | {
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         limit?: number | null;
@@ -667,7 +667,7 @@ export interface Page {
     | {
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
@@ -689,7 +689,7 @@ export interface Page {
     | {
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         /**
@@ -707,7 +707,7 @@ export interface Page {
     | {
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
@@ -736,7 +736,7 @@ export interface Page {
         anchor?: string | null;
         heading?: string | null;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
@@ -756,7 +756,7 @@ export interface Page {
     | {
         heading: string;
         /**
-         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         text?: string | null;
@@ -872,11 +872,11 @@ export interface Product {
      */
     pageTitle?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     /**
-     * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     sectionHeading?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     /**
-     * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     itemTitle?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
   };
@@ -2249,7 +2249,7 @@ export interface SiteSetting {
     postalCode: string;
   };
   /**
-   * Choose the size of every kind of title on the site. Sizes follow a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.
+   * Choose the size of every kind of title on the site. Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.
    */
   typography?: {
     /**
@@ -2257,21 +2257,37 @@ export interface SiteSetting {
      */
     headingScale?: ('80' | '90' | '100' | '110' | '125' | '150') | null;
     /**
-     * Default is about 64 px on desktop (88 px beside a photo).
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     pageTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     /**
-     * Default is about 48 px on desktop.
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     sectionHeadingStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     /**
-     * Default is about 36 px on desktop.
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     cardTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     /**
-     * Default is about 28 px on desktop.
+     * Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.
      */
     smallTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * Inter is a variable font, so every weight is available.
+     */
+    pageTitleWeight?: ('default' | '400' | '500' | '600' | '700' | '800') | null;
+    /**
+     * Inter is a variable font, so every weight is available.
+     */
+    sectionHeadingWeight?: ('default' | '400' | '500' | '600' | '700' | '800') | null;
+    /**
+     * Inter is a variable font, so every weight is available.
+     */
+    cardTitleWeight?: ('default' | '400' | '500' | '600' | '700' | '800') | null;
+    /**
+     * Inter is a variable font, so every weight is available.
+     */
+    smallTitleWeight?: ('default' | '400' | '500' | '600' | '700' | '800') | null;
     cardTitleSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
     sectionHeadingSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
   };
@@ -2315,6 +2331,10 @@ export interface SiteSettingsSelect<T extends boolean = true> {
         sectionHeadingStep?: T;
         cardTitleStep?: T;
         smallTitleStep?: T;
+        pageTitleWeight?: T;
+        sectionHeadingWeight?: T;
+        cardTitleWeight?: T;
+        smallTitleWeight?: T;
         cardTitleSize?: T;
         sectionHeadingSize?: T;
       };

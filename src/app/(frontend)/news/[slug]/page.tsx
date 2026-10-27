@@ -39,7 +39,7 @@ export default async function NewsItemPage({ params }: Props) {
     <article className="mx-auto flex w-full max-w-3xl flex-col gap-6 px-gutter py-section-sm">
       <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "News", href: "/news" }, { label: item.title }]} />
       <p className="eyebrow">{formatDate(item.publishedOn)}</p>
-      <h1 className="title-page font-extrabold">{item.title}</h1>
+      <h1 className="title-page">{item.title}</h1>
       <p className="text-lg text-fg-muted">{item.excerpt}</p>
       {item.image ? <MediaImage media={item.image} placeholder={item.title} className="aspect-[16/9] rounded-xl" /> : null}
       {item.body ? (

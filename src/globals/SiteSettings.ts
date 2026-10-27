@@ -1,7 +1,24 @@
-import type { GlobalConfig } from "payload";
+import type { Field, GlobalConfig } from "payload";
 import { titleSizeField } from "@/fields/display";
 import { anyone, authenticated } from "@/access";
 import { revalidateGlobal } from "@/hooks/revalidate";
+
+
+const WEIGHTS = [
+  { label: "Regular (400)", value: "400" },
+  { label: "Medium (500)", value: "500" },
+  { label: "Semibold (600)", value: "600" },
+  { label: "Bold (700)", value: "700" },
+  { label: "Extra bold (800)", value: "800" },
+];
+const weightField = (name: string, label: string): Field => ({
+  name,
+  type: "select",
+  label,
+  defaultValue: "default",
+  options: [{ label: "Default: Bold (700)", value: "default" }, ...WEIGHTS],
+  admin: { description: "Inter is a variable font, so every weight is available." },
+});
 
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
@@ -71,6 +88,10 @@ export const SiteSettings: GlobalConfig = {
         titleSizeField("sectionHeadingStep", "Section headings", undefined, { role: "section", site: true }),
         titleSizeField("cardTitleStep", "Card titles and sub-headings (e.g. Flax Fibre, Animal Bedding)", undefined, { role: "card", site: true }),
         titleSizeField("smallTitleStep", "Small titles (steps, highlights, list items, names)", undefined, { role: "small", site: true }),
+        weightField("pageTitleWeight", "Page title weight"),
+        weightField("sectionHeadingWeight", "Section heading weight"),
+        weightField("cardTitleWeight", "Card title weight"),
+        weightField("smallTitleWeight", "Small title weight"),
         // Replaced by the four "...Step" fields above. Kept (hidden) so no column is dropped; safe to remove later with a migration.
         { name: "cardTitleSize", type: "select", options: ["xs", "sm", "default", "lg", "xl"], defaultValue: "default", admin: { hidden: true } },
         { name: "sectionHeadingSize", type: "select", options: ["xs", "sm", "default", "lg", "xl"], defaultValue: "default", admin: { hidden: true } },

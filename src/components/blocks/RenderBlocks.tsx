@@ -40,7 +40,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
         <H
           id={headingId(block)}
           style={titleSize("--page-title-size", block.headingSize)}
-          className={`max-w-4xl animate-fade-up title-page font-extrabold [animation-delay:80ms] ${hasFigure ? "title-page--feature" : ""}`}
+          className={`max-w-4xl animate-fade-up title-page [animation-delay:80ms] ${hasFigure ? "title-page--feature" : ""}`}
         >
           {block.heading}
         </H>
@@ -358,7 +358,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
               <MediaImage media={p.heroImage} placeholder={p.name} className="aspect-[4/3]" sizes="(min-width: 1280px) 25vw, 50vw" />
               <span className="flex flex-1 flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
-                <span className="title-card font-display font-bold group-hover:text-link">{p.name}</span>
+                <span className="title-card font-display group-hover:text-link">{p.name}</span>
                 <span className="flex-1 text-base text-fg-muted">{p.cardSummary ?? p.summary}</span>
                 <span className="pt-2 font-display text-[15px] font-semibold text-link">
                   Learn More <span aria-hidden="true">→</span>
@@ -397,7 +397,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
             </span>
             <a
               href={safeHref(n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news"))}
-              className="title-small font-display font-bold leading-snug no-underline hover:text-link"
+              className="title-small font-display leading-snug no-underline hover:text-link"
             >
               {n.title}
             </a>
@@ -434,7 +434,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
               </span>
             )}
             <span className="flex flex-col gap-1">
-              <span className="title-small font-display font-bold">{t.name}</span>
+              <span className="title-small font-display">{t.name}</span>
               <span className="text-[15px] font-semibold text-accent">{t.role}</span>
               {t.bio ? <span className="text-base text-fg-muted">{t.bio}</span> : null}
             </span>
