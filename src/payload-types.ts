@@ -311,7 +311,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'richText';
@@ -406,7 +406,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'imageText';
@@ -440,7 +440,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'stats';
@@ -522,7 +522,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cards';
@@ -581,7 +581,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'steps';
@@ -606,7 +606,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'milestones';
@@ -636,7 +636,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'productList';
@@ -659,7 +659,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'newsList';
@@ -681,7 +681,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'team';
@@ -699,7 +699,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'partners';
@@ -724,7 +724,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'faq';
@@ -748,7 +748,7 @@ export interface Page {
         /**
          * How tall the cut is. It scales with the screen width.
          */
-        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
+        edgeStrength?: ('very-gentle' | 'gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'form';
@@ -863,6 +863,23 @@ export interface Product {
    */
   cardSummary?: string | null;
   heroImage?: (number | null) | Media;
+  /**
+   * Override the Site settings sizes for this product page only. Default follows Site settings.
+   */
+  headingSizes?: {
+    /**
+     * The big heading at the top of the page.
+     */
+    pageTitle?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+     */
+    sectionHeading?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+     */
+    itemTitle?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+  };
   /**
    * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
    */
@@ -1813,6 +1830,13 @@ export interface ProductsSelect<T extends boolean = true> {
   summary?: T;
   cardSummary?: T;
   heroImage?: T;
+  headingSizes?:
+    | T
+    | {
+        pageTitle?: T;
+        sectionHeading?: T;
+        itemTitle?: T;
+      };
   heroImageFocus?: T;
   heroImageWidth?: T;
   primaryCtaLabel?: T;
@@ -2229,6 +2253,10 @@ export interface SiteSetting {
    */
   typography?: {
     /**
+     * Scales every heading on the site at once (page titles, section headings, card titles, small titles and headings inside text). The four settings below then change one kind of heading. Sizes are in rem, so they also follow each visitor's own browser text size.
+     */
+    headingScale?: ('80' | '90' | '100' | '110' | '125' | '150') | null;
+    /**
      * Default is about 64 px on desktop (88 px beside a photo).
      */
     pageTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
@@ -2282,6 +2310,7 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   typography?:
     | T
     | {
+        headingScale?: T;
         pageTitleStep?: T;
         sectionHeadingStep?: T;
         cardTitleStep?: T;

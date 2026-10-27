@@ -10,6 +10,7 @@ import * as migration_20261026_030517_columns_in_a_row from './20261026_030517_c
 import * as migration_20261027_020815_title_size_steps from './20261027_020815_title_size_steps';
 import * as migration_20261027_023045_block_title_sizes_photo_controls from './20261027_023045_block_title_sizes_photo_controls';
 import * as migration_20261027_024333_icon_badges_section_edges from './20261027_024333_icon_badges_section_edges';
+import * as migration_20261027_030854_heading_scale_product_sizes_very_gentle_edge from './20261027_030854_heading_scale_product_sizes_very_gentle_edge';
 
 export const migrations = [
   {
@@ -70,6 +71,11 @@ export const migrations = [
   {
     up: migration_20261027_024333_icon_badges_section_edges.up,
     down: migration_20261027_024333_icon_badges_section_edges.down,
-    name: '20261027_024333_icon_badges_section_edges'
+    name: '20261027_024333_icon_badges_section_edges',
+  },
+  {
+    up: migration_20261027_030854_heading_scale_product_sizes_very_gentle_edge.up,
+    down: migration_20261027_030854_heading_scale_product_sizes_very_gentle_edge.down,
+    name: '20261027_030854_heading_scale_product_sizes_very_gentle_edge'
   },
 ];

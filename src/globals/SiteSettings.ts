@@ -62,6 +62,24 @@ export const SiteSettings: GlobalConfig = {
           "Choose the size of every kind of title on the site. Sizes follow a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.",
       },
       fields: [
+        {
+          name: "headingScale",
+          type: "select",
+          label: "All headings together",
+          defaultValue: "100",
+          options: [
+            { label: "80% (much smaller)", value: "80" },
+            { label: "90% (smaller)", value: "90" },
+            { label: "100% (as designed)", value: "100" },
+            { label: "110% (larger)", value: "110" },
+            { label: "125% (much larger)", value: "125" },
+            { label: "150% (largest)", value: "150" },
+          ],
+          admin: {
+            description:
+              "Scales every heading on the site at once (page titles, section headings, card titles, small titles and headings inside text). The four settings below then change one kind of heading. Sizes are in rem, so they also follow each visitor's own browser text size.",
+          },
+        },
         titleSizeField("pageTitleStep", "Page titles (the main heading at the top of each page)", "Default is about 64 px on desktop (88 px beside a photo)."),
         titleSizeField("sectionHeadingStep", "Section headings", "Default is about 48 px on desktop."),
         titleSizeField("cardTitleStep", "Card titles and sub-headings (e.g. Flax Fibre, Animal Bedding)", "Default is about 36 px on desktop."),

@@ -95,6 +95,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
   const setStep = (cssVar: string, value?: string | null) => {
     if (value && /^s[0-7]$/.test(value)) sizeVars[cssVar] = `var(--step-${value.slice(1)})`;
   };
+  if (t?.headingScale && /^(80|90|110|125|150)$/.test(t.headingScale)) sizeVars["--heading-scale"] = String(Number(t.headingScale) / 100);
   setStep("--page-title-size", t?.pageTitleStep);
   setStep("--section-heading-size", t?.sectionHeadingStep);
   setStep("--card-title-size", t?.cardTitleStep);

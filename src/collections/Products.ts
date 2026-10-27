@@ -1,4 +1,4 @@
-import { imageFocusField, imageWidthField } from "@/fields/display";
+import { imageFocusField, imageWidthField, titleSizeField } from "@/fields/display";
 import type { CollectionConfig } from "payload";
 import { authenticated, publishedOrAuthenticated } from "@/access";
 import { orderField, seoFields, slugField } from "@/fields";
@@ -33,6 +33,17 @@ export const Products: CollectionConfig = {
             { name: "summary", type: "textarea", required: true },
             { name: "cardSummary", type: "textarea", admin: { description: "One sentence for product cards." } },
             { name: "heroImage", type: "upload", relationTo: "media" },
+            {
+              name: "headingSizes",
+              type: "group",
+              label: "Heading sizes on this product's page",
+              admin: { description: "Override the Site settings sizes for this product page only. Default follows Site settings." },
+              fields: [
+                titleSizeField("pageTitle", "Page title", "The big heading at the top of the page."),
+                titleSizeField("sectionHeading", "Section headings"),
+                titleSizeField("itemTitle", "Item titles (benefits, uses, where to buy)"),
+              ],
+            },
             imageFocusField("heroImageFocus"),
             imageWidthField("heroImageWidth"),
             {

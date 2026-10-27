@@ -19,6 +19,7 @@ export const EDGES = {
 
 /** How tall the edge is. Fluid: it grows with the screen width but never gets tiny on phones or huge on wide screens. */
 export const EDGE_STRENGTH = {
+  "very-gentle": { label: "Very gentle", height: "clamp(0.5rem, 1.25vw, 1.25rem)" },
   gentle: { label: "Gentle", height: "clamp(1rem, 2.5vw, 2.25rem)" },
   medium: { label: "Medium", height: "clamp(1.5rem, 4vw, 3.5rem)" },
   steep: { label: "Steep", height: "clamp(2rem, 6vw, 5.5rem)" },

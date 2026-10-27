@@ -3,7 +3,7 @@ import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { safeHref } from "@/lib/safe-url";
-import { Breadcrumb, ButtonLink, MediaImage, Section } from "@/components/ui/primitives";
+import { Breadcrumb, ButtonLink, MediaImage, Section, stepVar } from "@/components/ui/primitives";
 import { buildMetadata } from "@/lib/metadata";
 import { getProductBySlug, getProducts } from "@/lib/payload";
 
@@ -29,8 +29,19 @@ export default async function ProductPage({ params }: Props) {
   const others = all.filter((p) => p.id !== product.id);
   const brochure = product.brochure && typeof product.brochure === "object" ? product.brochure : null;
 
+  const hs = product.headingSizes;
+  const sizeVars: Record<string, string> = {};
+  const set = (cssVar: string, value?: string | null) => {
+    const v = stepVar(value);
+    if (v) sizeVars[cssVar] = v;
+  };
+  set("--page-title-size", hs?.pageTitle);
+  set("--section-heading-size", hs?.sectionHeading);
+  set("--card-title-size", hs?.itemTitle);
+  set("--small-title-size", hs?.itemTitle);
+
   return (
-    <>
+    <div style={sizeVars as React.CSSProperties}>
       <section aria-labelledby="product-h" className="container-wide grid items-center gap-12 py-section-sm lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Products", href: "/products" }, { label: product.name }]} />
@@ -216,6 +227,6 @@ export default async function ProductPage({ params }: Props) {
           ))}
         </ul>
       </Section>
-    </>
+    </div>
   );
 }
