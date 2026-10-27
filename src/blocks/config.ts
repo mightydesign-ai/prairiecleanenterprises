@@ -116,7 +116,7 @@ export const RichTextBlock: Block = {
 
 export const ImageTextBlock: Block = {
   slug: "imageText",
-  imageURL: "/block-previews/richText.svg",
+  imageURL: "/block-previews/imageText.svg",
   imageAltText: "Preview of the Text with image layout",
   labels: { singular: "Text with image", plural: "Text with image" },
   fields: [
