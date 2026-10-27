@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MediaImage } from "@/components/ui/primitives";
 import type { Media } from "@/payload-types";
 
@@ -26,9 +26,22 @@ const topics = [
   { value: "funding", label: "Funding" },
 ];
 
+const PAGE_SIZE = 10;
+
 export function NewsFilter({ items }: { items: NewsCard[] }) {
   const [topic, setTopic] = useState("all");
-  const shown = topic === "all" ? items : items.filter((n) => n.topic === topic);
+  const [count, setCount] = useState(PAGE_SIZE);
+  const listRef = useRef<HTMLUListElement>(null);
+  const focusFrom = useRef<number | null>(null);
+  const matching = topic === "all" ? items : items.filter((n) => n.topic === topic);
+  const shown = matching.slice(0, count);
+
+  // After "Load more", move keyboard focus to the first story that was just added so it is not lost at the bottom.
+  useEffect(() => {
+    if (focusFrom.current == null) return;
+    listRef.current?.querySelectorAll("li")[focusFrom.current]?.querySelector("a")?.focus();
+    focusFrom.current = null;
+  }, [count]);
   return (
     <>
       <div role="group" aria-label="Filter by topic" className="flex flex-wrap gap-2">
@@ -37,7 +50,10 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
             key={t.value}
             type="button"
             aria-pressed={topic === t.value}
-            onClick={() => setTopic(t.value)}
+            onClick={() => {
+              setTopic(t.value);
+              setCount(PAGE_SIZE);
+            }}
             className="pressable min-h-11 rounded-full border border-border bg-surface px-4 font-display text-[15px] font-semibold aria-pressed:border-inverse aria-pressed:bg-inverse aria-pressed:text-on-inverse"
           >
             {t.label}
@@ -45,9 +61,9 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
         ))}
       </div>
       <p className="sr-only" aria-live="polite">
-        Showing {shown.length} {shown.length === 1 ? "story" : "stories"}
+        Showing {shown.length} of {matching.length} {matching.length === 1 ? "story" : "stories"}
       </p>
-      <ul className="border-t border-border">
+      <ul ref={listRef} className="border-t border-border">
         {shown.map((n) => (
           <li key={n.id} className="grid gap-x-8 gap-y-4 border-b border-border py-6 sm:grid-cols-[15rem_minmax(0,1fr)]">
             <MediaImage
@@ -70,6 +86,23 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
           </li>
         ))}
       </ul>
+      {matching.length > count ? (
+        <div className="flex flex-col items-center gap-3 pt-8">
+          <p className="text-sm text-fg-muted">
+            Showing {shown.length} of {matching.length} stories
+          </p>
+          <button
+            type="button"
+            onClick={() => {
+              focusFrom.current = shown.length;
+              setCount((c) => c + PAGE_SIZE);
+            }}
+            className="pressable inline-flex min-h-12 items-center justify-center rounded-md border border-border-strong px-6 font-display font-semibold hover:bg-surface-sunken"
+          >
+            Load more stories
+          </button>
+        </div>
+      ) : null}
     </>
   );
 }
