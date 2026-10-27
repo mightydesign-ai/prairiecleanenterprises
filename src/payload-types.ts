@@ -924,6 +924,27 @@ export interface Product {
         | '5'
       )
     | null;
+  /**
+   * Optional. A different photo for the product cards. If empty, the hero image is used.
+   */
+  cardImage?: (number | null) | Media;
+  /**
+   * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
+   */
+  cardImageFocus?:
+    | (
+        | 'default'
+        | 'center'
+        | 'top'
+        | 'bottom'
+        | 'left'
+        | 'right'
+        | 'top-left'
+        | 'top-right'
+        | 'bottom-left'
+        | 'bottom-right'
+      )
+    | null;
   primaryCtaLabel?: string | null;
   primaryCtaHref?: string | null;
   secondaryCtaLabel?: string | null;
@@ -1839,6 +1860,8 @@ export interface ProductsSelect<T extends boolean = true> {
       };
   heroImageFocus?: T;
   heroImageWidth?: T;
+  cardImage?: T;
+  cardImageFocus?: T;
   primaryCtaLabel?: T;
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;

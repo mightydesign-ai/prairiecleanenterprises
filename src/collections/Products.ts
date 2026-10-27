@@ -32,7 +32,12 @@ export const Products: CollectionConfig = {
             { name: "headline", type: "text", required: true },
             { name: "summary", type: "textarea", required: true },
             { name: "cardSummary", type: "textarea", admin: { description: "One sentence for product cards." } },
-            { name: "heroImage", type: "upload", relationTo: "media" },
+            {
+              name: "heroImage",
+              type: "upload",
+              relationTo: "media",
+              label: "Hero image (top of this product's page)",
+            },
             {
               name: "headingSizes",
               type: "group",
@@ -46,6 +51,14 @@ export const Products: CollectionConfig = {
             },
             imageFocusField("heroImageFocus"),
             imageWidthField("heroImageWidth"),
+            {
+              name: "cardImage",
+              type: "upload",
+              relationTo: "media",
+              label: "Card image (product cards on the home page and the Products list)",
+              admin: { description: "Optional. A different photo for the product cards. If empty, the hero image is used." },
+            },
+            imageFocusField("cardImageFocus"),
             {
               type: "row",
               fields: [
