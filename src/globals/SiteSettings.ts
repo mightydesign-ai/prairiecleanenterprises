@@ -1,20 +1,7 @@
-import type { Field, GlobalConfig } from "payload";
+import type { GlobalConfig } from "payload";
+import { titleSizeField } from "@/fields/display";
 import { anyone, authenticated } from "@/access";
 import { revalidateGlobal } from "@/hooks/revalidate";
-
-// Steps on the modular scale defined in globals.css (--step-0 ... --step-7). Sizes shown are the desktop sizes.
-const SCALE_PX = [18, 22, 28, 35, 44, 55, 69, 86];
-const titleSizeField = (name: string, label: string, description: string): Field => ({
-  name,
-  type: "select",
-  label,
-  defaultValue: "default",
-  options: [
-    { label: "Default (as designed)", value: "default" },
-    ...SCALE_PX.map((px, i) => ({ label: `Step ${i}: ${px} px`, value: `s${i}` })),
-  ],
-  admin: { description },
-});
 
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
@@ -59,7 +46,7 @@ export const SiteSettings: GlobalConfig = {
       label: "Text sizes",
       admin: {
         description:
-          "Choose the size of every kind of title on the site. Sizes follow a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.",
+          "Choose the size of every kind of title on the site. Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.",
       },
       fields: [
         {
@@ -80,10 +67,10 @@ export const SiteSettings: GlobalConfig = {
               "Scales every heading on the site at once (page titles, section headings, card titles, small titles and headings inside text). The four settings below then change one kind of heading. Sizes are in rem, so they also follow each visitor's own browser text size.",
           },
         },
-        titleSizeField("pageTitleStep", "Page titles (the main heading at the top of each page)", "Default is about 64 px on desktop (88 px beside a photo)."),
-        titleSizeField("sectionHeadingStep", "Section headings", "Default is about 48 px on desktop."),
-        titleSizeField("cardTitleStep", "Card titles and sub-headings (e.g. Flax Fibre, Animal Bedding)", "Default is about 36 px on desktop."),
-        titleSizeField("smallTitleStep", "Small titles (steps, highlights, list items, names)", "Default is about 28 px on desktop."),
+        titleSizeField("pageTitleStep", "Page titles (the main heading at the top of each page)", undefined, { role: "page", site: true }),
+        titleSizeField("sectionHeadingStep", "Section headings", undefined, { role: "section", site: true }),
+        titleSizeField("cardTitleStep", "Card titles and sub-headings (e.g. Flax Fibre, Animal Bedding)", undefined, { role: "card", site: true }),
+        titleSizeField("smallTitleStep", "Small titles (steps, highlights, list items, names)", undefined, { role: "small", site: true }),
         // Replaced by the four "...Step" fields above. Kept (hidden) so no column is dropped; safe to remove later with a migration.
         { name: "cardTitleSize", type: "select", options: ["xs", "sm", "default", "lg", "xl"], defaultValue: "default", admin: { hidden: true } },
         { name: "sectionHeadingSize", type: "select", options: ["xs", "sm", "default", "lg", "xl"], defaultValue: "default", admin: { hidden: true } },

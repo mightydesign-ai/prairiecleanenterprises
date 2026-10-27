@@ -8,11 +8,11 @@ import fs from "node:fs";
 import path from "node:path";
 
 // The five greys, darkest to lightest.
-const G1 = "#2e2e2e"; // headings, dark panels
+const G1 = "#2e2e2e"; // headings and text
 const G2 = "#666666"; // buttons, markers, secondary emphasis
 const G3 = "#9b9b9b"; // body text, icons
-const G4 = "#d2d2d2"; // cards, panels, image areas
-const G5 = "#f4f4f4"; // page background, light details
+const G4 = "#e4e4e4"; // cards, panels, image areas (light)
+const G5 = "#f8f8f8"; // page background, light details
 
 const W = 600;
 const H = 400;
@@ -46,14 +46,13 @@ const heading = (y = 40, w = 220) => eyebrow(M, y) + title(M, y + 18, w);
 
 const previews = {
   hero: () =>
-    r(0, 0, W, H, G1, 0) +
-    eyebrow(M, 84, 56).replace(G3, G3) +
-    title(M, 106, 250, G4, 22) +
-    title(M, 138, 200, G4, 22) +
+    eyebrow(M, 84, 56) +
+    title(M, 106, 250, G1, 22) +
+    title(M, 138, 200, G1, 22) +
     lines(M, 190, [240, 200], G3) +
-    btn(M, 244, 112, G4) +
+    btn(M, 244, 112, G2) +
     outline(M + 124, 244, 104, 32, G3, 8) +
-    photo(340, 56, 220, 288, G2, G3, G4),
+    photo(340, 56, 220, 288, G4, G3, G5),
 
   highlights: () =>
     r(0, 150, W, 100, G4, 0) +
@@ -67,10 +66,10 @@ const previews = {
     heading(60, 180) + lines(M, 128, [240, 230, 240, 200, 240, 170], G3, 22, 9) + photo(330, 50, 230, 300),
 
   stats: () =>
-    r(0, 0, W, H, G1, 0) +
-    eyebrow(M, 50) + title(M, 68, 200, G4) +
-    [0, 1, 2, 3].map((i) => { const x = M + i * 134; return r(x, 150, 70, 28, G4, 6) + r(x, 194, 96, 8, G3, 4) + r(x, 210, 70, 8, G2, 4); }).join("") +
-    r(M, 330, 220, 8, G3, 4),
+    eyebrow(M, 50) + title(M, 68, 200, G1) +
+    r(0, 120, W, 190, G4, 0) +
+    [0, 1, 2, 3].map((i) => { const x = M + i * 134; return r(x, 150, 70, 28, G1, 6) + r(x, 194, 96, 8, G3, 4) + r(x, 210, 70, 8, G3, 4); }).join("") +
+    r(M, 338, 220, 8, G3, 4),
 
   cards: () =>
     heading(40, 240) +
@@ -117,9 +116,9 @@ const previews = {
     btn(110, 308, 110, G1),
 
   cta: () =>
-    r(M, 110, 520, 180, G1, 16) +
-    title(72, 148, 240, G4, 20) + lines(72, 190, [280, 220], G3, 16, 8) +
-    btn(72, 240, 104, G4) + outline(188, 240, 96, 32, G3, 8),
+    r(M, 110, 520, 180, G4, 16) +
+    title(72, 148, 240, G1, 20) + lines(72, 190, [280, 220], G3, 16, 8) +
+    btn(72, 240, 104, G2) + outline(188, 240, 96, 32, G3, 8),
 };
 
 const outDir = path.resolve("public/block-previews");

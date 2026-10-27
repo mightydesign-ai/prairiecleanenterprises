@@ -39,9 +39,9 @@ export const Products: CollectionConfig = {
               label: "Heading sizes on this product's page",
               admin: { description: "Override the Site settings sizes for this product page only. Default follows Site settings." },
               fields: [
-                titleSizeField("pageTitle", "Page title", "The big heading at the top of the page."),
-                titleSizeField("sectionHeading", "Section headings"),
-                titleSizeField("itemTitle", "Item titles (benefits, uses, where to buy)"),
+                titleSizeField("pageTitle", "Page title", "The big heading at the top of the page.", { role: "page" }),
+                titleSizeField("sectionHeading", "Section headings", undefined, { role: "section" }),
+                titleSizeField("itemTitle", "Item titles (benefits, uses, where to buy)", undefined, { role: "card" }),
               ],
             },
             imageFocusField("heroImageFocus"),

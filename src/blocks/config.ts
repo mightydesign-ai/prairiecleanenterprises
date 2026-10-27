@@ -10,7 +10,7 @@ const eyebrow: Field = {
 };
 
 const heading: Field = { name: "heading", type: "text" };
-const headingSize = titleSizeField("headingSize", "Heading size");
+const headingSize = titleSizeField("headingSize", "Heading size", undefined, { role: "section" });
 
 const tone: Field = {
   name: "tone",
@@ -69,7 +69,7 @@ export const HeroBlock: Block = {
   fields: [
     eyebrow,
     { name: "heading", type: "text", required: true },
-    titleSizeField("headingSize", "Heading size"),
+    titleSizeField("headingSize", "Heading size", undefined, { role: "page" }),
     { name: "intro", type: "textarea" },
     link("primary", "Main button"),
     link("secondary", "Second button"),
@@ -209,7 +209,7 @@ export const CardsBlock: Block = {
   fields: [
     eyebrow,
     heading, headingSize,
-    titleSizeField("itemTitleSize", "Card title size", "Size of the title on every item in this block. Default uses the Site settings size."),
+    titleSizeField("itemTitleSize", "Card title size", "Size of the title on every item in this block.", { role: "small" }),
     { name: "intro", type: "textarea" },
     columnsField,
     {
@@ -290,7 +290,7 @@ export const StepsBlock: Block = {
   fields: [
     eyebrow,
     heading, headingSize,
-    titleSizeField("itemTitleSize", "Step title size", "Size of the title on every item in this block. Default uses the Site settings size."),
+    titleSizeField("itemTitleSize", "Step title size", "Size of the title on every item in this block.", { role: "small" }),
     { name: "intro", type: "textarea" },
     columnsField,
     {
@@ -339,7 +339,7 @@ export const CtaBlock: Block = {
   labels: { singular: "Call to action", plural: "Calls to action" },
   fields: [
     { name: "heading", type: "text", required: true },
-    titleSizeField("headingSize", "Heading size"),
+    titleSizeField("headingSize", "Heading size", undefined, { role: "section" }),
     { name: "text", type: "textarea" },
     link("button", "Button"),
     tone,
@@ -374,7 +374,7 @@ export const ProductListBlock: Block = {
     eyebrow,
     heading,
     headingSize,
-    titleSizeField("itemTitleSize", "Card title size", "Size of the product names on the cards. Default uses the Site settings size."),
+    titleSizeField("itemTitleSize", "Card title size", "Size of the product names on the cards.", { role: "card" }),
     columnsField,
   ],
 };

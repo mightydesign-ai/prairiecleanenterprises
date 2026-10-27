@@ -1,22 +1,60 @@
 import type { Field } from "payload";
 
-/** Desktop size of each step on the modular scale (--step-0 ... --step-7 in globals.css). */
-export const SCALE_PX = [18, 22, 28, 35, 44, 55, 69, 86];
+/**
+ * The modular scale (--step-0 ... --step-7 in globals.css) in rem: [phone, desktop]. 1 rem is the visitor's browser text
+ * size (16 px by default), so these follow zoom and the visitor's own text-size setting.
+ */
+export const STEP_REM: [number, number][] = [
+  [1.0625, 1.125],
+  [1.275, 1.4062],
+  [1.53, 1.7578],
+  [1.836, 2.1973],
+  [2.2032, 2.7466],
+  [2.6438, 3.4332],
+  [3.1726, 4.2915],
+  [3.8071, 5.3644],
+];
 
-/** Title size picker: "Default" keeps the Site settings size; a step overrides it for this block only. */
-export const titleSizeField = (name: string, label: string, description?: string): Field => ({
+const rem = (n: number) => `${Number(n.toFixed(2))}`;
+const range = ([a, b]: [number, number]) => `${rem(a)} to ${rem(b)} rem`;
+
+/** What each kind of title uses when nothing is chosen (phone to desktop, in rem). Matches the --text-* tokens in globals.css. */
+export const ROLE_DEFAULT: Record<"page" | "section" | "card" | "small", string> = {
+  page: "2.25 to 4 rem (2.75 to 5.5 rem beside a photo)",
+  section: "1.88 to 3 rem",
+  card: "1.63 to 2.25 rem",
+  small: "1.38 to 1.75 rem",
+};
+
+/**
+ * Title size picker: "Default" keeps the size from Site settings (or, in Site settings, the designed size); a step overrides it.
+ * `role` says which kind of title this is, so the Default option can show the size it really uses.
+ */
+export const titleSizeField = (
+  name: string,
+  label: string,
+  description?: string,
+  opts: { role?: keyof typeof ROLE_DEFAULT; site?: boolean } = {},
+): Field => ({
   name,
   type: "select",
   label,
   defaultValue: "default",
   options: [
-    { label: "Default (from Site settings)", value: "default" },
-    ...SCALE_PX.map((px, i) => ({ label: `Step ${i}: ${px} px`, value: `s${i}` })),
+    {
+      label: opts.role
+        ? opts.site
+          ? `Default: ${ROLE_DEFAULT[opts.role]}`
+          : `Default: follows Site settings (designed size ${ROLE_DEFAULT[opts.role]})`
+        : "Default: follows Site settings",
+      value: "default",
+    },
+    ...STEP_REM.map((r, i) => ({ label: `Step ${i}: ${range(r)}`, value: `s${i}` })),
   ],
   admin: {
     description:
       description ??
-      "A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.",
+      "Sizes are in rem (1 rem is the visitor's browser text size, 16 px by default) on a modular scale: each step is 25% larger on desktop and 20% on phones. They shrink smoothly on small screens.",
   },
 });
 
