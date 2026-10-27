@@ -8,6 +8,8 @@ export const Media: CollectionConfig = {
     useAsTitle: "alt",
     // "filename" shows a thumbnail beside the file name; click the thumbnail for a larger preview.
     defaultColumns: ["filename", "alt", "decorative", "caption"],
+    // The list search box matches the file name as well as the alt text.
+    listSearchableFields: ["filename", "alt"],
   },
   access: {
     read: anyone,
