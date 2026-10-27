@@ -8,6 +8,7 @@ import * as migration_20261025_235839_text_sizes from './20261025_235839_text_si
 import * as migration_20261026_023116_card_image_controls from './20261026_023116_card_image_controls';
 import * as migration_20261026_030517_columns_in_a_row from './20261026_030517_columns_in_a_row';
 import * as migration_20261027_020815_title_size_steps from './20261027_020815_title_size_steps';
+import * as migration_20261027_023045_block_title_sizes_photo_controls from './20261027_023045_block_title_sizes_photo_controls';
 
 export const migrations = [
   {
@@ -58,6 +59,11 @@ export const migrations = [
   {
     up: migration_20261027_020815_title_size_steps.up,
     down: migration_20261027_020815_title_size_steps.down,
-    name: '20261027_020815_title_size_steps'
+    name: '20261027_020815_title_size_steps',
+  },
+  {
+    up: migration_20261027_023045_block_title_sizes_photo_controls.up,
+    down: migration_20261027_023045_block_title_sizes_photo_controls.down,
+    name: '20261027_023045_block_title_sizes_photo_controls'
   },
 ];

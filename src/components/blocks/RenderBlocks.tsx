@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Fragment } from "react";
 import { ContactForm, InvestorForm, StrawOfferForm } from "@/components/forms/forms";
 import { safeHref } from "@/lib/safe-url";
-import { ButtonLink, MediaImage, Section, SectionHeading, mediaSrc } from "@/components/ui/primitives";
+import { ButtonLink, MediaImage, Section, SectionHeading, mediaSrc, titleSize } from "@/components/ui/primitives";
 import { getNews, getPartners, getProducts, getTeam } from "@/lib/payload";
 import type { Page } from "@/payload-types";
 
@@ -37,6 +37,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
         {block.eyebrow ? <p className="eyebrow animate-fade-up">{block.eyebrow}</p> : null}
         <H
           id={headingId(block)}
+          style={titleSize("--page-title-size", block.headingSize)}
           className={`max-w-4xl animate-fade-up title-page font-extrabold [animation-delay:80ms] ${hasFigure ? "title-page--feature" : ""}`}
         >
           {block.heading}
@@ -61,6 +62,8 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
           media={block.image}
           placeholder="Hero image"
           fit={block.imageFit}
+          focus={block.imageFocus}
+          scale={block.imageWidth}
           priority={first}
           className="aspect-[5/4] rounded-xl"
         />
@@ -96,7 +99,7 @@ function RichTextSection({ block }: { block: BlockOf<"richText"> }) {
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
       <div className="grid gap-10 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
-        <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
+        <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
         <div className={`prose-pce flex flex-col gap-4 text-lg ${dark ? "text-on-inverse" : ""}`}>
           <RichText data={block.content as never} />
         </div>
@@ -115,12 +118,14 @@ function ImageTextSection({ block }: { block: BlockOf<"imageText"> }) {
       media={block.image}
       placeholder={block.heading ?? "image for this section"}
       fit={block.imageFit}
+      focus={block.imageFocus}
+      scale={block.imageWidth}
       className={side === "below" ? "aspect-[16/9] rounded-xl" : "aspect-[4/3] rounded-xl"}
     />
   ) : null;
   const body = (
     <div className="flex flex-col gap-6">
-      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
       {hasText ? (
         <div className={`prose-pce flex flex-col gap-4 text-lg ${dark ? "text-on-inverse" : ""}`}>
           <RichText data={block.content as never} />
@@ -149,7 +154,7 @@ function Stats({ block }: { block: BlockOf<"stats"> }) {
   const dark = block.tone === "dark";
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
-      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} onDark={dark} />
       <dl className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {(block.items ?? []).map((item) => (
           <div
@@ -181,8 +186,8 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
   const sideItems = block.imageVerticalAlign === "top" ? "items-start" : "items-center";
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
-      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
-      <ul className={`grid gap-5 ${grid}`}>
+      <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
+      <ul className={`grid gap-5 ${grid}`} style={titleSize("--small-title-size", block.itemTitleSize)}>
         {(block.items ?? []).map((item) => {
           const img = item.image && typeof item.image === "object" && item.image.url ? item.image : null;
           const layout = !img || position === "above" ? `flex-col ${aboveItems}` : `${position === "right" ? "flex-row-reverse" : "flex-row"} ${sideItems}`;
@@ -231,8 +236,8 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
   const items = block.items ?? [];
   return (
     <Section tone={block.tone} labelledBy={block.heading ? headingId(block) : undefined}>
-      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
-      <ol className={`grid gap-4 ${gridCols(block.columns, "sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]")}`}>
+      <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} intro={block.intro} onDark={dark} />
+      <ol className={`grid gap-4 ${gridCols(block.columns, "sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(14rem,1fr))]")}`} style={titleSize("--small-title-size", block.itemTitleSize)}>
         {items.map((item, i) => {
           const last = i === items.length - 1;
           return (
@@ -264,7 +269,7 @@ function Milestones({ block }: { block: BlockOf<"milestones"> }) {
   const items = block.items ?? [];
   return (
     <Section labelledBy={block.heading ? headingId(block) : undefined}>
-      <SectionHeading id={headingId(block)} heading={block.heading} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} heading={block.heading} />
       <ol className="grid border-t-2 border-primary sm:grid-cols-2 lg:grid-cols-[repeat(auto-fit,minmax(11rem,1fr))]">
         {items.map((m, i) => (
           <li key={m.id ?? m.date} className="relative flex flex-col gap-1.5 pt-5 pr-5">
@@ -292,7 +297,7 @@ function Cta({ block }: { block: BlockOf<"cta"> }) {
         }`}
       >
         <div className="flex max-w-2xl flex-col gap-3">
-          <h2 id={headingId(block)} className="title-section">
+          <h2 id={headingId(block)} className="title-section" style={titleSize("--section-heading-size", block.headingSize)}>
             {block.heading}
           </h2>
           {block.text ? <p className={dark ? "text-on-inverse-muted" : "text-fg-muted"}>{block.text}</p> : null}
@@ -310,7 +315,7 @@ function Cta({ block }: { block: BlockOf<"cta"> }) {
 function Faq({ block }: { block: BlockOf<"faq"> }) {
   return (
     <Section narrow labelledBy={block.heading ? headingId(block) : undefined}>
-      <SectionHeading id={headingId(block)} heading={block.heading} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} heading={block.heading} />
       <div className="border-t border-border">
         {(block.items ?? []).map((item, i) => (
           <details key={item.id ?? item.question} open={i === 0} className="group border-b border-border">
@@ -332,8 +337,8 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
   const products = await getProducts();
   return (
     <Section id="products" tone="tinted" labelledBy={headingId(block)}>
-      <SectionHeading id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} />
-      <ul className={`grid gap-6 ${gridCols(block.columns, "sm:grid-cols-2 xl:grid-cols-4")}`}>
+      <SectionHeading size={block.headingSize} id={headingId(block)} eyebrow={block.eyebrow} heading={block.heading} />
+      <ul className={`grid gap-6 ${gridCols(block.columns, "sm:grid-cols-2 xl:grid-cols-4")}`} style={titleSize("--card-title-size", block.itemTitleSize)}>
         {products.map((p) => (
           <li key={p.id} className="flex">
             <Link
@@ -365,7 +370,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
   return (
     <Section tone="tinted" labelledBy={headingId(block)}>
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <h2 id={headingId(block)} className="title-section">
+        <h2 id={headingId(block)} className="title-section" style={titleSize("--section-heading-size", block.headingSize)}>
           {block.heading ?? "In the news"}
         </h2>
         <Link href="/news" className="link font-display font-semibold">
@@ -374,7 +379,9 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
       </div>
       <ul className={`grid gap-6 ${gridCols(block.columns, "md:grid-cols-3")}`}>
         {items.map((n) => (
-          <li key={n.id} className="flex flex-col gap-2.5 rounded-lg border border-border bg-surface p-6">
+          <li key={n.id} className="flex flex-col overflow-hidden rounded-lg border border-border bg-surface">
+            <MediaImage media={n.image} placeholder={n.title} className="aspect-[16/9]" sizes="(min-width: 768px) 33vw, 100vw" />
+            <div className="flex flex-1 flex-col gap-2.5 p-6">
             <span className="text-sm font-semibold text-straw-strong">
               {[n.source, formatDate(n.publishedOn)].filter(Boolean).join(" · ")}
             </span>
@@ -385,6 +392,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
               {n.title}
             </a>
             <p className="text-base text-fg-muted">{n.excerpt}</p>
+            </div>
           </li>
         ))}
       </ul>
@@ -396,7 +404,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
   const team = await getTeam();
   return (
     <Section labelledBy={headingId(block)}>
-      <SectionHeading id={headingId(block)} heading={block.heading ?? "Leadership team"} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} heading={block.heading ?? "Leadership team"} />
       <ul className={`grid gap-6 ${gridCols(block.columns, "lg:grid-cols-2")}`}>
         {team.map((t) => (
           <li key={t.id} className="flex items-start gap-5 rounded-lg border border-border bg-surface p-6">
@@ -472,7 +480,7 @@ async function PartnerLogos({ block }: { block: BlockOf<"partners"> }) {
 function FormSection({ block }: { block: BlockOf<"form"> }) {
   return (
     <Section id={block.anchor ?? undefined} tone="tinted" narrow labelledBy={headingId(block)}>
-      <SectionHeading id={headingId(block)} heading={block.heading} intro={block.intro} />
+      <SectionHeading size={block.headingSize} id={headingId(block)} heading={block.heading} intro={block.intro} />
       {block.form === "contact" ? <ContactForm /> : null}
       {block.form === "straw" ? <StrawOfferForm /> : null}
       {block.form === "investor" ? <InvestorForm /> : null}

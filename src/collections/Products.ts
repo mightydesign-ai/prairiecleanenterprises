@@ -1,3 +1,4 @@
+import { imageFocusField, imageWidthField } from "@/fields/display";
 import type { CollectionConfig } from "payload";
 import { authenticated, publishedOrAuthenticated } from "@/access";
 import { orderField, seoFields, slugField } from "@/fields";
@@ -32,6 +33,8 @@ export const Products: CollectionConfig = {
             { name: "summary", type: "textarea", required: true },
             { name: "cardSummary", type: "textarea", admin: { description: "One sentence for product cards." } },
             { name: "heroImage", type: "upload", relationTo: "media" },
+            imageFocusField("heroImageFocus"),
+            imageWidthField("heroImageWidth"),
             {
               type: "row",
               fields: [
@@ -106,6 +109,8 @@ export const Products: CollectionConfig = {
                     { label: "Show the whole image (no cropping)", value: "full" },
                   ],
                 },
+                imageFocusField(),
+                imageWidthField(),
                 {
                   name: "imagePlaceholder",
                   type: "checkbox",

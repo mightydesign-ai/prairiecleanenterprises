@@ -167,6 +167,10 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading: string;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
         primary?: {
           label?: string | null;
@@ -187,6 +191,50 @@ export interface Page {
          * Crop keeps every image the same shape. Whole image keeps the photo's own proportions.
          */
         imageFit?: ('crop' | 'full') | null;
+        /**
+         * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
+         */
+        imageFocus?:
+          | (
+              | 'default'
+              | 'center'
+              | 'top'
+              | 'bottom'
+              | 'left'
+              | 'right'
+              | 'top-left'
+              | 'top-right'
+              | 'bottom-left'
+              | 'bottom-right'
+            )
+          | null;
+        /**
+         * How wide the photo is shown, as a share of the space for it. It stays centred and keeps its proportions on every screen size.
+         */
+        imageWidth?:
+          | (
+              | '100'
+              | '95'
+              | '90'
+              | '85'
+              | '80'
+              | '75'
+              | '70'
+              | '65'
+              | '60'
+              | '55'
+              | '50'
+              | '45'
+              | '40'
+              | '35'
+              | '30'
+              | '25'
+              | '20'
+              | '15'
+              | '10'
+              | '5'
+            )
+          | null;
         /**
          * Shows a placeholder until a photo is added. Turns on automatically when a photo or stat badge is set.
          */
@@ -216,6 +264,10 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         content: {
           root: {
             type: string;
@@ -245,6 +297,10 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         content?: {
           root: {
             type: string;
@@ -266,6 +322,50 @@ export interface Page {
          */
         imageFit?: ('crop' | 'full') | null;
         /**
+         * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
+         */
+        imageFocus?:
+          | (
+              | 'default'
+              | 'center'
+              | 'top'
+              | 'bottom'
+              | 'left'
+              | 'right'
+              | 'top-left'
+              | 'top-right'
+              | 'bottom-left'
+              | 'bottom-right'
+            )
+          | null;
+        /**
+         * How wide the photo is shown, as a share of the space for it. It stays centred and keeps its proportions on every screen size.
+         */
+        imageWidth?:
+          | (
+              | '100'
+              | '95'
+              | '90'
+              | '85'
+              | '80'
+              | '75'
+              | '70'
+              | '65'
+              | '60'
+              | '55'
+              | '50'
+              | '45'
+              | '40'
+              | '35'
+              | '30'
+              | '25'
+              | '20'
+              | '15'
+              | '10'
+              | '5'
+            )
+          | null;
+        /**
          * Show a labelled photo placeholder here until an image is uploaded.
          */
         imagePlaceholder?: boolean | null;
@@ -284,6 +384,10 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
           | {
               value: string;
@@ -306,6 +410,14 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
+         * Size of the title on every item in this block. Default uses the Site settings size.
+         */
+        itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
         /**
          * On phones the items always stack in one column, and on tablets they never go above two.
@@ -355,6 +467,14 @@ export interface Page {
          */
         eyebrow?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
+         * Size of the title on every item in this block. Default uses the Site settings size.
+         */
+        itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
         /**
          * On phones the items always stack in one column, and on tablets they never go above two.
@@ -377,6 +497,10 @@ export interface Page {
       }
     | {
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
           | {
               date: string;
@@ -395,6 +519,14 @@ export interface Page {
         eyebrow?: string | null;
         heading?: string | null;
         /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
+         * Size of the product names on the cards. Default uses the Site settings size.
+         */
+        itemTitleSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
          * On phones the items always stack in one column, and on tablets they never go above two.
          */
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
@@ -404,6 +536,10 @@ export interface Page {
       }
     | {
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         limit?: number | null;
         /**
          * On phones the items always stack in one column, and on tablets they never go above two.
@@ -416,6 +552,10 @@ export interface Page {
     | {
         heading?: string | null;
         /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
          * On phones the items always stack in one column, and on tablets they never go above two.
          */
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
@@ -425,12 +565,20 @@ export interface Page {
       }
     | {
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'partners';
       }
     | {
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         items?:
           | {
               question: string;
@@ -448,6 +596,10 @@ export interface Page {
          */
         anchor?: string | null;
         heading?: string | null;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
         form: 'contact' | 'straw' | 'investor';
         id?: string | null;
@@ -456,6 +608,10 @@ export interface Page {
       }
     | {
         heading: string;
+        /**
+         * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
+         */
+        headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         text?: string | null;
         button?: {
           label?: string | null;
@@ -560,6 +716,50 @@ export interface Product {
    */
   cardSummary?: string | null;
   heroImage?: (number | null) | Media;
+  /**
+   * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
+   */
+  heroImageFocus?:
+    | (
+        | 'default'
+        | 'center'
+        | 'top'
+        | 'bottom'
+        | 'left'
+        | 'right'
+        | 'top-left'
+        | 'top-right'
+        | 'bottom-left'
+        | 'bottom-right'
+      )
+    | null;
+  /**
+   * How wide the photo is shown, as a share of the space for it. It stays centred and keeps its proportions on every screen size.
+   */
+  heroImageWidth?:
+    | (
+        | '100'
+        | '95'
+        | '90'
+        | '85'
+        | '80'
+        | '75'
+        | '70'
+        | '65'
+        | '60'
+        | '55'
+        | '50'
+        | '45'
+        | '40'
+        | '35'
+        | '30'
+        | '25'
+        | '20'
+        | '15'
+        | '10'
+        | '5'
+      )
+    | null;
   primaryCtaLabel?: string | null;
   primaryCtaHref?: string | null;
   secondaryCtaLabel?: string | null;
@@ -620,6 +820,50 @@ export interface Product {
         } | null;
         image?: (number | null) | Media;
         imageFit?: ('crop' | 'full') | null;
+        /**
+         * Choose which part of the photo stays visible when it is cropped, on every screen size. For an exact point, open the photo in the Media library and set its focal point there.
+         */
+        imageFocus?:
+          | (
+              | 'default'
+              | 'center'
+              | 'top'
+              | 'bottom'
+              | 'left'
+              | 'right'
+              | 'top-left'
+              | 'top-right'
+              | 'bottom-left'
+              | 'bottom-right'
+            )
+          | null;
+        /**
+         * How wide the photo is shown, as a share of the space for it. It stays centred and keeps its proportions on every screen size.
+         */
+        imageWidth?:
+          | (
+              | '100'
+              | '95'
+              | '90'
+              | '85'
+              | '80'
+              | '75'
+              | '70'
+              | '65'
+              | '60'
+              | '55'
+              | '50'
+              | '45'
+              | '40'
+              | '35'
+              | '30'
+              | '25'
+              | '20'
+              | '15'
+              | '10'
+              | '5'
+            )
+          | null;
         /**
          * Show a labelled photo placeholder until an image is uploaded.
          */
@@ -1116,6 +1360,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
               intro?: T;
               primary?:
                 | T
@@ -1131,6 +1376,8 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               image?: T;
               imageFit?: T;
+              imageFocus?: T;
+              imageWidth?: T;
               showImageArea?: T;
               stat?:
                 | T
@@ -1158,6 +1405,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
               content?: T;
               tone?: T;
               id?: T;
@@ -1168,9 +1416,12 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
               content?: T;
               image?: T;
               imageFit?: T;
+              imageFocus?: T;
+              imageWidth?: T;
               imagePlaceholder?: T;
               imageSide?: T;
               tone?: T;
@@ -1182,6 +1433,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
               items?:
                 | T
                 | {
@@ -1199,6 +1451,8 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
+              itemTitleSize?: T;
               intro?: T;
               columns?: T;
               showBorder?: T;
@@ -1225,6 +1479,8 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
+              itemTitleSize?: T;
               intro?: T;
               columns?: T;
               items?:
@@ -1242,6 +1498,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               items?:
                 | T
                 | {
@@ -1257,6 +1514,8 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               eyebrow?: T;
               heading?: T;
+              headingSize?: T;
+              itemTitleSize?: T;
               columns?: T;
               id?: T;
               blockName?: T;
@@ -1265,6 +1524,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               limit?: T;
               columns?: T;
               id?: T;
@@ -1274,6 +1534,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               columns?: T;
               id?: T;
               blockName?: T;
@@ -1282,6 +1543,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               id?: T;
               blockName?: T;
             };
@@ -1289,6 +1551,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               items?:
                 | T
                 | {
@@ -1304,6 +1567,7 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               anchor?: T;
               heading?: T;
+              headingSize?: T;
               intro?: T;
               form?: T;
               id?: T;
@@ -1313,6 +1577,7 @@ export interface PagesSelect<T extends boolean = true> {
           | T
           | {
               heading?: T;
+              headingSize?: T;
               text?: T;
               button?:
                 | T
@@ -1347,6 +1612,8 @@ export interface ProductsSelect<T extends boolean = true> {
   summary?: T;
   cardSummary?: T;
   heroImage?: T;
+  heroImageFocus?: T;
+  heroImageWidth?: T;
   primaryCtaLabel?: T;
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;
@@ -1382,6 +1649,8 @@ export interface ProductsSelect<T extends boolean = true> {
         body?: T;
         image?: T;
         imageFit?: T;
+        imageFocus?: T;
+        imageWidth?: T;
         imagePlaceholder?: T;
         id?: T;
       };

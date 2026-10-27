@@ -1,4 +1,5 @@
 import type { Block, Field } from "payload";
+import { imageFocusField, imageWidthField, titleSizeField } from "@/fields/display";
 
 const eyebrow: Field = {
   name: "eyebrow",
@@ -7,6 +8,7 @@ const eyebrow: Field = {
 };
 
 const heading: Field = { name: "heading", type: "text" };
+const headingSize = titleSizeField("headingSize", "Heading size");
 
 const tone: Field = {
   name: "tone",
@@ -65,6 +67,7 @@ export const HeroBlock: Block = {
   fields: [
     eyebrow,
     { name: "heading", type: "text", required: true },
+    titleSizeField("headingSize", "Heading size"),
     { name: "intro", type: "textarea" },
     link("primary", "Main button"),
     link("secondary", "Second button"),
@@ -80,6 +83,8 @@ export const HeroBlock: Block = {
       ],
       admin: { description: "Crop keeps every image the same shape. Whole image keeps the photo's own proportions." },
     },
+    imageFocusField(),
+    imageWidthField(),
     {
       name: "showImageArea",
       type: "checkbox",
@@ -104,7 +109,7 @@ export const RichTextBlock: Block = {
   imageURL: "/block-previews/richText.svg",
   imageAltText: "Preview of the Text layout",
   labels: { singular: "Text", plural: "Text" },
-  fields: [eyebrow, heading, { name: "content", type: "richText", required: true }, tone],
+  fields: [eyebrow, heading, headingSize, { name: "content", type: "richText", required: true }, tone],
 };
 
 export const ImageTextBlock: Block = {
@@ -114,7 +119,7 @@ export const ImageTextBlock: Block = {
   labels: { singular: "Text with image", plural: "Text with image" },
   fields: [
     eyebrow,
-    heading,
+    heading, headingSize,
     { name: "content", type: "richText" },
     { name: "image", type: "upload", relationTo: "media" },
     {
@@ -128,6 +133,8 @@ export const ImageTextBlock: Block = {
       ],
       admin: { description: "Crop keeps every image the same shape. Whole image keeps the photo's own proportions." },
     },
+    imageFocusField(),
+    imageWidthField(),
     {
       name: "imagePlaceholder",
       type: "checkbox",
@@ -171,7 +178,7 @@ export const StatsBlock: Block = {
   labels: { singular: "Stats", plural: "Stats" },
   fields: [
     eyebrow,
-    heading,
+    heading, headingSize,
     {
       name: "items",
       type: "array",
@@ -199,7 +206,8 @@ export const CardsBlock: Block = {
   labels: { singular: "Cards", plural: "Cards" },
   fields: [
     eyebrow,
-    heading,
+    heading, headingSize,
+    titleSizeField("itemTitleSize", "Card title size", "Size of the title on every item in this block. Default uses the Site settings size."),
     { name: "intro", type: "textarea" },
     columnsField,
     {
@@ -278,7 +286,8 @@ export const StepsBlock: Block = {
   labels: { singular: "Numbered steps", plural: "Numbered steps" },
   fields: [
     eyebrow,
-    heading,
+    heading, headingSize,
+    titleSizeField("itemTitleSize", "Step title size", "Size of the title on every item in this block. Default uses the Site settings size."),
     { name: "intro", type: "textarea" },
     columnsField,
     {
@@ -301,7 +310,7 @@ export const MilestonesBlock: Block = {
   imageAltText: "Preview of the Timeline layout",
   labels: { singular: "Timeline", plural: "Timelines" },
   fields: [
-    heading,
+    heading, headingSize,
     {
       name: "items",
       type: "array",
@@ -326,6 +335,7 @@ export const CtaBlock: Block = {
   labels: { singular: "Call to action", plural: "Calls to action" },
   fields: [
     { name: "heading", type: "text", required: true },
+    titleSizeField("headingSize", "Heading size"),
     { name: "text", type: "textarea" },
     link("button", "Button"),
     tone,
@@ -338,7 +348,7 @@ export const FaqBlock: Block = {
   imageAltText: "Preview of the FAQ layout",
   labels: { singular: "FAQ", plural: "FAQs" },
   fields: [
-    heading,
+    heading, headingSize,
     {
       name: "items",
       type: "array",
@@ -356,7 +366,13 @@ export const ProductListBlock: Block = {
   imageURL: "/block-previews/productList.svg",
   imageAltText: "Preview of the Product list layout",
   labels: { singular: "Product list", plural: "Product lists" },
-  fields: [eyebrow, heading, columnsField],
+  fields: [
+    eyebrow,
+    heading,
+    headingSize,
+    titleSizeField("itemTitleSize", "Card title size", "Size of the product names on the cards. Default uses the Site settings size."),
+    columnsField,
+  ],
 };
 
 export const NewsListBlock: Block = {
@@ -364,7 +380,7 @@ export const NewsListBlock: Block = {
   imageURL: "/block-previews/newsList.svg",
   imageAltText: "Preview of the Latest news layout",
   labels: { singular: "Latest news", plural: "Latest news" },
-  fields: [heading, { name: "limit", type: "number", defaultValue: 3, min: 1, max: 12 }, columnsField],
+  fields: [heading, headingSize, { name: "limit", type: "number", defaultValue: 3, min: 1, max: 12 }, columnsField],
 };
 
 export const TeamBlock: Block = {
@@ -372,7 +388,7 @@ export const TeamBlock: Block = {
   imageURL: "/block-previews/team.svg",
   imageAltText: "Preview of the Team layout",
   labels: { singular: "Team", plural: "Team" },
-  fields: [heading, columnsField],
+  fields: [heading, headingSize, columnsField],
 };
 
 export const PartnersBlock: Block = {
@@ -380,7 +396,7 @@ export const PartnersBlock: Block = {
   imageURL: "/block-previews/partners.svg",
   imageAltText: "Preview of the Partner logos layout",
   labels: { singular: "Partner logos", plural: "Partner logos" },
-  fields: [heading],
+  fields: [heading, headingSize],
 };
 
 export const FormBlock: Block = {
@@ -390,7 +406,7 @@ export const FormBlock: Block = {
   labels: { singular: "Form", plural: "Forms" },
   fields: [
     { name: "anchor", type: "text", admin: { description: "Optional id so buttons can link here, e.g. offer." } },
-    heading,
+    heading, headingSize,
     { name: "intro", type: "textarea" },
     {
       name: "form",

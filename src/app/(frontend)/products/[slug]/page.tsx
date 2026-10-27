@@ -55,7 +55,7 @@ export default async function ProductPage({ params }: Props) {
             ) : null}
           </div>
         </div>
-        <MediaImage media={product.heroImage} placeholder={product.name} priority className="aspect-[5/4] rounded-xl" />
+        <MediaImage media={product.heroImage} placeholder={product.name} priority focus={product.heroImageFocus} scale={product.heroImageWidth} className="aspect-[5/4] rounded-xl" />
       </section>
 
       {product.highlights && product.highlights.length > 0 ? (
@@ -179,7 +179,7 @@ export default async function ProductPage({ params }: Props) {
                 ) : null}
               </div>
               {hasImage ? (
-                <MediaImage media={sec.image} placeholder={sec.heading} fit={sec.imageFit} className="aspect-[4/3] rounded-xl" />
+                <MediaImage media={sec.image} placeholder={sec.heading} fit={sec.imageFit} focus={sec.imageFocus} scale={sec.imageWidth} className="aspect-[4/3] rounded-xl" />
               ) : sec.body ? (
                 <div className="prose-pce flex flex-col gap-4 text-lg">
                   <RichText data={sec.body as never} />

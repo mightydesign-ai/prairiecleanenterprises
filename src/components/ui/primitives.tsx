@@ -1,8 +1,32 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { CSSProperties, ReactNode } from "react";
 import { safeHref } from "@/lib/safe-url";
 import type { Media } from "@/payload-types";
+
+
+/** "s3" (a step on the modular scale chosen in the CMS) becomes a value for a CSS variable; "default" or empty sets nothing. */
+export function stepVar(value?: string | null): string | undefined {
+  return value && /^s[0-7]$/.test(value) ? `var(--step-${value.slice(1)})` : undefined;
+}
+
+/** Inline style that overrides one of the title-size variables (--page-title-size, --section-heading-size, ...) for this element and its children. */
+export function titleSize(cssVar: string, value?: string | null): CSSProperties | undefined {
+  const v = stepVar(value);
+  return v ? ({ [cssVar]: v } as CSSProperties) : undefined;
+}
+
+const FOCUS_POSITION: Record<string, string> = {
+  center: "50% 50%",
+  top: "50% 0%",
+  bottom: "50% 100%",
+  left: "0% 50%",
+  right: "100% 50%",
+  "top-left": "0% 0%",
+  "top-right": "100% 0%",
+  "bottom-left": "0% 100%",
+  "bottom-right": "100% 100%",
+};
 
 export type Tone = "light" | "tinted" | "dark" | null | undefined;
 
@@ -47,19 +71,22 @@ export function SectionHeading({
   heading,
   intro,
   onDark = false,
+  size,
 }: {
   id?: string;
   eyebrow?: string | null;
   heading?: string | null;
   intro?: string | null;
   onDark?: boolean;
+  /** Step on the modular scale ("s0"..."s7") chosen for this block; empty uses the Site settings size. */
+  size?: string | null;
 }) {
   if (!eyebrow && !heading && !intro) return null;
   return (
     <div className="mb-10 flex max-w-3xl flex-col gap-3">
       {eyebrow ? <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow> : null}
       {heading ? (
-        <h2 id={id} className="title-section">
+        <h2 id={id} className="title-section" style={titleSize("--section-heading-size", size)}>
           {heading}
         </h2>
       ) : null}
@@ -116,6 +143,8 @@ export function MediaImage({
   sizes = "(min-width: 1024px) 50vw, 100vw",
   priority = false,
   fit = "crop",
+  focus,
+  scale,
 }: {
   media?: number | Media | null;
   placeholder: string;
@@ -124,14 +153,23 @@ export function MediaImage({
   priority?: boolean;
   /** "crop" fills the box (className sets its shape); "full" shows the whole photo at its own proportions. */
   fit?: "crop" | "full" | null;
+  /** Which part of a cropped photo stays in view ("top", "bottom-left", ...). Empty or "default" uses the photo's own focal point. */
+  focus?: string | null;
+  /** Display width as a percentage of the space available ("100" ... "5"). It stays centred and keeps its proportions. */
+  scale?: string | null;
 }) {
+  const pct = Number(scale);
+  const sized = Number.isFinite(pct) && pct > 0 && pct < 100;
+  const widthStyle: CSSProperties | undefined = sized ? { width: `${pct}%` } : undefined;
+  const widthClass = sized ? "mx-auto" : "";
+  const preset = focus && FOCUS_POSITION[focus];
   if (media && typeof media === "object" && media.url) {
     const src = mediaSrc(media.url);
     if (fit === "full" && media.width && media.height) {
       // The aspect-* class is dropped so the photo keeps its own shape; rounding and other classes stay.
       const shape = className.replace(/\baspect-\[[^\]]+\]/g, "").trim();
       return (
-        <div className={`overflow-hidden ${shape}`}>
+        <div className={`overflow-hidden ${widthClass} ${shape}`} style={widthStyle}>
           <Image
             src={src}
             alt={media.decorative ? "" : (media.alt ?? "")}
@@ -145,7 +183,7 @@ export function MediaImage({
       );
     }
     return (
-      <div className={`relative overflow-hidden ${className}`}>
+      <div className={`relative overflow-hidden ${widthClass} ${className}`} style={widthStyle}>
         <Image
           src={src}
           alt={media.decorative ? "" : (media.alt ?? "")}
@@ -154,9 +192,11 @@ export function MediaImage({
           priority={priority}
           className="object-cover"
           style={
-            media.focalX != null && media.focalY != null
-              ? { objectPosition: `${media.focalX}% ${media.focalY}%` }
-              : undefined
+            preset
+              ? { objectPosition: preset }
+              : media.focalX != null && media.focalY != null
+                ? { objectPosition: `${media.focalX}% ${media.focalY}%` }
+                : undefined
           }
         />
       </div>
@@ -166,7 +206,8 @@ export function MediaImage({
     <div
       role="img"
       aria-label={`Photo to come: ${placeholder}`}
-      className={`flex items-start bg-[repeating-linear-gradient(-28deg,var(--color-straw-300)_0_18px,var(--color-straw-200)_18px_44px)] p-5 ${className}`}
+      className={`flex items-start bg-[repeating-linear-gradient(-28deg,var(--color-straw-300)_0_18px,var(--color-straw-200)_18px_44px)] p-5 ${widthClass} ${className}`}
+      style={widthStyle}
     >
       <span className="rounded-full bg-straw-50 px-3 py-1.5 text-sm font-semibold text-straw-900">
         Photo: {placeholder}

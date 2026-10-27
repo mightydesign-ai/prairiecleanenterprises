@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { MediaImage } from "@/components/ui/primitives";
+import type { Media } from "@/payload-types";
 
 export type NewsCard = {
   id: number;
@@ -12,6 +14,7 @@ export type NewsCard = {
   topic: string;
   topicLabel: string;
   excerpt: string;
+  image?: number | Media | null;
 };
 
 const topics = [
@@ -46,14 +49,19 @@ export function NewsFilter({ items }: { items: NewsCard[] }) {
       </p>
       <ul className="border-t border-border">
         {shown.map((n) => (
-          <li key={n.id} className="grid gap-x-8 gap-y-2 border-b border-border py-6 sm:grid-cols-[12rem_minmax(0,1fr)]">
-            <div className="flex flex-col">
-              <span className="font-display text-[15px] font-bold">{n.date}</span>
-              <span className="text-[15px] text-fg-muted">{n.source}</span>
-            </div>
+          <li key={n.id} className="grid gap-x-8 gap-y-4 border-b border-border py-6 sm:grid-cols-[15rem_minmax(0,1fr)]">
+            <MediaImage
+              media={n.image}
+              placeholder={n.title}
+              className="aspect-[16/10] rounded-lg"
+              sizes="(min-width: 640px) 240px, 100vw"
+            />
             <div className="flex flex-col gap-1.5">
+              <span className="text-[15px] text-fg-muted">
+                <span className="font-display font-bold text-fg">{n.date}</span> · {n.source}
+              </span>
               <span className="text-xs font-bold uppercase tracking-[0.06em] text-accent">{n.topicLabel}</span>
-              <a href={n.href} className="font-display text-xl font-bold leading-snug no-underline hover:text-link">
+              <a href={n.href} className="title-small font-display font-bold leading-snug no-underline hover:text-link">
                 {n.title}
                 {n.external ? <span className="sr-only"> (on {n.source})</span> : null}
               </a>

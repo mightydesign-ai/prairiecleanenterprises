@@ -39,6 +39,7 @@ export default async function NewsPage() {
     topic: n.topic,
     topicLabel: topicLabel[n.topic] ?? n.topic,
     excerpt: n.excerpt,
+    image: n.image,
   }));
 
   return (
