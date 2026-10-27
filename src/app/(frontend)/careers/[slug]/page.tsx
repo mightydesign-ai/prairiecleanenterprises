@@ -60,7 +60,7 @@ export default async function JobPage({ params }: Props) {
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: jsonLd(jobJsonLd) }} />
       <div className="mb-10 flex flex-col gap-4">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Careers", href: "/careers" }, { label: job.title }]} />
-        <h1 className="text-4xl font-extrabold">{job.title}</h1>
+        <h1 className="title-page font-extrabold">{job.title}</h1>
         <ul aria-label="Role details" className="flex flex-wrap gap-2 text-[15px] font-semibold">
           {[job.location, typeLabel[job.employmentType], job.shift, job.pay].filter(Boolean).map((t) => (
             <li key={t} className="rounded-full bg-surface-sunken px-3.5 py-1.5">
@@ -73,7 +73,7 @@ export default async function JobPage({ params }: Props) {
       <div className="flex flex-wrap items-start gap-12">
         <article className="flex min-w-0 flex-[999_1_34rem] flex-col gap-10">
           <section aria-labelledby="role-h" className="flex flex-col gap-3">
-            <h2 id="role-h" className="text-2xl">
+            <h2 id="role-h" className="title-card">
               The role
             </h2>
             <p>{job.summary}</p>
@@ -85,7 +85,7 @@ export default async function JobPage({ params }: Props) {
           </section>
           {job.responsibilities && job.responsibilities.length > 0 ? (
             <section aria-labelledby="resp-h" className="flex flex-col gap-4">
-              <h2 id="resp-h" className="text-2xl">
+              <h2 id="resp-h" className="title-card">
                 What you&apos;ll do
               </h2>
               <dl className="grid gap-3.5 md:grid-cols-2">
@@ -100,7 +100,7 @@ export default async function JobPage({ params }: Props) {
           ) : null}
           {job.requirements && job.requirements.length > 0 ? (
             <section aria-labelledby="req-h" className="flex flex-col gap-3">
-              <h2 id="req-h" className="text-2xl">
+              <h2 id="req-h" className="title-card">
                 What you need
               </h2>
               <ul className="list-disc space-y-1.5 pl-6">
@@ -113,7 +113,7 @@ export default async function JobPage({ params }: Props) {
         </article>
 
         <aside aria-labelledby="apply-h" className="flex min-w-0 flex-[1_1_20rem] flex-col gap-5 rounded-xl border border-border bg-surface p-5 shadow-raised sm:p-7">
-          <h2 id="apply-h" className="text-2xl">
+          <h2 id="apply-h" className="title-card">
             Apply for this role
           </h2>
           <ApplicationForm jobId={job.id} />

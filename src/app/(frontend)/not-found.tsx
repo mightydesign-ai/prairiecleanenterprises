@@ -4,7 +4,7 @@ export default function NotFound() {
   return (
     <section className="container-page py-section" aria-labelledby="nf-heading">
       <p className="eyebrow">Page not found</p>
-      <h1 id="nf-heading" className="mt-4 text-4xl">
+      <h1 id="nf-heading" className="mt-4 title-page">
         That page has moved or no longer exists
       </h1>
       <p className="mt-6 max-w-prose text-lg text-fg-muted">

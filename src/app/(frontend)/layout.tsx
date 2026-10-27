@@ -17,12 +17,6 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-// Heading size choices (Site settings > Text sizes) map onto the fluid type scale in globals.css.
-const sizeScale = {
-  cardTitle: { xs: "--text-lg", sm: "--text-xl", lg: "--text-3xl", xl: "--text-4xl" },
-  sectionHeading: { xs: "--text-xl", sm: "--text-2xl", lg: "--text-4xl", xl: "--text-display" },
-} as const;
-
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
@@ -95,12 +89,16 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
     sameAs: (settings.social ?? []).map((s) => s.url),
   };
 
+  // Text sizes (Site settings): "s3" means step 3 of the modular scale (--step-3 in globals.css); "default" sets nothing.
   const sizeVars: Record<string, string> = {};
-  const cardStep = sizeScale.cardTitle[(settings.typography?.cardTitleSize ?? "default") as keyof typeof sizeScale.cardTitle];
-  const headingStep =
-    sizeScale.sectionHeading[(settings.typography?.sectionHeadingSize ?? "default") as keyof typeof sizeScale.sectionHeading];
-  if (cardStep) sizeVars["--card-title-size"] = `var(${cardStep})`;
-  if (headingStep) sizeVars["--section-heading-size"] = `var(${headingStep})`;
+  const t = settings.typography;
+  const setStep = (cssVar: string, value?: string | null) => {
+    if (value && /^s[0-7]$/.test(value)) sizeVars[cssVar] = `var(--step-${value.slice(1)})`;
+  };
+  setStep("--page-title-size", t?.pageTitleStep);
+  setStep("--section-heading-size", t?.sectionHeadingStep);
+  setStep("--card-title-size", t?.cardTitleStep);
+  setStep("--small-title-size", t?.smallTitleStep);
 
   return (
     <html

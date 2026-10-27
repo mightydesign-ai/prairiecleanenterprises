@@ -1755,9 +1755,25 @@ export interface SiteSetting {
     postalCode: string;
   };
   /**
-   * Change heading sizes across the whole site. The font is always Inter.
+   * Choose the size of every kind of title on the site. Sizes follow a modular scale: each step is 25% larger than the one before on desktop (20% on phones) and shrinks smoothly on small screens. The font is always Inter.
    */
   typography?: {
+    /**
+     * Default is about 64 px on desktop (88 px beside a photo).
+     */
+    pageTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * Default is about 48 px on desktop.
+     */
+    sectionHeadingStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * Default is about 36 px on desktop.
+     */
+    cardTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+    /**
+     * Default is about 28 px on desktop.
+     */
+    smallTitleStep?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
     cardTitleSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
     sectionHeadingSize?: ('xs' | 'sm' | 'default' | 'lg' | 'xl') | null;
   };
@@ -1796,6 +1812,10 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   typography?:
     | T
     | {
+        pageTitleStep?: T;
+        sectionHeadingStep?: T;
+        cardTitleStep?: T;
+        smallTitleStep?: T;
         cardTitleSize?: T;
         sectionHeadingSize?: T;
       };

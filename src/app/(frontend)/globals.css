@@ -104,6 +104,15 @@
   --text-display: clamp(2.75rem, 1.8333rem + 4.0741vw, 5.5rem);
   --text-display--line-height: 1;
   --text-display--letter-spacing: -0.02em;
+  /* Modular scale for titles (Site settings > Text sizes): ratio 1.2 on phones (360px) rising to 1.25 on desktop (1440px). */
+  --step-0: clamp(1.0625rem, 1.0417rem + 0.0926vw, 1.125rem);
+  --step-1: clamp(1.275rem, 1.2312rem + 0.1944vw, 1.4062rem);
+  --step-2: clamp(1.53rem, 1.4541rem + 0.3375vw, 1.7578rem);
+  --step-3: clamp(1.836rem, 1.7156rem + 0.5352vw, 2.1973rem);
+  --step-4: clamp(2.2032rem, 2.0221rem + 0.805vw, 2.7466rem);
+  --step-5: clamp(2.6438rem, 2.3807rem + 1.1695vw, 3.4332rem);
+  --step-6: clamp(3.1726rem, 2.7996rem + 1.6577vw, 4.2915rem);
+  --step-7: clamp(3.8071rem, 3.288rem + 2.3071vw, 5.3644rem);
 
   /* Fluid layout spacing: p-gutter, py-section, gap-gutter, etc. */
   --spacing-gutter: clamp(1rem, 0.5rem + 2.2222vw, 2.5rem);
@@ -507,18 +516,29 @@
 }
 
 /* ---------------------------------------------------------------------
-   7. Editable heading sizes (Site settings > Text sizes)
-   The layout sets --card-title-size / --section-heading-size only when an editor changes them.
+   7. Editable title sizes (Site settings > Text sizes)
+   Four title roles. The layout sets the --*-size variables only when an editor picks a step on the modular scale;
+   otherwise each role keeps the size it was designed with.
    --------------------------------------------------------------------- */
-.card-title {
+.title-page {
+  font-size: var(--page-title-size, var(--text-4xl));
+  line-height: 1.05;
+}
+@media (min-width: 64rem) {
+  .title-page--feature {
+    font-size: var(--page-title-size, var(--text-display));
+    line-height: 1;
+  }
+}
+.title-section {
+  font-size: var(--section-heading-size, var(--text-3xl));
+  line-height: 1.12;
+}
+.title-card {
   font-size: var(--card-title-size, var(--text-2xl));
   line-height: 1.2;
 }
-.card-title-sm {
-  font-size: var(--card-title-size, var(--text-xl));
+.title-small {
+  font-size: var(--small-title-size, var(--text-xl));
   line-height: 1.25;
-}
-.section-heading {
-  font-size: var(--section-heading-size, var(--text-3xl));
-  line-height: 1.12;
 }

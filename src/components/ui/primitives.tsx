@@ -59,7 +59,7 @@ export function SectionHeading({
     <div className="mb-10 flex max-w-3xl flex-col gap-3">
       {eyebrow ? <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow> : null}
       {heading ? (
-        <h2 id={id} className="section-heading">
+        <h2 id={id} className="title-section">
           {heading}
         </h2>
       ) : null}

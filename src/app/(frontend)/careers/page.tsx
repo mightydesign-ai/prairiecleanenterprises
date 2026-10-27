@@ -25,7 +25,7 @@ export default async function CareersPage() {
       <section aria-labelledby="careers-h" className="container-wide grid items-center gap-12 py-section-sm lg:grid-cols-2">
         <div className="flex flex-col gap-5">
           <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "Careers" }]} />
-          <h1 id="careers-h" className="text-4xl font-extrabold">
+          <h1 id="careers-h" className="title-page font-extrabold">
             Help run the first plant of its kind
           </h1>
           <p className="max-w-prose text-lg text-fg-muted">
@@ -40,7 +40,7 @@ export default async function CareersPage() {
       </section>
 
       <Section id="roles" tone="tinted" labelledBy="roles-h">
-        <h2 id="roles-h" className="mb-8 text-3xl">
+        <h2 id="roles-h" className="mb-8 title-section">
           Open roles <span className="font-semibold text-fg-muted">({jobs.length})</span>
         </h2>
         {jobs.length > 0 ? (
@@ -52,7 +52,7 @@ export default async function CareersPage() {
                   className="pressable flex flex-wrap items-center gap-x-8 gap-y-3 rounded-lg border border-border bg-surface px-7 py-6 no-underline hover:border-primary"
                 >
                   <span className="flex min-w-0 flex-[1_1_22rem] flex-col gap-1">
-                    <span className="font-display text-2xl font-bold">{j.title}</span>
+                    <span className="title-card font-display font-bold">{j.title}</span>
                     <span className="text-base text-fg-muted">{j.summary}</span>
                   </span>
                   <span className="flex flex-wrap gap-2 text-[15px] font-semibold">

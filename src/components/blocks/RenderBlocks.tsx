@@ -37,7 +37,7 @@ function Hero({ block, first }: { block: BlockOf<"hero">; first: boolean }) {
         {block.eyebrow ? <p className="eyebrow animate-fade-up">{block.eyebrow}</p> : null}
         <H
           id={headingId(block)}
-          className={`max-w-4xl animate-fade-up text-4xl font-extrabold [animation-delay:80ms] ${hasFigure ? "lg:text-display" : ""}`}
+          className={`max-w-4xl animate-fade-up title-page font-extrabold [animation-delay:80ms] ${hasFigure ? "title-page--feature" : ""}`}
         >
           {block.heading}
         </H>
@@ -215,7 +215,7 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
                     {item.tag}
                   </span>
                 ) : null}
-                <h3 className="card-title-sm">{item.title}</h3>
+                <h3 className="title-small">{item.title}</h3>
                 {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
               </div>
             </li>
@@ -250,7 +250,7 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
               >
                 {i + 1}
               </span>
-              <h3 className="text-xl">{item.title}</h3>
+              <h3 className="title-small">{item.title}</h3>
               {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
             </li>
           );
@@ -292,7 +292,7 @@ function Cta({ block }: { block: BlockOf<"cta"> }) {
         }`}
       >
         <div className="flex max-w-2xl flex-col gap-3">
-          <h2 id={headingId(block)} className="text-2xl lg:text-3xl">
+          <h2 id={headingId(block)} className="title-section">
             {block.heading}
           </h2>
           {block.text ? <p className={dark ? "text-on-inverse-muted" : "text-fg-muted"}>{block.text}</p> : null}
@@ -343,7 +343,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
               <MediaImage media={p.heroImage} placeholder={p.name} className="aspect-[4/3]" sizes="(min-width: 1280px) 25vw, 50vw" />
               <span className="flex flex-1 flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
-                <span className="card-title font-display font-bold group-hover:text-link">{p.name}</span>
+                <span className="title-card font-display font-bold group-hover:text-link">{p.name}</span>
                 <span className="flex-1 text-base text-fg-muted">{p.cardSummary ?? p.summary}</span>
                 <span className="pt-2 font-display text-[15px] font-semibold text-link">
                   Learn More <span aria-hidden="true">→</span>
@@ -365,7 +365,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
   return (
     <Section tone="tinted" labelledBy={headingId(block)}>
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
-        <h2 id={headingId(block)} className="text-3xl">
+        <h2 id={headingId(block)} className="title-section">
           {block.heading ?? "In the news"}
         </h2>
         <Link href="/news" className="link font-display font-semibold">
@@ -380,7 +380,7 @@ async function NewsList({ block }: { block: BlockOf<"newsList"> }) {
             </span>
             <a
               href={safeHref(n.kind === "announcement" ? `/news/${n.slug}` : (n.externalUrl ?? "/news"))}
-              className="font-display text-xl font-bold leading-snug no-underline hover:text-link"
+              className="title-small font-display font-bold leading-snug no-underline hover:text-link"
             >
               {n.title}
             </a>
@@ -416,7 +416,7 @@ async function TeamGrid({ block }: { block: BlockOf<"team"> }) {
               </span>
             )}
             <span className="flex flex-col gap-1">
-              <span className="font-display text-xl font-bold">{t.name}</span>
+              <span className="title-small font-display font-bold">{t.name}</span>
               <span className="text-[15px] font-semibold text-accent">{t.role}</span>
               {t.bio ? <span className="text-base text-fg-muted">{t.bio}</span> : null}
             </span>

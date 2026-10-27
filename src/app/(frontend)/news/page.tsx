@@ -45,7 +45,7 @@ export default async function NewsPage() {
     <div className="container-wide py-section-sm">
       <div className="mb-10 flex flex-col gap-5">
         <Breadcrumb items={[{ label: "Home", href: "/" }, { label: "Company" }, { label: "News" }]} />
-        <h1 className="text-4xl font-extrabold">PCE in the news</h1>
+        <h1 className="title-page font-extrabold">PCE in the news</h1>
         <p className="max-w-prose text-lg text-fg-muted">
           Coverage of our facility, products and partnerships. Media enquiries go to{" "}
           <a href={`mailto:${settings.email}`} className="link">
@@ -64,7 +64,7 @@ export default async function NewsPage() {
                 .filter(Boolean)
                 .join(" · ")}
             </span>
-            <h2 className="text-3xl">{featured.title}</h2>
+            <h2 className="title-section">{featured.title}</h2>
             <p className="text-on-inverse-muted">{featured.excerpt}</p>
             <div>
               <ButtonLink href={hrefOf(featured)} onDark>
@@ -76,7 +76,7 @@ export default async function NewsPage() {
       ) : null}
 
       <section aria-labelledby="all-h" className="flex flex-col gap-7">
-        <h2 id="all-h" className="text-2xl">
+        <h2 id="all-h" className="title-card">
           All coverage
         </h2>
         <NewsFilter items={cards} />
