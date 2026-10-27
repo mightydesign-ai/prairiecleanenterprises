@@ -1,5 +1,7 @@
 import type { Block, Field } from "payload";
 import { imageFocusField, imageWidthField, titleSizeField } from "@/fields/display";
+import { edgeFields } from "@/fields/edge";
+import { iconBadgeField } from "@/fields/icon";
 
 const eyebrow: Field = {
   name: "eyebrow",
@@ -166,7 +168,7 @@ export const HighlightsBlock: Block = {
       type: "array",
       minRows: 1,
       maxRows: 6,
-      fields: [{ name: "text", type: "text", required: true }],
+      fields: [{ name: "text", type: "text", required: true }, iconBadgeField("iconBadge", "Icon (replaces the dot)")],
     },
   ],
 };
@@ -270,6 +272,7 @@ export const CardsBlock: Block = {
       fields: [
         { name: "tag", type: "text" },
         { name: "image", type: "upload", relationTo: "media", admin: { description: "Optional icon or picture (SVG or PNG) shown beside the text." } },
+        iconBadgeField("iconBadge", "Icon (replaces the picture)"),
         { name: "title", type: "text", required: true },
         { name: "text", type: "textarea" },
         { name: "highlight", type: "checkbox", admin: { description: "Draw this card with an accent border." } },
@@ -296,6 +299,7 @@ export const StepsBlock: Block = {
       minRows: 2,
       maxRows: 8,
       fields: [
+        iconBadgeField("iconBadge", "Icon (replaces the step number)"),
         { name: "title", type: "text", required: true },
         { name: "text", type: "textarea" },
       ],
@@ -420,6 +424,11 @@ export const FormBlock: Block = {
     },
   ],
 };
+
+// Every section with its own background can end in an angled (or other) edge.
+for (const b of [RichTextBlock, ImageTextBlock, StatsBlock, CardsBlock, StepsBlock, MilestonesBlock, ProductListBlock, NewsListBlock, TeamBlock, PartnersBlock, FaqBlock, FormBlock]) {
+  b.fields.push(...edgeFields);
+}
 
 export const pageBlocks: Block[] = [
   HeroBlock,

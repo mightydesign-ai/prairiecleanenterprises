@@ -251,6 +251,23 @@ export interface Page {
         items?:
           | {
               text: string;
+              /**
+               * Pick an icon and, if you like, put it in a coloured circle. Leave the icon empty to show none.
+               */
+              iconBadge?: {
+                icon?: string | null;
+                style?: ('solid' | 'outline') | null;
+                size?: ('sm' | 'md' | 'lg' | 'xl') | null;
+                circle?: ('teal' | 'green' | 'straw' | 'charcoal' | 'light' | 'white' | 'none') | null;
+                /**
+                 * Automatic always has enough contrast. Check contrast if you pick another colour.
+                 */
+                iconColour?: ('auto' | 'white' | 'teal' | 'green' | 'straw' | 'charcoal') | null;
+                /**
+                 * Leave empty when the icon is only decoration. Fill it in when the icon carries meaning on its own.
+                 */
+                label?: string | null;
+              };
               id?: string | null;
             }[]
           | null;
@@ -287,6 +304,14 @@ export interface Page {
          * Background for this section.
          */
         tone?: ('light' | 'tinted' | 'dark') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'richText';
@@ -374,6 +399,14 @@ export interface Page {
          * Background for this section.
          */
         tone?: ('light' | 'tinted' | 'dark') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'imageText';
@@ -400,6 +433,14 @@ export interface Page {
          * Background for this section.
          */
         tone?: ('light' | 'tinted' | 'dark') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'stats';
@@ -444,6 +485,23 @@ export interface Page {
                * Optional icon or picture (SVG or PNG) shown beside the text.
                */
               image?: (number | null) | Media;
+              /**
+               * Pick an icon and, if you like, put it in a coloured circle. Leave the icon empty to show none.
+               */
+              iconBadge?: {
+                icon?: string | null;
+                style?: ('solid' | 'outline') | null;
+                size?: ('sm' | 'md' | 'lg' | 'xl') | null;
+                circle?: ('teal' | 'green' | 'straw' | 'charcoal' | 'light' | 'white' | 'none') | null;
+                /**
+                 * Automatic always has enough contrast. Check contrast if you pick another colour.
+                 */
+                iconColour?: ('auto' | 'white' | 'teal' | 'green' | 'straw' | 'charcoal') | null;
+                /**
+                 * Leave empty when the icon is only decoration. Fill it in when the icon carries meaning on its own.
+                 */
+                label?: string | null;
+              };
               title: string;
               text?: string | null;
               /**
@@ -457,6 +515,14 @@ export interface Page {
          * Background for this section.
          */
         tone?: ('light' | 'tinted' | 'dark') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'cards';
@@ -482,6 +548,23 @@ export interface Page {
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
         items?:
           | {
+              /**
+               * Pick an icon and, if you like, put it in a coloured circle. Leave the icon empty to show none.
+               */
+              iconBadge?: {
+                icon?: string | null;
+                style?: ('solid' | 'outline') | null;
+                size?: ('sm' | 'md' | 'lg' | 'xl') | null;
+                circle?: ('teal' | 'green' | 'straw' | 'charcoal' | 'light' | 'white' | 'none') | null;
+                /**
+                 * Automatic always has enough contrast. Check contrast if you pick another colour.
+                 */
+                iconColour?: ('auto' | 'white' | 'teal' | 'green' | 'straw' | 'charcoal') | null;
+                /**
+                 * Leave empty when the icon is only decoration. Fill it in when the icon carries meaning on its own.
+                 */
+                label?: string | null;
+              };
               title: string;
               text?: string | null;
               id?: string | null;
@@ -491,6 +574,14 @@ export interface Page {
          * Background for this section.
          */
         tone?: ('light' | 'tinted' | 'dark') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'steps';
@@ -508,6 +599,14 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'milestones';
@@ -530,6 +629,14 @@ export interface Page {
          * On phones the items always stack in one column, and on tablets they never go above two.
          */
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'productList';
@@ -545,6 +652,14 @@ export interface Page {
          * On phones the items always stack in one column, and on tablets they never go above two.
          */
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'newsList';
@@ -559,6 +674,14 @@ export interface Page {
          * On phones the items always stack in one column, and on tablets they never go above two.
          */
         columns?: ('auto' | '1' | '2' | '3' | '4' | '5' | '6') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'team';
@@ -569,6 +692,14 @@ export interface Page {
          * A step on the modular scale (each step is 25% larger on desktop, 20% on phones). Sizes shrink smoothly on small screens.
          */
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'partners';
@@ -586,6 +717,14 @@ export interface Page {
               id?: string | null;
             }[]
           | null;
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'faq';
@@ -602,6 +741,14 @@ export interface Page {
         headingSize?: ('default' | 's0' | 's1' | 's2' | 's3' | 's4' | 's5' | 's6' | 's7') | null;
         intro?: string | null;
         form: 'contact' | 'straw' | 'investor';
+        /**
+         * The shape where this section meets the next one. The next section's colour shows through the cut.
+         */
+        edge?: ('none' | 'angle-rise' | 'angle-fall') | null;
+        /**
+         * How tall the cut is. It scales with the screen width.
+         */
+        edgeStrength?: ('gentle' | 'medium' | 'steep') | null;
         id?: string | null;
         blockName?: string | null;
         blockType: 'form';
@@ -1395,6 +1542,16 @@ export interface PagesSelect<T extends boolean = true> {
                 | T
                 | {
                     text?: T;
+                    iconBadge?:
+                      | T
+                      | {
+                          icon?: T;
+                          style?: T;
+                          size?: T;
+                          circle?: T;
+                          iconColour?: T;
+                          label?: T;
+                        };
                     id?: T;
                   };
               id?: T;
@@ -1408,6 +1565,8 @@ export interface PagesSelect<T extends boolean = true> {
               headingSize?: T;
               content?: T;
               tone?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1425,6 +1584,8 @@ export interface PagesSelect<T extends boolean = true> {
               imagePlaceholder?: T;
               imageSide?: T;
               tone?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1443,6 +1604,8 @@ export interface PagesSelect<T extends boolean = true> {
                   };
               footnote?: T;
               tone?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1465,12 +1628,24 @@ export interface PagesSelect<T extends boolean = true> {
                 | {
                     tag?: T;
                     image?: T;
+                    iconBadge?:
+                      | T
+                      | {
+                          icon?: T;
+                          style?: T;
+                          size?: T;
+                          circle?: T;
+                          iconColour?: T;
+                          label?: T;
+                        };
                     title?: T;
                     text?: T;
                     highlight?: T;
                     id?: T;
                   };
               tone?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1486,11 +1661,23 @@ export interface PagesSelect<T extends boolean = true> {
               items?:
                 | T
                 | {
+                    iconBadge?:
+                      | T
+                      | {
+                          icon?: T;
+                          style?: T;
+                          size?: T;
+                          circle?: T;
+                          iconColour?: T;
+                          label?: T;
+                        };
                     title?: T;
                     text?: T;
                     id?: T;
                   };
               tone?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1506,6 +1693,8 @@ export interface PagesSelect<T extends boolean = true> {
                     text?: T;
                     id?: T;
                   };
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1517,6 +1706,8 @@ export interface PagesSelect<T extends boolean = true> {
               headingSize?: T;
               itemTitleSize?: T;
               columns?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1527,6 +1718,8 @@ export interface PagesSelect<T extends boolean = true> {
               headingSize?: T;
               limit?: T;
               columns?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1536,6 +1729,8 @@ export interface PagesSelect<T extends boolean = true> {
               heading?: T;
               headingSize?: T;
               columns?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1544,6 +1739,8 @@ export interface PagesSelect<T extends boolean = true> {
           | {
               heading?: T;
               headingSize?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1559,6 +1756,8 @@ export interface PagesSelect<T extends boolean = true> {
                     answer?: T;
                     id?: T;
                   };
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };
@@ -1570,6 +1769,8 @@ export interface PagesSelect<T extends boolean = true> {
               headingSize?: T;
               intro?: T;
               form?: T;
+              edge?: T;
+              edgeStrength?: T;
               id?: T;
               blockName?: T;
             };

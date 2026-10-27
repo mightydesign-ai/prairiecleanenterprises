@@ -1,8 +1,10 @@
 import { RichText } from "@payloadcms/richtext-lexical/react";
 import Link from "next/link";
-import { Fragment } from "react";
+import { Fragment, type CSSProperties, type ReactNode } from "react";
 import { ContactForm, InvestorForm, StrawOfferForm } from "@/components/forms/forms";
+import { EDGES, EDGE_STRENGTH, isEdge, type EdgeStrengthKey } from "@/lib/edges";
 import { safeHref } from "@/lib/safe-url";
+import { IconBadge } from "@/components/ui/icon";
 import { ButtonLink, MediaImage, Section, SectionHeading, mediaSrc, titleSize } from "@/components/ui/primitives";
 import { getNews, getPartners, getProducts, getTeam } from "@/lib/payload";
 import type { Page } from "@/payload-types";
@@ -85,7 +87,7 @@ function Highlights({ block }: { block: BlockOf<"highlights"> }) {
       <ul className="container-wide flex flex-wrap justify-center gap-x-10 gap-y-3 py-5 font-display text-[15px] font-semibold">
         {(block.items ?? []).map((item) => (
           <li key={item.id ?? item.text} className="flex items-center gap-2.5">
-            <span aria-hidden="true" className="size-2 rounded-full bg-accent" />
+            {item.iconBadge?.icon ? <IconBadge badge={item.iconBadge} /> : <span aria-hidden="true" className="size-2 rounded-full bg-accent" />}
             {item.text}
           </li>
         ))}
@@ -190,7 +192,9 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
       <ul className={`grid gap-5 ${grid}`} style={titleSize("--small-title-size", block.itemTitleSize)}>
         {(block.items ?? []).map((item) => {
           const img = item.image && typeof item.image === "object" && item.image.url ? item.image : null;
-          const layout = !img || position === "above" ? `flex-col ${aboveItems}` : `${position === "right" ? "flex-row-reverse" : "flex-row"} ${sideItems}`;
+          const badge = item.iconBadge?.icon ? item.iconBadge : null;
+          const hasVisual = Boolean(img) || Boolean(badge);
+          const layout = !hasVisual || position === "above" ? `flex-col ${aboveItems}` : `${position === "right" ? "flex-row-reverse" : "flex-row"} ${sideItems}`;
           return (
             <li
               key={item.id ?? item.title}
@@ -204,7 +208,9 @@ function Cards({ block }: { block: BlockOf<"cards"> }) {
                       : "border border-border bg-surface"
               }`}
             >
-              {img ? (
+              {badge ? (
+                <IconBadge badge={badge} />
+              ) : img ? (
                 // Plain <img> so uploaded SVGs stay inert (locked-down CSP on /api/media/file/*.svg).
                 // eslint-disable-next-line @next/next/no-img-element
                 <img
@@ -247,14 +253,18 @@ function Steps({ block }: { block: BlockOf<"steps"> }) {
                 dark ? "border border-white/20" : last ? "border-2 border-accent bg-surface" : "border border-border bg-surface"
               }`}
             >
-              <span
-                aria-hidden="true"
-                className={`flex size-10 items-center justify-center rounded-full font-display font-bold ${
-                  dark ? "bg-primary text-on-primary" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
-                }`}
-              >
-                {i + 1}
-              </span>
+              {item.iconBadge?.icon ? (
+                <IconBadge badge={item.iconBadge} className="self-start" />
+              ) : (
+                <span
+                  aria-hidden="true"
+                  className={`flex size-10 items-center justify-center rounded-full font-display font-bold ${
+                    dark ? "bg-primary text-on-primary" : last ? "bg-accent text-on-accent" : "bg-primary text-on-primary"
+                  }`}
+                >
+                  {i + 1}
+                </span>
+              )}
               <h3 className="title-small">{item.title}</h3>
               {item.text ? <p className={`text-base ${dark ? "text-on-inverse-muted" : "text-fg-muted"}`}>{item.text}</p> : null}
             </li>
@@ -488,45 +498,86 @@ function FormSection({ block }: { block: BlockOf<"form"> }) {
   );
 }
 
+
+const TONE_BG: Record<string, string> = { light: "bg-bg", tinted: "bg-surface-sunken", dark: "bg-inverse" };
+
+/** The background tone a block shows, so a section edge knows which colour to reveal. Blocks without a tone setting have a fixed look. */
+function toneOf(block?: Block): string {
+  if (!block) return "light";
+  const t = (block as { tone?: string | null }).tone;
+  if (t) return t;
+  return block.blockType === "productList" || block.blockType === "newsList" || block.blockType === "form" || block.blockType === "highlights"
+    ? "tinted"
+    : "light";
+}
+
+/**
+ * Wraps a section whose "Section edge" is set. The section is clipped along the edge shape and the wrapper behind it is
+ * painted in the NEXT section's colour, so the cut reveals that colour with no gaps, at every screen width.
+ */
+function WithEdge({ block, next, children }: { block: Block; next?: Block; children: ReactNode }) {
+  const edge = (block as { edge?: string | null }).edge;
+  if (!isEdge(edge)) return <>{children}</>;
+  const strength = (block as { edgeStrength?: string | null }).edgeStrength;
+  const height = EDGE_STRENGTH[(strength as EdgeStrengthKey) in EDGE_STRENGTH ? (strength as EdgeStrengthKey) : "medium"].height;
+  return (
+    <div className={TONE_BG[toneOf(next)] ?? "bg-bg"} style={{ "--edge-h": height } as CSSProperties}>
+      <div
+        className={`edge-inner ${TONE_BG[toneOf(block)] ?? "bg-bg"}`}
+        style={{ clipPath: EDGES[edge].clip("var(--edge-h)"), paddingBottom: "var(--edge-h)" }}
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
+
 export function RenderBlocks({ blocks }: { blocks: Page["layout"] }) {
   return (
     <>
       {blocks.map((block, i) => {
         const key = block.id ?? `${block.blockType}-${i}`;
+        const content = ((): ReactNode => {
         switch (block.blockType) {
           case "hero":
-            return <Hero key={key} block={block} first={i === 0} />;
+            return <Hero block={block} first={i === 0} />;
           case "highlights":
-            return <Highlights key={key} block={block} />;
+            return <Highlights block={block} />;
           case "richText":
-            return <RichTextSection key={key} block={block} />;
+            return <RichTextSection block={block} />;
           case "imageText":
-            return <ImageTextSection key={key} block={block} />;
+            return <ImageTextSection block={block} />;
           case "stats":
-            return <Stats key={key} block={block} />;
+            return <Stats block={block} />;
           case "cards":
-            return <Cards key={key} block={block} />;
+            return <Cards block={block} />;
           case "steps":
-            return <Steps key={key} block={block} />;
+            return <Steps block={block} />;
           case "milestones":
-            return <Milestones key={key} block={block} />;
+            return <Milestones block={block} />;
           case "cta":
-            return <Cta key={key} block={block} />;
+            return <Cta block={block} />;
           case "faq":
-            return <Faq key={key} block={block} />;
+            return <Faq block={block} />;
           case "productList":
-            return <ProductList key={key} block={block} />;
+            return <ProductList block={block} />;
           case "newsList":
-            return <NewsList key={key} block={block} />;
+            return <NewsList block={block} />;
           case "team":
-            return <TeamGrid key={key} block={block} />;
+            return <TeamGrid block={block} />;
           case "partners":
-            return <PartnerLogos key={key} block={block} />;
+            return <PartnerLogos block={block} />;
           case "form":
-            return <FormSection key={key} block={block} />;
+            return <FormSection block={block} />;
           default:
-            return <Fragment key={key} />;
+            return null;
         }
+        })();
+        return (
+          <WithEdge key={key} block={block} next={blocks[i + 1]}>
+            {content}
+          </WithEdge>
+        );
       })}
     </>
   );

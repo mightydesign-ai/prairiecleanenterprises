@@ -9,6 +9,7 @@ import * as migration_20261026_023116_card_image_controls from './20261026_02311
 import * as migration_20261026_030517_columns_in_a_row from './20261026_030517_columns_in_a_row';
 import * as migration_20261027_020815_title_size_steps from './20261027_020815_title_size_steps';
 import * as migration_20261027_023045_block_title_sizes_photo_controls from './20261027_023045_block_title_sizes_photo_controls';
+import * as migration_20261027_024333_icon_badges_section_edges from './20261027_024333_icon_badges_section_edges';
 
 export const migrations = [
   {
@@ -64,6 +65,11 @@ export const migrations = [
   {
     up: migration_20261027_023045_block_title_sizes_photo_controls.up,
     down: migration_20261027_023045_block_title_sizes_photo_controls.down,
-    name: '20261027_023045_block_title_sizes_photo_controls'
+    name: '20261027_023045_block_title_sizes_photo_controls',
+  },
+  {
+    up: migration_20261027_024333_icon_badges_section_edges.up,
+    down: migration_20261027_024333_icon_badges_section_edges.down,
+    name: '20261027_024333_icon_badges_section_edges'
   },
 ];

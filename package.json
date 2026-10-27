@@ -21,6 +21,7 @@
     "upload-blob": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/upload-to-blob.ts",
     "reset-images": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/reset-images.ts",
     "optimize-media": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/optimize-media.ts",
+    "build:icons": "node scripts/build-icons.mjs",
     "import-heroes": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/import-heroes.ts",
     "attach-heroes": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/attach-heroes.ts",
     "images:rebuild": "npm run reset-images && npm run import-images && npm run upload-blob",
@@ -43,6 +44,7 @@
     "sharp": "0.35.5"
   },
   "devDependencies": {
+    "@phosphor-icons/core": "^2.1.1",
     "@tailwindcss/postcss": "^4.1.0",
     "@types/node": "^22.19.0",
     "@types/react": "^19.2.0",

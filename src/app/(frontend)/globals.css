@@ -542,3 +542,8 @@
   font-size: var(--small-title-size, var(--text-xl));
   line-height: 1.25;
 }
+
+/* Section edges (src/lib/edges.ts): the clipped section keeps no bottom border, which would show as a straight line across the cut. */
+.edge-inner > section {
+  border-bottom-width: 0;
+}
