@@ -29,6 +29,7 @@ export default buildConfig({
     user: Users.slug,
     meta: { titleSuffix: " · PCE website" },
     importMap: { baseDir: path.resolve(dirname) },
+    components: { providers: ["/components/admin/MediaPreview#MediaPreviewProvider"] },
   },
   collections: [
     Pages,

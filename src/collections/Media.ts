@@ -3,7 +3,12 @@ import { anyone, authenticated } from "@/access";
 
 export const Media: CollectionConfig = {
   slug: "media",
-  admin: { group: "Content", useAsTitle: "alt" },
+  admin: {
+    group: "Content",
+    useAsTitle: "alt",
+    // "filename" shows a thumbnail beside the file name; click the thumbnail for a larger preview.
+    defaultColumns: ["filename", "alt", "decorative", "caption"],
+  },
   access: {
     read: anyone,
     create: authenticated,
