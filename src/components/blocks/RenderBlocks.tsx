@@ -521,7 +521,7 @@ function WithEdge({ block, next, children }: { block: Block; next?: Block; child
   const strength = (block as { edgeStrength?: string | null }).edgeStrength;
   const height = EDGE_STRENGTH[(strength as EdgeStrengthKey) in EDGE_STRENGTH ? (strength as EdgeStrengthKey) : "medium"].height;
   return (
-    <div className={TONE_BG[toneOf(next)] ?? "bg-bg"} style={{ "--edge-h": height } as CSSProperties}>
+    <div className={`edge-wrap ${TONE_BG[toneOf(next)] ?? "bg-bg"}`} style={{ "--edge-h": height } as CSSProperties}>
       <div
         className={`edge-inner ${TONE_BG[toneOf(block)] ?? "bg-bg"}`}
         style={{ clipPath: EDGES[edge].clip("var(--edge-h)"), paddingBottom: "var(--edge-h)" }}

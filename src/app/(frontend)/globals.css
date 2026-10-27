@@ -544,7 +544,13 @@
   line-height: 1.25;
 }
 
-/* Section edges (src/lib/edges.ts): the clipped section keeps no bottom border, which would show as a straight line across the cut. */
+/* Section edges (src/lib/edges.ts): tinted sections draw a thin grey border on top and bottom. Where a section is cut at an
+   angle, that border would show as a straight line across the cut, so the cut section loses its bottom border and the
+   section after it loses its top border. */
 .edge-inner > section {
   border-bottom-width: 0;
+}
+.edge-wrap + section,
+.edge-wrap + .edge-wrap > .edge-inner > section {
+  border-top-width: 0;
 }
