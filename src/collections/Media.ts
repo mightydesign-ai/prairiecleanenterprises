@@ -7,7 +7,7 @@ export const Media: CollectionConfig = {
     group: "Content",
     useAsTitle: "alt",
     // "filename" shows a thumbnail beside the file name; click the thumbnail for a larger preview.
-    defaultColumns: ["filename", "alt", "decorative", "caption"],
+    defaultColumns: ["filename", "alt", "decorative", "caption", "actions"],
   },
   access: {
     read: anyone,
@@ -26,6 +26,13 @@ export const Media: CollectionConfig = {
     adminThumbnail: "thumb",
   },
   fields: [
+    {
+      // List-view only: a delete button on each row that opens a confirmation (see MediaDeleteCell).
+      name: "actions",
+      type: "ui",
+      label: "",
+      admin: { components: { Cell: "/components/admin/MediaDeleteCell#MediaDeleteCell" } },
+    },
     {
       name: "decorative",
       type: "checkbox",
