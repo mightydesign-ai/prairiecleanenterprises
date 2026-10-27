@@ -20,6 +20,7 @@
     "import-images": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/import-images.ts",
     "upload-blob": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/upload-to-blob.ts",
     "reset-images": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/reset-images.ts",
+    "optimize-media": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/optimize-media.ts",
     "images:rebuild": "npm run reset-images && npm run import-images && npm run upload-blob",
     "attach-media": "cross-env NODE_OPTIONS=--no-deprecation payload run src/seed/attach-media.ts"
   },

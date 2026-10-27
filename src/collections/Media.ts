@@ -18,10 +18,18 @@ export const Media: CollectionConfig = {
   upload: {
     mimeTypes: ["image/*", "application/pdf"],
     focalPoint: true,
+    // Every new upload is shrunk to fit inside 1024 x 1024 and saved as WebP, so nobody can add a 3 MB PNG by accident.
+    // (SVGs and PDFs are left alone. `pnpm optimize-media` sets MEDIA_PASSTHROUGH because it has already done this.)
+    ...(process.env.MEDIA_PASSTHROUGH
+      ? {}
+      : {
+          resizeOptions: { width: 1024, height: 1024, fit: "inside" as const, withoutEnlargement: true },
+          formatOptions: { format: "webp" as const, options: { quality: 82 } },
+        }),
     imageSizes: [
-      { name: "thumb", width: 480 },
-      { name: "card", width: 960 },
-      { name: "hero", width: 1920 },
+      { name: "thumb", width: 480, formatOptions: { format: "webp", options: { quality: 80 } } },
+      { name: "card", width: 960, formatOptions: { format: "webp", options: { quality: 80 } } },
+      { name: "hero", width: 1920, formatOptions: { format: "webp", options: { quality: 80 } } },
     ],
     adminThumbnail: "thumb",
   },
