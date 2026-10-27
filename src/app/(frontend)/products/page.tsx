@@ -32,7 +32,7 @@ export default async function ProductsPage() {
               href={`/products/${p.slug}`}
               className="pressable group flex flex-1 flex-col overflow-hidden rounded-lg border border-border bg-surface no-underline shadow-card hover:shadow-raised"
             >
-              <MediaImage media={p.cardImage ?? p.heroImage} focus={p.cardImage ? p.cardImageFocus : p.heroImageFocus} placeholder={p.name} className="aspect-[16/9]" sizes="(min-width: 640px) 50vw, 100vw" />
+              <MediaImage media={p.cardImage ?? p.heroImage} focus={p.cardImage ? p.cardImageFocus : p.heroImageFocus} scale={p.cardImage ? p.cardImageWidth : p.heroImageWidth} placeholder={p.name} className="aspect-[16/9]" sizes="(min-width: 640px) 50vw, 100vw" />
               <span className="flex flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
                 <span className="title-card font-display group-hover:text-link">{p.name}</span>

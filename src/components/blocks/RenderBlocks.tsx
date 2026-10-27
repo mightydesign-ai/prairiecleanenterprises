@@ -355,7 +355,7 @@ async function ProductList({ block }: { block: BlockOf<"productList"> }) {
               href={`/products/${p.slug}`}
               className="pressable group flex flex-1 flex-col overflow-hidden rounded-lg border border-border bg-surface no-underline shadow-card hover:shadow-raised"
             >
-              <MediaImage media={p.cardImage ?? p.heroImage} focus={p.cardImage ? p.cardImageFocus : p.heroImageFocus} placeholder={p.name} className="aspect-[4/3]" sizes="(min-width: 1280px) 25vw, 50vw" />
+              <MediaImage media={p.cardImage ?? p.heroImage} focus={p.cardImage ? p.cardImageFocus : p.heroImageFocus} scale={p.cardImage ? p.cardImageWidth : p.heroImageWidth} placeholder={p.name} className="aspect-[4/3]" sizes="(min-width: 1280px) 25vw, 50vw" />
               <span className="flex flex-1 flex-col gap-2 p-6">
                 {p.audience ? <span className="text-sm font-semibold text-accent">{p.audience}</span> : null}
                 <span className="title-card font-display group-hover:text-link">{p.name}</span>

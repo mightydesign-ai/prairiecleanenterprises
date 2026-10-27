@@ -945,6 +945,33 @@ export interface Product {
         | 'bottom-right'
       )
     | null;
+  /**
+   * How wide the photo is shown, as a share of the space for it. It stays centred and keeps its proportions on every screen size.
+   */
+  cardImageWidth?:
+    | (
+        | '100'
+        | '95'
+        | '90'
+        | '85'
+        | '80'
+        | '75'
+        | '70'
+        | '65'
+        | '60'
+        | '55'
+        | '50'
+        | '45'
+        | '40'
+        | '35'
+        | '30'
+        | '25'
+        | '20'
+        | '15'
+        | '10'
+        | '5'
+      )
+    | null;
   primaryCtaLabel?: string | null;
   primaryCtaHref?: string | null;
   secondaryCtaLabel?: string | null;
@@ -1862,6 +1889,7 @@ export interface ProductsSelect<T extends boolean = true> {
   heroImageWidth?: T;
   cardImage?: T;
   cardImageFocus?: T;
+  cardImageWidth?: T;
   primaryCtaLabel?: T;
   primaryCtaHref?: T;
   secondaryCtaLabel?: T;

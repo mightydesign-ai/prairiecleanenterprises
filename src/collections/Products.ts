@@ -59,6 +59,7 @@ export const Products: CollectionConfig = {
               admin: { description: "Optional. A different photo for the product cards. If empty, the hero image is used." },
             },
             imageFocusField("cardImageFocus"),
+            imageWidthField("cardImageWidth"),
             {
               type: "row",
               fields: [
