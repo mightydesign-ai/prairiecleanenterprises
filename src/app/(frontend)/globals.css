@@ -118,7 +118,7 @@
   --spacing-gutter: clamp(1rem, 0.5rem + 2.2222vw, 2.5rem);
   --spacing-section-sm: clamp(3rem, 2.3333rem + 2.963vw, 5rem);
   --spacing-section: clamp(4rem, 2.6667rem + 5.9259vw, 8rem);
-  --spacing-header: 4.5rem;
+  --spacing-header: 5rem;
 
   /* Content widths, also usable as @container sizes */
   --container-content: 76rem;
@@ -553,4 +553,11 @@
 .edge-wrap + section,
 .edge-wrap + .edge-wrap > .edge-inner > section {
   border-top-width: 0;
+}
+
+/* The header grows with the logo on larger screens (also used for the scroll offset under the sticky header). */
+@media (min-width: 40rem) {
+  :root {
+    --spacing-header: 6rem;
+  }
 }

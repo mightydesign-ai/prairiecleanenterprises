@@ -21,7 +21,7 @@ type LogoProps = {
 };
 
 export function Logo({ tone = "auto", className = "", priority = false }: LogoProps) {
-  const size = "h-12 w-auto sm:h-14";
+  const size = "h-14 w-auto sm:h-16 xl:h-[4.5rem]";
   const loading = priority ? undefined : "lazy";
   return (
     <Link
@@ -31,7 +31,7 @@ export function Logo({ tone = "auto", className = "", priority = false }: LogoPr
     >
       {tone === "inverse" ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src="/brand/pce-logo-white.svg" alt="" width={WHITE.w} height={WHITE.h} loading={loading} className="h-14 w-auto sm:h-16" />
+        <img src="/brand/pce-logo-white.svg" alt="" width={WHITE.w} height={WHITE.h} loading={loading} className="h-10 w-auto sm:h-12" />
       ) : (
         <>
           {/* eslint-disable-next-line @next/next/no-img-element */}
